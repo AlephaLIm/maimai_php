@@ -1,0 +1,14 @@
+<a href="" data-bs-toggle="modal" data-bs-target="#modal_{{ id }}">
+    <div class="song_container" style="background-color: {{base}};">
+        <div class="song_bg" style="background-color: {{bg}};">
+            <img src="{{ img }}" style="box-shadow: 0 0 5px 5px {{base}};">
+            <h4 class="s_name">{{ name }}</h4>
+            <h4 class="chart_const" style="border: 2px solid {{rate}}; color: {{text}};">{{ level }}</h4>
+            <h5 class="chart_diff" style="background-color: {{base}};">{{ diff }}</h5>
+            <h5 class="c_type" style="background: {{m_color}};">{{ c_type }}</h5>
+            <h4 class="badge">{{ rank }}</h4>
+            <h4 class="score">Score: {{ score }}%</h4>
+            <h3 class="rating_val" style="box-shadow: 0 0 2px 2px {{base}} inset; background-color: {{rate}}; color: {{text}};">{{ rating }}</h3>
+        </div>
+    </div>
+</a>

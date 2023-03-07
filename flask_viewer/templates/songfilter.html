@@ -1,0 +1,228 @@
+{% extends 'navbar.html' %}
+
+{% block style %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/songbox.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/songmodal.css') }}" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,1,0" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@48,400,1,0" />
+{% endblock %}
+
+{% block body %}
+    <main>
+        <div class="container">
+            <div class="filter_wrapper">
+                <form class="filter-form" id="song_form" action="/songfilter/{{ usr_id }}/load" method="GET">
+                    <div class="s_box">
+                        <input class="search_input" type="text" id="s_input" name="search" placeholder="Search for a Song">
+                        <button type="button" class="search_submit">Search</button>
+                    </div>
+                    <div class="f_box">
+                        <div class="filter_label">GENRE</div>
+                        <div class="filter_row">
+                            {% with pa=g_status["POPS＆ANIME"],
+                                    nv=g_status["niconico＆VOCALOID™"],
+                                    gv=g_status["GAME＆VARIETY"],
+                                    proj=g_status["東方Project"],
+                                    chun=g_status["オンゲキ＆CHUNITHM"] %}
+                            <button type="button" class="filters {{ pa }}" name="genre" form="song_form" value="POPS＆ANIME">POPS＆ANIME</button>
+                            <button type="button" class="filters {{ nv }}" name="genre" form="song_form" value="niconico＆VOCALOID™">niconico＆VOCALOID™</button>
+                            <button type="button" class="filters {{ gv }}" name="genre" form="song_form" value="GAME＆VARIETY">GAME＆VARIETY</button>
+                            <button type="button" class="filters {{ proj }}" name="genre" form="song_form" value="東方Project">東方Project</button>
+                            <button type="button" class="filters {{ chun }}" name="genre" form="song_form" value="オンゲキ＆CHUNITHM">オンゲキ＆CHUNITHM</button>
+                            {% endwith %}
+                        </div>
+                    </div>
+                    <div class="f_box">
+                        <div class="filter_label">VERSION</div>
+                        <div class="filter_row">
+                            {% with mai=v_status['maimai'],
+                                    mai_p=v_status['maimai PLUS'],
+                                    gre=v_status['GreeN'],
+                                    gre_p=v_status['GreeN PLUS'],
+                                    ora=v_status['ORANGE'],
+                                    ora_p=v_status['ORANGE PLUS'],
+                                    pin=v_status['PiNK'],
+                                    pin_p=v_status['PiNK PLUS'],
+                                    mura=v_status['MURASAKi'],
+                                    mura_p=v_status['MURASAKi PLUS'],
+                                    mil=v_status['MiLK'],
+                                    mil_p=v_status['MiLK PLUS'],
+                                    fin=v_status['FiNALE'],
+                                    jap=v_status['でらっくす'],
+                                    jap_p=v_status['でらっくす PLUS'],
+                                    spla=v_status['Splash'],
+                                    spla_p=v_status['Splash PLUS'],
+                                    uni=v_status['UNiVERSE'],
+                                    uni_p=v_status['UNiVERSE PLUS'],
+                                    fes=v_status['FESTiVAL'] %}
+                            <button type="button" class="filters {{ mai }}" name="version" form="song_form" value="maimai">maimai</button>
+                            <button type="button" class="filters {{ mai_p }}" name="version" form="song_form" value="maimai PLUS">maimai PLUS</button>
+                            <button type="button" class="filters {{ gre }}" name="version" form="song_form" value="GreeN">GreeN</button>
+                            <button type="button" class="filters {{ gre_p }}" name="version" form="song_form" value="GreeN PLUS">GreeN PLUS</button>
+                            <button type="button" class="filters {{ ora }}" name="version" form="song_form" value="ORANGE">ORANGE</button>
+                            <button type="button" class="filters {{ ora_p }}" name="version" form="song_form" value="ORANGE PLUS">ORANGE PLUS</button>
+                            <button type="button" class="filters {{ pin }}" name="version" form="song_form" value="PiNK">PiNK</button>
+                            <button type="button" class="filters {{ pin_p }}" name="version" form="song_form" value="PiNK PLUS">PiNK PLUS</button>
+                            <button type="button" class="filters {{ mura }}" name="version" form="song_form" value="MURASAKi">MURASAKi</button>
+                            <button type="button" class="filters {{ mura_p }}" name="version" form="song_form" value="MURASAKi PLUS">MURASAKi PLUS</button>
+                            <button type="button" class="filters {{ mil }}" name="version" form="song_form" value="MiLK">MiLK</button>
+                            <button type="button" class="filters {{ mil_p }}" name="version" form="song_form" value="MiLK PLUS">MiLK PLUS</button>
+                            <button type="button" class="filters {{ fin }}" name="version" form="song_form" value="FiNALE">FiNALE</button>
+                            <button type="button" class="filters {{ jap }}" name="version" form="song_form" value="でらっくす">でらっくす</button>
+                            <button type="button" class="filters {{ jap_p }}" name="version" form="song_form" value="でらっくす PLUS">でらっくす PLUS</button>
+                            <button type="button" class="filters {{ spla }}" name="version" form="song_form" value="Splash">Splash</button>
+                            <button type="button" class="filters {{ spla_p }}" name="version" form="song_form" value="Splash PLUS">Splash PLUS</button>
+                            <button type="button" class="filters {{ uni }}" name="version" form="song_form" value="UNiVERSE">UNiVERSE</button>
+                            <button type="button" class="filters {{ uni_p }}" name="version" form="song_form" value="UNiVERSE PLUS">UNiVERSE PLUS</button>
+                            <button type="button" class="filters {{ fes }}" name="version" form="song_form" value="FESTiVAL">FESTiVAL</button>
+                            {% endwith %}
+                        </div>
+                    </div>
+                    <div class="filter_label">LEVEL</div>
+                    <div class="filter_row">
+                        {% with one=l_status['1'],
+                            two=l_status['2'],
+                            three=l_status['3'],
+                            four=l_status['4'],
+                            five=l_status['5'],
+                            six=l_status['6'],
+                            seven=l_status['7'],
+                            seven_p=l_status['7+'],
+                            eight=l_status['8'],
+                            eight_p=l_status['8+'],
+                            nine=l_status['9'],
+                            nine_p=l_status['9+'],
+                            ten=l_status['10'],
+                            ten_p=l_status['10+'],
+                            eleven=l_status['11'],
+                            eleven_p=l_status['11+'],
+                            twelve=l_status['12'],
+                            twelve_p=l_status['12+'],
+                            thirteen=l_status['13'],
+                            thirteen_p=l_status['13+'],
+                            fourteen=l_status['14'],
+                            fourteen_p=l_status['14+'],
+                            fifteen=l_status['15'] %}
+                        <button type="button" class="filters {{ one }}" name="level" form="song_form" value="1">1</button>
+                        <button type="button" class="filters {{ two }}" name="level" form="song_form" value="2">2</button>
+                        <button type="button" class="filters {{ three }}" name="level" form="song_form" value="3">3</button>
+                        <button type="button" class="filters {{ four }}" name="level" form="song_form" value="4">4</button>
+                        <button type="button" class="filters {{ five }}" name="level" form="song_form" value="5">5</button>
+                        <button type="button" class="filters {{ six }}" name="level" form="song_form" value="6">6</button>
+                        <button type="button" class="filters {{ seven }}" name="level" form="song_form" value="7">7</button>
+                        <button type="button" class="filters {{ seven_p }}" name="level" form="song_form" value="7+">7+</button>
+                        <button type="button" class="filters {{ eight }}" name="level" form="song_form" value="8">8</button>
+                        <button type="button" class="filters {{ eight_p }}" name="level" form="song_form" value="8+">8+</button>
+                        <button type="button" class="filters {{ nine }}" name="level" form="song_form" value="9">9</button>
+                        <button type="button" class="filters {{ nine_p }}" name="level" form="song_form" value="9+">9+</button>
+                        <button type="button" class="filters {{ ten }}" name="level" form="song_form" value="10">10</button>
+                        <button type="button" class="filters {{ ten_p }}" name="level" form="song_form" value="10+">10+</button>
+                        <button type="button" class="filters {{ eleven }}" name="level" form="song_form" value="11">11</button>
+                        <button type="button" class="filters {{ eleven_p }}" name="level" form="song_form" value="11+">11+</button>
+                        <button type="button" class="filters {{ tweleve }}" name="level" form="song_form" value="12">12</button>
+                        <button type="button" class="filters {{ tweleve_p }}" name="level" form="song_form" value="12+">12+</button>
+                        <button type="button" class="filters {{ thirteen }}" name="level" form="song_form" value="13">13</button>
+                        <button type="button" class="filters {{ thirteen_p }}" name="level" form="song_form" value="13+">13+</button>
+                        <button type="button" class="filters {{ fourteen }}" name="level" form="song_form" value="14">14</button>
+                        <button type="button" class="filters {{ fourteen_p }}" name="level" form="song_form" value="14+">14+</button>
+                        <button type="button" class="filters {{ fifteen }}" name="level" form="song_form" value="15">15</button>
+                        {% endwith %}
+                    </div>
+                    <div class="filter_label" id="sorter">SORT BY</div>
+                    <div class="filter_row">
+                        {% with score=s_status["score"],
+                                combo=s_status["combo"],
+                                sync=s_status["sync"],
+                                dx_score=s_status["dx_score"],
+                                level=s_status["level"],
+                                constant=s_status["constant"],
+                                key=key %}
+                        <button type="button" class="filters {{ score }}" id="sort_id" name="sort" form="song_form" value="score">
+                            Score</button>
+                        <button type="button" class="filters {{ combo }}" id="sort_id" name="sort" form="song_form" value="combo">Combo Grade</button>
+                        <button type="button" class="filters {{ sync }}" id="sort_id" name="sort" form="song_form" value="sync">Sync Grade</button>
+                        <button type="button" class="filters {{ dx_score }}" id="sort_id" name="sort" form="song_form" value="dx_score">DX Score</button>
+                        <button type="button" class="filters {{ level }}" id="sort_id" name="sort" form="song_form" value="level">Level</button>
+                        <button type="button" class="filters {{ constant }}" id="sort_id" name="sort" form="song_form" value="constant">Constant</button>
+                        <button type="button" class="filters {{ key }} material-symbols-outlined" id="key{{ key }}" name="key" form="song_form" value="active">eject</button>
+                        {% endwith %}
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="msg">{{ msg }}</div>
+        <div class="songs_box" id="songbox">
+            {% for song in songs %}
+                {% with name=song.detail.name,
+                        id=song.chart_id,
+                        diff=song.diff,
+                        level=song.level,
+                        cons=song.cons,
+                        score=song.user_stats.score,
+                        rank=song.user_stats.rank,
+                        rating=song.user_stats.rating,
+                        ap=song.user_stats.ap,
+                        fsd=song.user_stats.fsd,
+                        img=song.detail.img,
+                        alias=song.detail.alias,
+                        artist=song.detail.artist,
+                        genre=song.detail.genre,
+                        bpm=song.detail.bpm,
+                        version=song.detail.version,
+                        dxscore=song.user_stats.dxscore,
+                        c_type=song.c_type,
+                        m_color = song.m_color,
+                        base=song.c_palette["base"],
+                        bg=song.c_palette["bg"],
+                        rate=song.c_palette["rate"],
+                        accent=song.c_palette["accent"],
+                        text=song.c_palette["text"],
+                        chart=song.chart %}
+                    {% include 'song_block.html' %}
+                    {% include 'song_modal.html' %}
+                {% endwith %}
+            {% endfor %}
+        </div>
+    </main>
+    <script>
+        $("document").ready(function(){
+            $(".filters,.search_submit").click(function(event){
+                var selected = document.getElementsByClassName('selected');
+                const ifselected = event.target.classList.contains('selected');
+
+                if (ifselected) {
+                    event.target.classList.remove('selected');
+                }
+                else {
+                    event.target.classList.add('selected');
+                };
+
+                var dict = {};
+                if (selected) {
+                    for (const el of selected) {
+                        let name = el.name
+                        let val = el.value
+                        if (name != null) {
+                            if (!(name in dict)) {
+                                dict[name] = val
+                            }
+                            else {
+                                dict[name] = dict[name] + ',' + val 
+                            }
+                        }
+                    };
+                }
+
+                let entrystr = '';
+                for (const [k, v] of Object.entries(dict)) {
+                    entrystr += (k + "=" + v + "&")
+                };
+
+                laststr = entrystr + "search=" + document.getElementById('s_input').value
+
+                fetch('/songfilter/{{ usr_id }}?' + laststr).then(response => response).then(window.location.href = "/songfilter/{{ usr_id }}/load?" + laststr)
+            });
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,55 @@
+{% extends 'navbar.html' %}
+
+{% block style %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/recblock.css') }}" />
+<link rel="stylesheet" href="{{ url_for('static', filename='css/recmodal.css') }}" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@48,400,1,0" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+{% endblock %}
+
+{% block body %}
+<main>
+    <div class="jumbotron text-center" id="headtitle">
+        <h1 class="display-3">USER STATS:</h1>
+    </div>
+    <hr class="rec_hr">
+    <div class="container">
+        <img class="player_chart" src="{{ p_img }}">
+    </div>
+    <hr class="rec_hr">
+    <div class="songs_box">
+        {% for song in songs %}
+            {% with next_score=score[song.chart_id], r_change=rate_gain[song.chart_id] %} 
+                {% with name=song.detail.name,
+                        id=song.chart_id,
+                        diff=song.diff,
+                        level=song.level,
+                        cons=song.cons,
+                        score=song.user_stats.score,
+                        rank=song.user_stats.rank,
+                        rating=song.user_stats.rating,
+                        ap=song.user_stats.ap,
+                        fsd=song.user_stats.fsd,
+                        img=song.detail.img,
+                        alias=song.detail.alias,
+                        artist=song.detail.artist,
+                        genre=song.detail.genre,
+                        bpm=song.detail.bpm,
+                        version=song.detail.version,
+                        dxscore=song.user_stats.dxscore,
+                        c_type=song.c_type,
+                        m_color = song.m_color,
+                        base=song.c_palette["base"],
+                        bg=song.c_palette["bg"],
+                        rate=song.c_palette["rate"],
+                        accent=song.c_palette["accent"],
+                        text=song.c_palette["text"],
+                        chart=song.chart %}
+                    {% include 'rec_block.html' %}
+                    {% include 'rec_modal.html' %}
+                {% endwith %}
+            {% endwith %}
+    {% endfor %}
+    </div>
+</main>
+{% endblock %}

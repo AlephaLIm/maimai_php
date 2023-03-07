@@ -1,0 +1,36 @@
+<div class="modal fade" id="modal_{{ id }}" tabindex="-1" aria-labelledby="modal_label" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: {{bg}};">
+                <h1 class="modal-title" id="modal_label">{{ name }}</h1>
+                <h2 class="cons_label" style="color:{{text}}; text-shadow: 2px 2px 3px {{accent}}">{{ level }}<span class="material-symbols-outlined">double_arrow</span>{{ cons }}</h2>
+            </div>
+            <div class="modal-body">
+                <img src="{{ img }}" class="song_img" style="box-shadow: 0 0 5px 5px {{base}};">
+                <div class="u_info">User stats</div>
+                <div class="user_stats">
+                    <h3 class="score_header">CURRENT SCORE:</h3>
+                    <div class="dx">
+                        {% for i in range(dxscore) %}
+                        <span class="material-symbols-sharp">star</span>
+                        {% endfor %}
+                    </div>
+                    <h4 id="rank_label">{{ rank }}</h4>
+                    <h5 id="score_label">Score: {{ score }}</h5>
+                </div>
+                <img src="{{ p_img }}" class="p_chart">
+                <div class="note_stats">
+                    <h3>Artist: <p>{{ artist }}</p></h3>
+                    <h3>Genre: <p>{{ genre }}</p></h3>
+                    <h3>BPM: <p>{{ bpm }}</p></h3>
+                    <h3>Version: <p>{{ version }}</p></h3>
+                </div>
+                <img src="{{ url_for('static', filename='assets/RadarCharts/' + chart + '.png') }}" class="radar">
+                <div class="c_info">Chart stats</div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
