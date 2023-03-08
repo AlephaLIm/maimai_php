@@ -1,0 +1,9 @@
+### Libraries without version specifiers###
+flask
+pony
+mechanize
+requests
+bs4
+matplotlib
+numpy
+### Libraries with version specifiers###
