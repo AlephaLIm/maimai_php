@@ -8,19 +8,20 @@
     integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" 
     crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,1,0" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/nav.css') }}" />
 @endsection
 
 @section('header')
     <div class="container-fluid" id="nav-wrapper">
-        <nav class="navbar navbar-expand-lg bg-dark navbar-dark" id="logo-wrapper">
-        <div class="header-logo">
+        <nav class="navbar navbar-expand-lg bg-dark navbar-dark" aria-label="nav_bg" id="logo-wrapper">
+        <div class="header-logo" style="background: linear-gradient(rgba(0, 0, 0, 0.40), rgba(0, 0, 0, 0.40)), url({{ asset('images/nav_bg/bg_img.jpg') }}), no-repeat;">
             <a class="navbar-brand" href="#">
                 <img src="{{ $logo_url }} " alt="Logo">
                 <h1>Maimai<br>Scoreviewer</h1>
             </a>
         </div>
     </nav>
-    <nav class="navbar navbar-expand-lg bg-dark navbar-dark" id="nav-row">
+    <nav class="navbar navbar-expand-lg bg-dark navbar-dark" aria-label="nav_panel" id="nav-row">
         <div class="navbar-brand" id="profile-box">
             <img id="profile-img" src="{{ $profile_url }}" alt="Profile Photo">
             <div class="profile-user">

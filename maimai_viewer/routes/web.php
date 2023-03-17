@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\URL;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,8 +22,8 @@ Route::get('/nav_test', function() {
     return view('navbar', [
         'title'=> "Navbar Test",
         'description'=> "Testing the navbar port",
-        'logo_url'=> secure_asset('images/bearhands.png'),
-        'profile_url'=> secure_asset('images/user_img.png'),
+        'logo_url'=> URL::asset('/images/nav_icons/bearhands.png'),
+        'profile_url'=> URL::asset('/images/nav_icons/user_img.png'),
         'user'=> [
                 'name'=> "H O S H I N O",
                 'title'=> "響け！CHIREI MY WAY!",
