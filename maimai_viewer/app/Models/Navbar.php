@@ -7,6 +7,7 @@ class Navbar {
     public $title;
     public $rating;
     public $profile_img;
+    
     public static function retrieveuser() {
         $user = new Navbar();
         $user->name = "H O S H I N O";
