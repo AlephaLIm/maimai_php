@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\URL;
+use App\Models\Navbar;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,12 +26,21 @@ Route::get('/nav_test', function() {
         'title'=> "Navbar Test",
         'description'=> "Testing the navbar port",
         'logo_url'=> URL::asset('/images/nav_icons/bearhands.png'),
-        'profile_url'=> URL::asset('/images/nav_icons/user_img.png'),
-        'user'=> [
-                'name'=> "H O S H I N O",
-                'title'=> "響け！CHIREI MY WAY!",
-                'rating'=> "15000"
-        ],
+        'user'=> Navbar::retrieveuser(),
+        'status'=>[
+            'achievements'=>'',
+            'songs'=>'',
+            'recommendations'=>''
+        ]
+    ]);
+});
+
+Route::get('/songs', function() {
+    return view('songs', [
+        'title'=> "Songs Finder",
+        'description'=> "Search for songs in the Maimai database",
+        'logo_url'=> URL::asset('/images/nav_icons/bearhands.png'),
+        'user'=> Navbar::retrieveuser(),
         'status'=>[
             'achievements'=>'',
             'songs'=>'',

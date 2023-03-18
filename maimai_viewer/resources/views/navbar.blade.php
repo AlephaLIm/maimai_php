@@ -23,14 +23,14 @@
     </nav>
     <nav class="navbar navbar-expand-lg bg-dark navbar-dark" aria-label="nav_panel" id="nav-row">
         <div class="navbar-brand" id="profile-box">
-            <img id="profile-img" src="{{ $profile_url }}" alt="Profile Photo">
+            <img id="profile-img" src="{{ asset($user->profile_img) }}" alt="Profile Photo">
             <div class="profile-user">
-                <h4>{{ $user['name'] }}</h4>
+                <h4>{{ $user->name }}</h4>
                 <div class="ratings">
-                    <p>Rating: {{ $user['rating'] }}</p>
+                    <p>Rating: {{ $user->rating }}</p>
                 </div>
                 <div class="title-box">
-                    <h5>{{ $user['title'] }}</h5>
+                    <h5>{{ $user->title }}</h5>
                 </div>
             </div>
         </div>
