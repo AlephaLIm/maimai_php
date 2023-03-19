@@ -4,10 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Filterbox;
+use App\Models\Filters;
 
 class Songfinder extends Controller
 {   
-    private static function extract_params(Request $request, $type) {
+    public static function extract_params(Request $request, $type) {
         $request_str = $request->get($type);
         $params = explode(',', $request_str);
 
@@ -15,11 +16,11 @@ class Songfinder extends Controller
     }
 
     public static function initialize_genre(Request $request) {
-        $genres = ["POPS＆ANIME", "niconico＆VOCALOID™", "東方Project", "GAME＆VARIETY", "maimai", "オンゲキ＆CHUNITHM"];
+        $genres = Filters::get_list('genre');
         $genre_list = [];
         $selected = self::extract_params($request, "genre");
         foreach ($genres as $genre) {
-            $instance = Filterbox::initialize($genre);
+            $instance = Filterbox::initialize($genre, $genre);
             array_push($genre_list, $instance);
             if (in_array($genre, $selected)){
                 $instance->status = "selected";
@@ -29,12 +30,11 @@ class Songfinder extends Controller
     }
     
     public static function initialize_ver(Request $request) {
-        $versions = ["maimai", "maimai PLUS", "GreeN", "GreeN PLUS", "ORANGE", "ORANGE PLUS", "PiNK", "PiNK PLUS", "MURASAKi", "MURASAKi PLUS",
-        "MiLK", "MiLK PLUS", "FiNALE", "でらっくす", "でらっくす PLUS", "Splash", "Splash PLUS", "UNiVERSE", "UNiVERSE PLUS", "FESTiVAL"];
+        $versions = Filters::get_list('version');
         $version_list = [];
         $selected = self::extract_params($request, "version");
         foreach ($versions as $version) {
-            $instance = Filterbox::initialize($version);
+            $instance = Filterbox::initialize($version, $version);
             array_push($version_list, $instance);
             if (in_array($version, $selected)){
                 $instance->status = "selected";
@@ -44,11 +44,12 @@ class Songfinder extends Controller
     }
     
     public static function initialize_diff(Request $request) {
-        $difficulties = ["BASIC", "ADVANCED", "EXPERT", "MASTER", "Re:MASTER"];
+        $difficulties = Filters::get_list('difficulty');
+        $diff_filter = Filters::get_filter('difficulty');
         $diff_list = [];
         $selected = self::extract_params($request, "difficulty");
-        foreach ($difficulties as $diff) {
-            $instance = Filterbox::initialize($diff);
+        foreach (array_combine($difficulties, $diff_filter) as $diff => $diff_val) {
+            $instance = Filterbox::initialize($diff, $diff_val);
             array_push($diff_list, $instance);
             if (in_array($diff, $selected)){
                 $instance->status = "selected";
@@ -58,11 +59,11 @@ class Songfinder extends Controller
     }
     
     public static function initialize_level(Request $request) {
-        $levels = ["1", "2", "3", "4", "5", "6", "7", "7+", "8", "8+", "9", "9+", "10", "10+", "11", "11+", "12", "12+", "13", "13+", "14", "14+", "15"];
+        $levels = Filters::get_list('level');
         $level_list = [];
         $selected = self::extract_params($request, "level");
         foreach ($levels as $level) {
-            $instance = Filterbox::initialize($level);
+            $instance = Filterbox::initialize($level, $level);
             array_push($level_list, $instance); 
             if (in_array($level, $selected)){
                 $instance->status = "selected";
@@ -72,11 +73,11 @@ class Songfinder extends Controller
     }
     
     public static function initialize_sorts(Request $request) {
-        $sorts = ["Level", "Constant", "Score", "DX Score", "Sync Grade", "Combo Grade"];
+        $sorts = Filters::get_list('sort');
         $sort_list = [];
         $selected = self::extract_params($request, "sort");
         foreach ($sorts as $sort) {
-            $instance = Filterbox::initialize($sort);
+            $instance = Filterbox::initialize($sort, $sort);
             array_push($sort_list, $instance); 
             if (in_array($sort, $selected)){
                 $instance->status = "selected";
