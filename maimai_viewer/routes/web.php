@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\URL;
 use App\Http\Controllers\Songfinder;
+use App\Http\Controllers\ChartLoader;
 use App\Models\Navbar;
 use App\Models\Page_status;
 
@@ -35,6 +36,12 @@ Route::get('/nav_test', function() {
 });
 
 Route::get('/songs', function(Request $request) {
+    if (count($request->all()) > 0) {
+        $charts = Chartloader::retrieve_result($request);
+    }
+    else {
+        $charts = [];
+    }
     return view('songs', [
         'title'=> 'Songs Finder',
         'description'=> "Search for songs in the Maimai database",
@@ -46,7 +53,8 @@ Route::get('/songs', function(Request $request) {
         'difficulties'=>Songfinder::initialize_diff($request),
         'levels'=>Songfinder::initialize_level($request),
         'sorts'=>Songfinder::initialize_sorts($request),
-        'key'=>Songfinder::key($request)
+        'key'=>Songfinder::key($request),
+        'charts'=> $charts
     ]);
 });
 

@@ -27,13 +27,18 @@ $("document").ready(function(){
             };
         }
 
-        let entrystr = '';
+        let entrystr = '?';
         for (const [k, v] of Object.entries(dict)) {
             entrystr += (k + "=" + v + "&")
         };
 
-        laststr = entrystr + "search=" + document.getElementById('sinput').value
+        if (document.getElementById('sinput').value.length != 0) {
+            laststr = entrystr + "search=" + document.getElementById('sinput').value
+        }
+        else {
+            laststr = entrystr.substring(0, entrystr.length-1)
+        }
 
-        fetch('/songs/?' + laststr).then(response => response).then(window.location.href = "/songs?" + laststr)
+        fetch('/songs' + laststr).then(response => response).then(window.location.href = "/songs" + laststr)
     });
 });

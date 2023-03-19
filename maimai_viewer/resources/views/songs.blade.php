@@ -3,12 +3,14 @@
 @section('links')
     @parent
     <link rel="stylesheet" type="text/css" href="{{ asset('css/songfilter.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/songbox.css') }}" />
     <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
     <script defer src="{{ asset('js/song_finder.js') }}"></script>
 @endsection
 
 @section('body')
     <main>
+
         <div class="container">
             <div class="filterwrapper">
                 <form class="filter-form" id="song_form" action="/songs/" method="GET">
@@ -20,7 +22,7 @@
                         <div class="filterlabel">GENRE</div>
                         <div class="filterrow">
                             @foreach ($genres as $genre)
-                                <button type="button" class="filters {{ $genre->status }}" name="genre" form="song_form" value="{{ $genre->name }}">{{ $genre->name }}</button>
+                                <button type="button" class="filters {{ $genre->status }}" name="genre" form="song_form" value="{{ $genre->value }}">{{ $genre->name }}</button>
                             @endforeach
                         </div>
                     </div>
@@ -28,27 +30,27 @@
                         <div class="filterlabel">VERSION</div>
                         <div class="filterrow">
                             @foreach ($versions as $version)
-                                <button type="button" class="filters {{ $version->status }}" name="version" form="song_form" value="{{ $version->name }}">{{ $version->name }}</button>
+                                <button type="button" class="filters {{ $version->status }}" name="version" form="song_form" value="{{ $version->value }}">{{ $version->name }}</button>
                             @endforeach
                         </div>
                     </div>
                     <div class="filterlabel special">DIFFICULTY</div>
                     <div class="filterrow">
                         @foreach ($difficulties as $diff)
-                            <button type="button" class="filters {{ $diff->status }}" name="difficulty" form="songform" value="{{ $diff->name }}">{{ $diff->name }}</button>
+                            <button type="button" class="filters {{ $diff->status }}" name="difficulty" form="songform" value="{{ $diff->value }}">{{ $diff->name }}</button>
                         @endforeach
                     </div>
                     <div class="filterlabel" id="level">LEVELS</div>
                     <div class="filterrow">
                         @foreach ($levels as $level)
-                            <button type="button" class="filters {{ $level->status }}" name="level" form="song_form" value="{{ $level->name }}">{{ $level->name }}</button>
+                            <button type="button" class="filters {{ $level->status }}" name="level" form="song_form" value="{{ $level->value }}">{{ $level->name }}</button>
                         @endforeach
                     </div>
                     <div class="fbox">
                         <div class="filterlabel special">SORT BY</div>
                         <div class="filterrow">
                             @foreach ($sorts as $sort)
-                                <button type="button" class="filters {{ $sort->status }}" name="sort" form="song_form" value="{{ $sort->name }}">{{ $sort->name }}</button>
+                                <button type="button" class="filters {{ $sort->status }}" name="sort" form="song_form" value="{{ $sort->value }}">{{ $sort->name }}</button>
                             @endforeach
                             <button type="button" class="filters {{ $key }} material-symbols-outlined" id="key{{ $key }}" name="key" form="song_form" value="selected">eject</button>
                         </div>
@@ -56,5 +58,15 @@
                 </form>
             </div>
         </div>
+        @if (empty($charts))
+        <div class="msg">There are no songs found.</div>
+        @else
+        <div class="songsbox" id="songbox">
+            @foreach ($charts as $chart) {
+                @include('songbox', ['chart'=>$chart])
+            }
+            @endforeach
+        </div>
+        @endif
     </main>
 @endsection
