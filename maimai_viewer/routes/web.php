@@ -1,7 +1,9 @@
 <?php
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\URL;
+use App\Http\Controllers\Songfinder;
 use App\Models\Navbar;
 use App\Models\Page_status;
 
@@ -30,12 +32,19 @@ Route::get('/nav_test', function() {
     ]);
 });
 
-Route::get('/songs', function() {
+Route::get('/songs', function(Request $request) {
     return view('songs', [
         'title'=> 'Songs Finder',
         'description'=> "Search for songs in the Maimai database",
         'logo_url'=> URL::asset('/images/nav_icons/bearhands.png'),
         'user'=> Navbar::retrieveuser(),
-        'status'=>Page_status::set_status('songs')
+        'status'=>Page_status::set_status('songs'),
+        'genres'=>Songfinder::initialize_genre($request),
+        'versions'=>Songfinder::initialize_ver($request),
+        'difficulties'=>Songfinder::initialize_diff($request),
+        'levels'=>Songfinder::initialize_level($request),
+        'sorts'=>Songfinder::initialize_sorts($request),
+        'key'=>Songfinder::key($request)
     ]);
 });
+
