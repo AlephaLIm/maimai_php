@@ -23,6 +23,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::post('/data', 'App\Http\Controllers\DatabaseController@data');
+
 Route::get('/nav_test', function() {
     return view('navbar', [
         'title'=> 'Navbar Test',
