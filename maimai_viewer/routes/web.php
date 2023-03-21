@@ -1,7 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,3 +39,9 @@ Route::get('/nav_test', function() {
         ]
     ]);
 });
+
+// register form
+Route::get('/register', [UserController::class, 'create']);
+
+// create user
+Route::post('/users', [UserController::class, 'store']);
