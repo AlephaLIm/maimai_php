@@ -1,0 +1,192 @@
+body {
+    background: #141414;
+}
+
+main {
+    min-height: 800px;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.filterwrapper {
+    width: 55vw;
+    background: #100720;
+    border-radius: 10px;
+    box-shadow: 0 0 4px 3px #3D087B inset;
+    text-align: center;
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
+
+.sbox .searchinput {
+    width: max(42.3vw, 240px);
+    height: 43px;
+    vertical-align: middle;
+    outline: none;
+    border: none;
+    padding-left: 20px;
+    background: #141414;
+    box-shadow: 0 0 2px 2px #3D087B;
+}
+
+.sbox .searchsubmit {
+    width: 120px;
+    margin-left: 5px;
+    height: 45px;
+    font-size: 20px;
+    text-align: center;
+    vertical-align: middle;
+    background: #3D087B;
+    border: none;
+    border-radius: 5px;
+    color: white;
+}
+
+.sbox .searchsubmit:hover {
+    background: #FFBF00;
+    box-shadow: 1px 1px 2px 2px #3D087B;
+}
+
+.filter-form .filterrow .selected {
+    background: #FFBF00;
+    color: black;
+    box-shadow: 1px 1px 2px 2px #3D087B;
+}
+
+.filter-form .fbox {
+    margin: 10px;
+    overflow-wrap: break-word;
+}   
+
+.filter-form .filterlabel {
+    display: inline-block;
+    width: 170px;
+    height: 130px;
+    padding-top: 50px;
+    background: #3D087B;
+    border-radius: 5px;
+    box-shadow: 0 0 5px 5px #100720 inset;
+    text-align: center;
+    vertical-align: bottom;
+    color: white;
+    font-size: 20px;
+}
+
+.filter-form .special {
+    height: 75px;
+    padding-top: 20px;
+}
+
+
+.filter-form #level {
+    height: 100px;
+    padding-top: 35px;
+}
+
+.filter-form .filterrow #key {
+    vertical-align: middle;
+    padding-top: 5px;
+    padding-bottom: 6px;
+    transform: rotate(180deg);
+    float: right;
+}
+
+.filter-form .filterrow #keyselected {
+    transform: rotate(0deg);
+    padding-top: 4px;
+    padding-bottom: 8px;
+    margin-bottom: 1px;
+    margin-top: 3px;
+    float: right;
+}
+
+.filter-form .filterrow {
+    border-bottom: 1px solid white;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    width: min(53vw, 750px);
+    display: inline-block;
+    vertical-align: bottom;
+    text-align: start;
+}
+
+.filter-form .filterrow button {
+    background: darkgray;
+    border-radius: 3px;
+    color: white;
+    font-size: 18px;
+    margin-bottom: 5px;
+    border: 2px solid darkgray;
+}
+
+.msg {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.songsbox {
+    margin-top: 10px;
+    overflow-y: scroll;
+    text-align: center;
+}
+
+.songsbox::-webkit-scrollbar {
+    display: none;
+}
+
+::-webkit-scrollbar {
+    width: 3px;
+}
+
+@media screen and (max-width: 1000px) {
+
+    .main {
+        min-height: 1150px;
+    }
+    .filter-form .f_box {
+        text-align: center;
+    }
+    .filterwrapper {
+        width: 100vw
+    }
+    .filter-form .filterrow {
+        width: 95vw;
+        text-align: center;
+    }
+    .filter-form .filterlabel {
+        width: 80vw;
+        height: auto;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
+    .filter-form .special {
+        width: 80vw;
+        height: 60px;
+        padding-top: 15px;
+        padding-bottom: 10px;
+    }
+
+    .filter-form #level {
+        width: 80vw;
+        height: 60px;
+        padding-top: 15px;
+        padding-bottom: 10px;
+    }
+
+    .sbox .searchsubmit {
+        width: 100px;
+    }
+
+    .filter-form .filterrow #key {
+        margin-right:16px;
+    }
+    .filter-form .filterrow #keyselected {
+        margin-right:16px;
+    }
+}

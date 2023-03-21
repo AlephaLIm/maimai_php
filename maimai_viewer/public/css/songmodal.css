@@ -1,0 +1,190 @@
+@import url('https://fonts.googleapis.com/css2?family=Megrim&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Slab&display=swap');
+
+.modal-header {
+    color: white;
+}
+
+.modal-header .modal_label {
+    height: max(3vw, 40px);
+    width: 33vw;
+    text-align: start;
+    overflow: hidden;
+}
+
+.modal-header .cons_label {
+    margin-right: 10px;
+}
+
+.modal-body {
+    height: 650px;
+    padding-left: 0px;
+    padding-right: 0px;
+    background-color: #1b1b1b;
+}
+
+.modal-body .song_img {
+    position: absolute;
+    left: max(1.5vw, 10px);
+    width: 190px;
+    height: 190px;
+}
+
+.modal-body .user_stats {
+    position: absolute;
+    top: 40px;
+    left: max(12.5vw, 210px);
+    text-align: start;
+}
+
+.modal-body .user_stats .score_header {
+    font-family: 'Megrim', 'cursive';
+    color: white;
+}
+
+.modal-body .user_stats .dx {
+    margin-top: 30px;
+    text-shadow: 3px 3px 3px black;
+    color: #FFBF00;
+}
+
+.modal-body .user_stats .rank_label {
+    font-size: 35px;
+    width: 80px;
+    font-weight: bold;
+    background: -webkit-linear-gradient(left, red , yellow, cyan, purple);
+    background: -o-linear-gradient(right, red, yellow, cyan, purple);
+    background: -moz-linear-gradient(right, red, yellow, cyan, purple);
+    background: linear-gradient(to right, red , yellow, cyan, purple);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.modal-body .user_stats .score_label {
+    font-size: 25px;
+    font-style: italic;
+    font-family: 'Megrim', 'cursive';
+    color: white;
+}
+
+.modal-body .clear_badges {
+    background-color: #141414;
+    border-radius: 8px;
+    box-shadow: 0 0 2px 2px #8a8a8a;
+    width: 250px;
+    height: 200px;
+    position: absolute;
+    right: 30px;
+    top: 15px;
+}
+
+.modal-body .clear_badges .ap_badges {
+    height: 100px;
+    text-align: center;
+    border-bottom: 1px solid #8a8a8a;
+    position: relative;
+}
+
+.modal-body .clear_badges .fsd_badges {
+    height: 100px;
+    text-align: center;
+    position: relative;
+}
+
+.modal-body .clear_badges h4 {
+    position: absolute;
+    width: 150px;
+    top: 30px;
+    left: 5px;
+    font-size: 30px;
+}
+
+.modal-body .clear_badges .empty_badges {
+    position: absolute;
+    right: 25px;
+    top: 15px;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background-color: #3b3b3b;
+    box-shadow: 0 0 7px 5px black inset;
+}
+
+.modal-body .clear_badges .empty_badges .medal {
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+    font-size: 25px;
+    padding-top: 12.5px;
+    text-shadow: 2px 2px 3px black;
+}
+
+.modal-body .note_stats {
+    position: absolute;
+    top: 250px;
+    left: 28px;
+    width: 300px;
+    text-align: start;
+    border-top: 2px solid white;
+    padding-top: 30px;
+    text-overflow: ellipsis;
+    color: white;
+}
+
+.modal-body .note_stats h3 {
+    font-family: 'Josefin Slab', serif;
+    padding-bottom: 10px;
+}
+
+.modal-body .note_stats h3 p {
+    display: inline;
+    font-size: 23px;
+}
+
+.modal-body .radar {
+    position: absolute;
+    top: 250px;
+    right: 20px;
+    padding-right: 15px;
+    width: max(20vw, 350px);
+    background-color: #141414;
+    border: 3px solid white;
+}
+
+.modal-footer {
+    background-color: #1b1b1b;
+}
+
+.modal-footer button {
+    background: -webkit-linear-gradient(left, red , yellow, cyan, purple);
+    color: #141414;
+    font-weight: bold;
+}
+
+.modal-footer button:hover {
+    color: black;
+    font-weight: bold;
+    box-shadow: 0 0 3px 3px cyan;
+}
+
+
+@media screen and (max-width: 900px) {
+    .modal-body {
+        height: 1150px;
+    }
+    .modal-body .clear_badges {
+        top: 220px;
+        left: 70px;
+    }
+    .modal-body .note_stats {
+        position: static;
+        margin-top: 420px;
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+    .modal-body .radar {
+        position: static;
+        margin-top: 10px;
+    }
+}
