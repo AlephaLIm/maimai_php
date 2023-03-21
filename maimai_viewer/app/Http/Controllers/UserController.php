@@ -4,9 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Navbar;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\URL;
 use App\Models\Page_status;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\URL;
 
 class UserController extends Controller
 {
@@ -36,10 +37,52 @@ class UserController extends Controller
         // create user
         $user = User::create($formFields);
 
+        /*$userData = $request->input("user");
+        $user = DB::insert(
+            'INSERT INTO users(id, friendcode, email, email_verified_at, password, remember_token, created_at, updated_at) values (?,?,?,?,?,?,?,?);',
+            ["1", $userData["friendcode"], "test@gmail", null, "password", null, null, null]
+        );*/
+
         // login
         auth()->login($user);
 
         // return to homepage
         return redirect('/')->with('message', 'User created and logged in');
+    }
+
+    // logout user
+    public function logout(Request $request){
+        auth()->logout();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        
+        return redirect('/')->with('message', 'You have been logged out!');
+    }
+
+    // login form
+    public function login(){
+        return view('users.login',[
+            'title'=> 'Register',
+            'description'=> "Create a new user",
+            'logo_url'=> URL::asset('/images/nav_icons/bearhands.png'),
+            'user'=> Navbar::retrieveuser(),
+            'status'=>Page_status::set_status('')
+        ]);
+    }
+
+    public function authenticate(Request $request){
+        $formFields = $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
+
+        if(auth()->attempt($formFields)){
+            $request->session()->regenerate();
+
+            return redirect('/')->with('message', 'You are now logged in!');
+        }
+
+        return back()->withErrors(['email' => 'Invalid Credentials'])->onlyInput('email');
     }
 }

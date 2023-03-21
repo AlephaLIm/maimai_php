@@ -23,6 +23,7 @@
         </div>
     </nav>
     <nav class="navbar navbar-expand-lg bg-dark navbar-dark" aria-label="nav_panel" id="nav-row">
+        @auth
         <div class="navbar-brand" id="profile-box">
             <img id="profile-img" src="{{ asset($user->profile_img) }}" alt="Profile Photo">
             <div class="profile-user">
@@ -35,6 +36,8 @@
                 </div>
             </div>
         </div>
+        @else
+        @endauth
          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#Navlinks"
             aria-controls="Navlinks" aria-expanded="false" aria-label="Go to...">
             <span class="navbar-toggler-icon"></span>
@@ -45,7 +48,10 @@
                 <a class="nav-link ms-auto {{ $status->achievements }}" href="./achievements"><p>Achievements</p></a>
                 <a class="nav-link ms-auto {{ $status->songs }}" href="./songs"><p>Songs</p></a>
                 <a class="nav-link ms-auto {{ $status->recommendations }}" href="./recommendations"><p>Recommendations</p></a>
-                <a class="nav-link ms-auto" href="./login"><span class="material-symbols-outlined">logout</span></a>
+                @auth
+                @csrf
+                <a class="nav-link ms-auto" href="logout"><span class="material-symbols-outlined">logout</span></a></form>
+                @endauth
             </div>
         </div>
     </nav>
