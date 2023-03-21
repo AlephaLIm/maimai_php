@@ -31,7 +31,7 @@ class ChartLoader extends Controller
             $charts = DB::table('Charts')
                                     ->join('Songs', 'Charts.parentsong', '=', 'Songs.songid')
                                     ->join('Alias', 'Songs.songid', '=', 'Alias.songid')
-                                    ->select('Charts.chartid', 'Songs.name', 'Songs.jacket', 'Charts.level', 'Charts.difficulty', 'Songs.type')
+                                    ->select('Charts.chartid', 'Songs.name', 'Songs.jacket', 'Charts.level', 'Charts.constant', 'Charts.difficulty', 'Songs.type', 'Songs.artist', 'Songs.genre', 'Songs.version', 'Songs.bpm')
                                     ->whereIn('Songs.genre', $list_items['genre'])
                                     ->whereIn('Songs.version', $list_items['version'])
                                     ->whereIn('Charts.difficulty', $list_items['difficulty'])
@@ -42,7 +42,7 @@ class ChartLoader extends Controller
         else {
             $charts = DB::table('Charts')
                                 ->join('Songs', 'Charts.parentsong', '=', 'Songs.songid')
-                                ->select('Charts.chartid', 'Songs.name', 'Songs.jacket', 'Charts.level', 'Charts.difficulty', 'Songs.type')
+                                ->select('Charts.chartid', 'Songs.name', 'Songs.jacket', 'Charts.level', 'Charts.constant', 'Charts.difficulty', 'Songs.type', 'Songs.artist', 'Songs.genre', 'Songs.version', 'Songs.bpm')
                                 ->whereIn('Songs.genre', $list_items['genre'])
                                 ->whereIn('Songs.version', $list_items['version'])
                                 ->whereIn('Charts.difficulty', $list_items['difficulty'])
@@ -51,7 +51,8 @@ class ChartLoader extends Controller
         }
 
         foreach ($charts as $chart) {
-            $chart_obj = Chart::create_chart($chart->chartid, $chart->name, $chart->jacket, $chart->level, $chart->difficulty, $chart->type);
+            $chart_obj = Chart::create_chart($chart->chartid, $chart->name, $chart->artist, $chart->genre, $chart->bpm, $chart->version, $chart->jacket, $chart->level, $chart->constant, $chart->difficulty, $chart->type);
+            $chart_obj->set_dx('99/100');
             array_push($chart_list, $chart_obj);
         }
 
