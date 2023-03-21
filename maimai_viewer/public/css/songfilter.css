@@ -59,6 +59,7 @@ main {
 
 .filter-form .fbox {
     margin: 10px;
+    overflow-wrap: break-word;
 }   
 
 .filter-form .filterlabel {
@@ -108,7 +109,7 @@ main {
     padding-top: 10px;
     padding-bottom: 10px;
     padding-left: 10px;
-    width: 750px;
+    width: min(53vw, 750px);
     display: inline-block;
     vertical-align: bottom;
     text-align: start;
