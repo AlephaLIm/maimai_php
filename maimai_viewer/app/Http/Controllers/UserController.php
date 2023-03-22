@@ -16,9 +16,6 @@ class UserController extends Controller
         return view('users.register',[
             'title'=> 'Register',
             'description'=> "Create a new user",
-            'logo_url'=> URL::asset('/images/nav_icons/bearhands.png'),
-            'user'=> Navbar::retrieveuser(),
-            'status'=>Page_status::set_status('')
         ]);
     }
 
@@ -63,11 +60,8 @@ class UserController extends Controller
     // login form
     public function login(){
         return view('users.login',[
-            'title'=> 'Register',
-            'description'=> "Create a new user",
-            'logo_url'=> URL::asset('/images/nav_icons/bearhands.png'),
-            'user'=> Navbar::retrieveuser(),
-            'status'=>Page_status::set_status('')
+            'title'=> 'Login',
+            'description'=> "Log in as existing user",
         ]);
     }
 

@@ -60,7 +60,7 @@ Route::get('/songs', function(Request $request) {
 });
 
 // register form
-Route::get('/register', [UserController::class, 'create']);
+Route::get('/register', [UserController::class, 'create'])->middleware('guest');
 
 // create user
 Route::post('/users', [UserController::class, 'store']);
@@ -69,7 +69,7 @@ Route::post('/users', [UserController::class, 'store']);
 Route::get('/logout', [UserController::class, 'logout']);
 
 // login form
-Route::get('/login', [UserController::class, 'login']);
+Route::get('/login', [UserController::class, 'login'])->name('login')->middleware('guest');
 
 // login user
 Route::post('/users/authenticate', [UserController::class, 'authenticate']);
