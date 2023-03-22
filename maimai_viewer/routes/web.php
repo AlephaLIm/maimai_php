@@ -24,7 +24,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+//Post API for scorescrapper.js
 Route::post('/data', 'App\Http\Controllers\DatabaseController@data');
+//Get API to send song information to scorescrapper.js
+Route::get('/songinfo', 'App\Http\Controllers\getsongController@get');
 
 Route::get('/nav_test', function() {
     return view('navbar', [
