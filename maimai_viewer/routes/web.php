@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Songfinder;
 use App\Http\Controllers\ChartLoader;
+use App\Models\Sorted;
 use App\Models\Navbar;
 use App\Models\Page_status;
 

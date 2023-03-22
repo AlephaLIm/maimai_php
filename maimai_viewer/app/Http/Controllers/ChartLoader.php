@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Songfinder;
+use App\Models\Sorted;
 use App\Models\Chart;
 use App\Models\Filters;
 
@@ -31,7 +32,7 @@ class ChartLoader extends Controller
             $charts = DB::table('Charts')
                                     ->join('Songs', 'Charts.parentsong', '=', 'Songs.songid')
                                     ->join('Alias', 'Songs.songid', '=', 'Alias.songid')
-                                    ->select('Charts.chartid', 'Songs.name', 'Songs.jacket', 'Charts.level', 'Charts.constant', 'Charts.difficulty', 'Songs.type', 'Songs.artist', 'Songs.genre', 'Songs.version', 'Songs.bpm')
+                                    ->select('Charts.chartid', 'Songs.name', 'Songs.jacket', 'Charts.level', 'Charts.constant', 'Charts.difficulty', 'Songs.type', 'Songs.artist', 'Songs.genre', 'Songs.version', 'Songs.bpm')->distinct()
                                     ->whereIn('Songs.genre', $list_items['genre'])
                                     ->whereIn('Songs.version', $list_items['version'])
                                     ->whereIn('Charts.difficulty', $list_items['difficulty'])
@@ -42,7 +43,7 @@ class ChartLoader extends Controller
         else {
             $charts = DB::table('Charts')
                                 ->join('Songs', 'Charts.parentsong', '=', 'Songs.songid')
-                                ->select('Charts.chartid', 'Songs.name', 'Songs.jacket', 'Charts.level', 'Charts.constant', 'Charts.difficulty', 'Songs.type', 'Songs.artist', 'Songs.genre', 'Songs.version', 'Songs.bpm')
+                                ->select('Charts.chartid', 'Songs.name', 'Songs.jacket', 'Charts.level', 'Charts.constant', 'Charts.difficulty', 'Songs.type', 'Songs.artist', 'Songs.genre', 'Songs.version', 'Songs.bpm')->distinct()
                                 ->whereIn('Songs.genre', $list_items['genre'])
                                 ->whereIn('Songs.version', $list_items['version'])
                                 ->whereIn('Charts.difficulty', $list_items['difficulty'])
@@ -56,6 +57,45 @@ class ChartLoader extends Controller
             array_push($chart_list, $chart_obj);
         }
 
-        return $chart_list;
+        $charts_ordered = self::sort_charts($chart_list, $list_items['sort'], $key);
+        $stored_charts = Sorted::set_ordered($chart_ordered);
+
+        return $stored_charts;
+    }
+
+    private static function sort_charts($array, $keys, $order) {
+        $count = count($keys) - 1;
+        usort($array, function($former, $latter) use ($keys, $order, $count){
+            return self::helper_sort($former, $latter, $keys, $order, $count);
+        });
+        return $array;
+    }
+
+    private static function helper_sort($former, $latter, $keys, $order, $count, ?int $index = 0) {
+        $param = $keys[$index];
+        if ($former->$param == $latter->$param) {
+            if ($index < $count) {
+                return self::helper_sort($former, $latter, $keys, $order, $count, $index + 1);
+            }
+            else {
+                return 0;
+            }
+        }
+        elseif ($former->$param > $latter->$param) {
+            if ($order == 'desc') {
+                return -1;
+            }
+            else {
+                return 1;
+            }
+        }
+        else {
+            if ($order == 'desc') {
+                return 1;
+            }
+            else {
+                return -1;
+            }
+        }
     }
 }
