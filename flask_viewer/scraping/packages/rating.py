@@ -39,5 +39,5 @@ def GetValues(score):
             return (achievement_range[i-1], achievement_range[i], factor[i-1])
 
 
-#print(GetValues(99.7299)[0])
-#print(CalculateRating(100.0303,13.9))
+#print(f"Getvalues: {GetValues(99.7299)[0]}")
+print(f"CalculateRating: {CalculateRating(100.8945,13)}")
