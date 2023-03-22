@@ -37,6 +37,18 @@
             </div>
         </div>
         @else
+        <div class="navbar-brand" id="profile-box">
+            <img id="profile-img" src="{{ asset($user->profile_img) }}" alt="Profile Photo">
+            <div class="profile-user">
+                <h4>{{ $user->name }}</h4>
+                <div class="ratings">
+                    <p>Rating: {{ $user->rating }}</p>
+                </div>
+                <div class="title-box">
+                    <h5>{{ $user->title }}</h5>
+                </div>
+            </div>
+        </div>
         @endauth
          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#Navlinks"
             aria-controls="Navlinks" aria-expanded="false" aria-label="Go to...">

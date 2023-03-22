@@ -25,7 +25,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+//Post API for scorescrapper.js
 Route::post('/data', 'App\Http\Controllers\DatabaseController@data');
+//Get API to send song information to scorescrapper.js
+Route::get('/songinfo', 'App\Http\Controllers\getsongController@get');
 
 Route::get('/nav_test', function() {
     return view('navbar', [
@@ -61,16 +64,16 @@ Route::get('/songs', function(Request $request) {
 });
 
 // register form
-Route::get('/register', [UserController::class, 'create']);
+Route::get('/register', [UserController::class, 'create'])->middleware('guest');
 
 // create user
 Route::post('/users', [UserController::class, 'store']);
 
 // logout user
-Route::get('/logout', [UserController::class, 'logout']);
+Route::get('/logout', [UserController::class, 'logout'])->middleware('auth');
 
 // login form
-Route::get('/login', [UserController::class, 'login']);
+Route::get('/login', [UserController::class, 'login'])->name('login')->middleware('guest');
 
 // login user
 Route::post('/users/authenticate', [UserController::class, 'authenticate']);

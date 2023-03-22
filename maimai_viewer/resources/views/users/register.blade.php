@@ -1,8 +1,10 @@
-@extends('navbar', ['title' => $title, 'description' => $description, 'logo_url' => $logo_url, 'user' => $user, 'status' => $status])
+@extends('metadata', ['title' => $title, 'description' => $description])
 
 @section('links')
     @parent
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/register.css') }}" />    
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/register.css') }}" />  
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,1,0" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@48,400,1,0" />  
 @endsection
 
 @section('body')
@@ -65,6 +67,13 @@
                     <p>
                     Already have an account?
                     <a href="/login" class="redirect">Login</a>
+                    </p>
+                </div>
+
+                <div class="guest">
+                    <p>
+                    Otherwise,
+                    <a href="/" class="guest">Continue as Guest</a>
                     </p>
                 </div>
             </form>
