@@ -32,7 +32,7 @@ class ChartLoader extends Controller
             $charts = DB::table('Charts')
                                     ->join('Songs', 'Charts.parentsong', '=', 'Songs.songid')
                                     ->join('Alias', 'Songs.songid', '=', 'Alias.songid')
-                                    ->select('Charts.chartid', 'Songs.name', 'Songs.jacket', 'Charts.level', 'Charts.constant', 'Charts.difficulty', 'Songs.type', 'Songs.artist', 'Songs.genre', 'Songs.version', 'Songs.bpm')->distinct()
+                                    ->select('Charts.chartid', 'Songs.name', 'Songs.jacket', 'Charts.level', 'Charts.constant', 'Charts.difficulty', 'Charts.totalnotecount', 'Charts.tapcount', 'Charts.slidecount', 'Charts.holdcount', 'Charts.breakcount', 'Charts.touchcount', 'Charts.excount', 'Songs.type', 'Songs.artist', 'Songs.genre', 'Songs.version', 'Songs.bpm')->distinct()
                                     ->whereIn('Songs.genre', $list_items['genre'])
                                     ->whereIn('Songs.version', $list_items['version'])
                                     ->whereIn('Charts.difficulty', $list_items['difficulty'])
@@ -43,7 +43,7 @@ class ChartLoader extends Controller
         else {
             $charts = DB::table('Charts')
                                 ->join('Songs', 'Charts.parentsong', '=', 'Songs.songid')
-                                ->select('Charts.chartid', 'Songs.name', 'Songs.jacket', 'Charts.level', 'Charts.constant', 'Charts.difficulty', 'Songs.type', 'Songs.artist', 'Songs.genre', 'Songs.version', 'Songs.bpm')->distinct()
+                                ->select('Charts.chartid', 'Songs.name', 'Songs.jacket', 'Charts.level', 'Charts.constant', 'Charts.difficulty', 'Charts.totalnotecount', 'Charts.tapcount', 'Charts.slidecount', 'Charts.holdcount', 'Charts.breakcount', 'Charts.touchcount', 'Charts.excount', 'Songs.type', 'Songs.artist', 'Songs.genre', 'Songs.version', 'Songs.bpm')->distinct()
                                 ->whereIn('Songs.genre', $list_items['genre'])
                                 ->whereIn('Songs.version', $list_items['version'])
                                 ->whereIn('Charts.difficulty', $list_items['difficulty'])
@@ -54,6 +54,7 @@ class ChartLoader extends Controller
         foreach ($charts as $chart) {
             $chart_obj = Chart::create_chart($chart->chartid, $chart->name, $chart->artist, $chart->genre, $chart->bpm, $chart->version, $chart->jacket, $chart->level, $chart->constant, $chart->difficulty, $chart->type);
             $chart_obj->set_dx('99/100');
+            $chart_obj->set_notes($chart->totalnotecount, $chart->tapcount, $chart->slidecount, $chart->holdcount, $chart->breakcount, $chart->touchcount, $chart->excount);
             array_push($chart_list, $chart_obj);
         }
 

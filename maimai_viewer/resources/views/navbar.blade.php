@@ -17,7 +17,7 @@
         <nav class="navbar navbar-expand-lg bg-dark navbar-dark" aria-label="nav_bg" id="logo-wrapper">
         <div class="header-logo" style="background: linear-gradient(rgba(0, 0, 0, 0.40), rgba(0, 0, 0, 0.40)), url({{ asset('images/nav_bg/bg_img.jpg') }}), no-repeat;">
             <a class="navbar-brand" href="#">
-                <img src="{{ $logo_url }} " alt="Logo">
+                <img src="{{ asset('/images/nav_icons/bearhands.png') }} " alt="Logo">
                 <h1>Maimai<br>Scoreviewer</h1>
             </a>
         </div>
@@ -27,12 +27,12 @@
         <div class="navbar-brand" id="profile-box">
             <img id="profile-img" src="{{ asset($user->profile_img) }}" alt="Profile Photo">
             <div class="profile-user">
-                <h4>{{ $user->name }}</h4>
+                <h2>{{ $user->name }}</h2>
                 <div class="ratings">
                     <p>Rating: {{ $user->rating }}</p>
                 </div>
                 <div class="title-box">
-                    <h5>{{ $user->title }}</h5>
+                    <h3>{{ $user->title }}</h3>
                 </div>
             </div>
         </div>
@@ -40,12 +40,12 @@
         <div class="navbar-brand" id="profile-box">
             <img id="profile-img" src="{{ asset($user->profile_img) }}" alt="Profile Photo">
             <div class="profile-user">
-                <h4>{{ $user->name }}</h4>
+                <h2>{{ $user->name }}</h2>
                 <div class="ratings">
                     <p>Rating: {{ $user->rating }}</p>
                 </div>
                 <div class="title-box">
-                    <h5>{{ $user->title }}</h5>
+                    <h3>{{ $user->title }}</h3>
                 </div>
             </div>
         </div>

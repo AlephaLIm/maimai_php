@@ -17,7 +17,7 @@
 }
 
 .modal-body {
-    height: 650px;
+    height: 700px;
     padding-left: 0px;
     padding-right: 0px;
     background-color: #1b1b1b;
@@ -65,6 +65,10 @@
     font-size: 25px;
     font-style: italic;
     font-family: 'Megrim', 'cursive';
+    color: white;
+}
+
+.modal-body .clear_badges h4 {
     color: white;
 }
 
@@ -143,12 +147,14 @@
     font-size: 20px;
 }
 
-.modal-body .radar {
+.modal-body .radar_div {
     position: absolute;
     top: 250px;
-    right: 20px;
+    right: 15px;
     padding-right: 15px;
-    width: max(20vw, 350px);
+    height: max(20.5vw, 430px);
+    width: max(20vw, 420px);
+
 
 }
 
@@ -184,7 +190,7 @@
         margin-right: 20px;
         width: 350px;
     }
-    .modal-body .radar {
+    .modal-body .radar_div {
         position: static;
         margin-top: 10px;
     }

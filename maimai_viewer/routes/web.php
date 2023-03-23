@@ -41,7 +41,6 @@ Route::get('/songs', function(Request $request) {
     return view('songs', [
         'title'=> 'Songs Finder',
         'description'=> "Search for songs in the Maimai database",
-        'logo_url'=> URL::asset('/images/nav_icons/bearhands.png'),
         'user'=> Navbar::retrieveuser(),
         'status'=>Page_status::set_status('songs'),
         'genres'=>Songfinder::initialize_genre($request),
