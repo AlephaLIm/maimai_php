@@ -1,4 +1,4 @@
-<div class="modal fade" id="modal_{{ $chart->id }}" tabindex="-1" aria-labelledby="modal_label" aria-hidden="true">
+<div class="modal fade" id="modal_{{ $chart->id }}" tabindex="-1" title="{{ $chart->name }}_{{ $chart->diff }}" aria-labelledby="modal_label" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header" style="background-color: {{ $chart->color['bg'] }};">
@@ -46,6 +46,9 @@
                     <h3 style="color:{{ $chart->color['text'] }};">Genre: <p style="color:white;">{{ $chart->genre }}</p></h3>
                     <h3 style="color:{{ $chart->color['text'] }};">BPM: <p style="color:white;">{{ $chart->bpm }}</p></h3>
                     <h3 style="color:{{ $chart->color['text'] }};">Version: <p style="color:white;">{{ $chart->version }}</p></h3>
+                </div>
+                <div class="radar_div">
+                    <canvas class="radar" data-tap="{{ $chart->tap }}" data-slide="{{ $chart->slide }}" data-hold="{{ $chart->hold }}" data-break="{{ $chart->break }}" data-touch="{{ $chart->touch }}" data-ex="{{ $chart->ex }}"></canvas>
                 </div>
             </div>
             <div class="modal-footer">
