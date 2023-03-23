@@ -17,7 +17,7 @@
                         @endfor
                     </div>
                     <h4 class="rank_label">{{ $chart->scoregrade }}</h4>
-                    <h5 class="score_label">Score: {{ $chart->scoregrade }}</h5>
+                    <h5 class="score_label">Score: {{ $chart->score }}%</h5>
                 </div>
                 <div class="clear_badges">
                     <div class="ap_badges">
@@ -42,10 +42,10 @@
                     </div>
                 </div>
                 <div class="note_stats">
-                    <h3>Artist: <p>{{ $chart->artist }}</p></h3>
-                    <h3>Genre: <p>{{ $chart->genre }}</p></h3>
-                    <h3>BPM: <p>{{ $chart->bpm }}</p></h3>
-                    <h3>Version: <p>{{ $chart->version }}</p></h3>
+                    <h3 style="color:{{ $chart->color['text'] }};">Artist: <p style="color:white;">{{ $chart->artist }}</p></h3>
+                    <h3 style="color:{{ $chart->color['text'] }};">Genre: <p style="color:white;">{{ $chart->genre }}</p></h3>
+                    <h3 style="color:{{ $chart->color['text'] }};">BPM: <p style="color:white;">{{ $chart->bpm }}</p></h3>
+                    <h3 style="color:{{ $chart->color['text'] }};">Version: <p style="color:white;">{{ $chart->version }}</p></h3>
                 </div>
             </div>
             <div class="modal-footer">

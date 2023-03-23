@@ -10,6 +10,7 @@
 @section('body')
     <div class='bg-limit'>
         <div class='login_wrapper'>
+            <span class= "logo"><img src="{{ asset('/images/nav_icons/bearhands.png') }} " alt="Logo"></span>
             <span class="title">
                 <h1>Login</h1>
                 <h6>For existing users</h6>
@@ -38,9 +39,11 @@
                 </div>
             
                 <div class="submit-button-container">
-                    <button type="submit" class="submit-button">
-                    Sign In
-                    </button>
+                    <div class="shadow-wrapper">
+                        <button type="submit" class="submit-button">
+                        Sign In
+                        </button>
+                    </div>
                 </div>
                 
                 <div class="redirect">
