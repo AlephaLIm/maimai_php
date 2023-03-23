@@ -58,7 +58,7 @@ class ChartLoader extends Controller
         }
 
         $charts_ordered = self::sort_charts($chart_list, $list_items['sort'], $key);
-        $stored_charts = Sorted::set_ordered($chart_ordered);
+        $stored_charts = Sorted::set_ordered($charts_ordered);
 
         return $stored_charts;
     }

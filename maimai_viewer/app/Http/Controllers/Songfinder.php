@@ -51,7 +51,7 @@ class Songfinder extends Controller
         foreach (array_combine($difficulties, $diff_filter) as $diff => $diff_val) {
             $instance = Filterbox::initialize($diff, $diff_val);
             array_push($diff_list, $instance);
-            if (in_array($diff, $selected)){
+            if (in_array($diff_val, $selected)){
                 $instance->status = "selected";
             }
         }
