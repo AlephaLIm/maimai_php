@@ -67,10 +67,13 @@
         <div class="msg">There are no songs found.</div>
         @else
         <div class="songsbox" id="songbox">
-            @for ($i = 0; $i < count($charts); $i++) 
-                @include('songbox', ['chart'=>$charts[$i]])
-                @include('songmodal', ['chart'=>$charts[$i]])
-            @endfor
+            @foreach ($charts as $chart) 
+                @include('songbox', [ 'chart'=>$chart ])
+                @include('songmodal', [ 'chart'=>$chart ])
+            @endforeach
+        </div>
+        <div id="links" class="d-flex justify-content-center">
+            {{ $charts->appends($_GET)->links() }}
         </div>
         @endif
     </main>

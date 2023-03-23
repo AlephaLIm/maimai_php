@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Songfinder;
 use App\Http\Controllers\ChartLoader;
+use App\Http\Controllers\Paginate;
 use App\Models\Sorted;
 use App\Models\Navbar;
 use App\Models\Page_status;
@@ -41,12 +42,10 @@ Route::get('/nav_test', function() {
 });
 
 Route::get('/songs', function(Request $request) {
-    if (count($request->all()) > 0) {
-        $charts = Chartloader::retrieve_result($request);
-    }
-    else {
-        $charts = [];
-    }
+    
+    $sorted = Chartloader::retrieve_result($request);
+    $charts = Paginate::generate_pagination($request, $sorted);
+
     return view('songs', [
         'title'=> 'Songs Finder',
         'description'=> "Search for songs in the Maimai database",
