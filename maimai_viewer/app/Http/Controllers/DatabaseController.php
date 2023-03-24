@@ -9,14 +9,6 @@ class DatabaseController extends Controller
 {
     public function data(Request $request)
     {
-        // function CalculateRating($score, $chart_constant){
-        //      if ($score < 80){
-        //         return 0;
-        //      } 
-        //      elseif ($score>= 100.5){
-        //         return 22.512 * $chart_constant;
-        //      }
-        // }
         function CalculateRating($score, $chart_constant)
         {
             $score = floatval($score);
@@ -86,12 +78,13 @@ class DatabaseController extends Controller
         $remasterData = $request->input("remasterScores");
 
         //Inserting of userData
+        // print_r($userData);
         $user = DB::insert(
-            'INSERT INTO users(username, rating, playcount, picture, friendcode, classrank, courserank, title, email, password) values (?,?,?,?,?,?,?,?,?,?);',
-            [$userData["name"], $userData["rating"], $userData["playcount"], null, $userData["friendcode"], $userData["classrank"], $userData["courserank"], $userData["title"], "test@gmail", "password"]
+            'INSERT INTO users(username, rating, playcount, picture, friendcode, classrank, courserank, title, email, password) values (?,?,?,?,?,?,?,?,?,?) ON DUPLICATE KEY UPDATE `friendcode` = ?;',
+            [$userData["name"], $userData["rating"], $userData["playcount"], null, $userData["friendcode"], $userData["classrank"], $userData["courserank"], $userData["title"], "test@gmail", "password", $userData["friendcode"]]
         );
-        
-        if (count($basicData) != 0) {
+
+        if ($basicData != null) {
             for ($i = 0; $i < count($basicData); $i++) {
                 //Assign each array to basicscore
                 $basicScore = $basicData[$i];
@@ -126,7 +119,7 @@ class DatabaseController extends Controller
             }
         }
 
-        if (count($advancedData) != 0) {
+        if ($advancedData != null) {
             for ($i = 0; $i < count($advancedData); $i++) {
                 $advancedScore = $advancedData[$i];
                 $songid = DB::select('SELECT songid FROM maimai_db.songs where name=? and type=?;', [$advancedScore["title"], $advancedScore["type"]]);
@@ -151,7 +144,7 @@ class DatabaseController extends Controller
             }
         }
 
-        if (count($expertData) != 0) {
+        if ($expertData != null) {
             for ($i = 0; $i < count($expertData); $i++) {
                 $expertScore = $expertData[$i];
                 $songid = DB::select('SELECT songid FROM maimai_db.songs where name=? and type=?;', [$expertScore["title"], $expertScore["type"]]);
@@ -176,7 +169,7 @@ class DatabaseController extends Controller
             }
         }
 
-        if (count($masterData) != 0) {
+        if ($masterData != null) {
             for ($i = 0; $i < count($masterData); $i++) {
                 $masterScore = $masterData[$i];
                 $songid = DB::select('SELECT songid FROM maimai_db.songs where name=? and type=?;', [$masterScore["title"], $masterScore["type"]]);
@@ -202,7 +195,7 @@ class DatabaseController extends Controller
             }
         }
 
-        if (count($remasterData) != 0) {
+        if ($remasterData != null) {
             for ($i = 0; $i < count($remasterData); $i++) {
                 $remasterScore = $remasterData[$i];
                 $songid = DB::select('SELECT songid FROM maimai_db.songs where name=? and type=?;', [$remasterScore["title"], $remasterScore["type"]]);
@@ -231,13 +224,13 @@ class DatabaseController extends Controller
             'message' => 'success',
         ], 201);
     }
-// public function data(Request $request)
-// {
-//     try {
-//         DB::connection()->getPdo();
-//         return "Connection to database established successfully!";
-//     } catch (\Exception $e) {
-//         return "Could not connect to database: " . $e->getMessage();
-//     }
-// }
+    public function connection(Request $request)
+    {
+        try {
+            DB::connection()->getPdo();
+            return "Connection to database established successfully!";
+        } catch (\Exception $e) {
+            return "Could not connect to database: " . $e->getMessage();
+        }
+    }
 }
