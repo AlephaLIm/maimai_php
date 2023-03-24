@@ -16,7 +16,6 @@ class UserController extends Controller
         ]);
     }
 
-
     // create user
     public function store(Request $request){
         $userData = $request->validate([
@@ -32,6 +31,12 @@ class UserController extends Controller
             'INSERT INTO users(friendcode, email, email_verified_at, password, remember_token, created_at, updated_at) values (?,?,?,?,?,?,?);',
             [$userData["friendcode"], $userData["email"], null, $userData["password"], null, null, null]
         );
+
+        /* //new database
+        $user = DB::insert(
+            'INSERT INTO users(username, email, friendcode, password, picture, rating, title, playcount, classrank, courserank) values (?,?,?,?,?,?,?,?,?,?);',
+            [null, $userData["email"], $userData["friendcode"], $userData["password"], null, null, null, null, null, null`]
+        );*/
 
         // authenticate if register is successful
         if ($user){
@@ -74,4 +79,5 @@ class UserController extends Controller
 
         return back()->withErrors(['email' => 'Invalid Credentials'])->onlyInput('email');
     }
+
 }
