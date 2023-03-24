@@ -79,16 +79,30 @@ class DatabaseController extends Controller
 
         //Inserting of userData
         // print_r($userData);
-        $user = DB::insert(
-            'INSERT INTO users(username, rating, playcount, picture, friendcode, classrank, courserank, title, email, password) values (?,?,?,?,?,?,?,?,?,?) ON DUPLICATE KEY UPDATE `friendcode` = ?;',
-            [$userData["name"], $userData["rating"], $userData["playcount"], null, $userData["friendcode"], $userData["classrank"], $userData["courserank"], $userData["title"], "test@gmail", "password", $userData["friendcode"]]
+        // $user = DB::insert(
+        //     'INSERT INTO users(username, rating, playcount, picture, friendcode, classrank, courserank, title, email, password) values (?,?,?,?,?,?,?,?,?,?) ON DUPLICATE KEY UPDATE `friendcode` = ?;',
+        //     [$userData["name"], $userData["rating"], $userData["playcount"], null, $userData["friendcode"], $userData["classrank"], $userData["courserank"], $userData["title"], "test@gmail", "password", $userData["friendcode"]]
+        // );
+        //print_r($_POST);
+        $user = DB::update(
+            'UPDATE users set username=?, picture=?, rating=?, title=?, playcount=?, classrank=?, courserank=? where friendcode=?;',
+            [
+                $userData["name"],
+                null,
+                $userData["rating"],
+                $userData["title"],
+                $userData["playcount"],
+                $userData["classrank"],
+                $userData["courserank"],
+                $userData["friendcode"],
+            ]
         );
 
         if ($basicData != null) {
             for ($i = 0; $i < count($basicData); $i++) {
                 //Assign each array to basicscore
                 $basicScore = $basicData[$i];
-
+                //insert into scores(score, dxscore, combograde, syncgrade, scoregrade, chartid, chartrating, friendcode) values ("101.0000","123 / 495","AP+","FSD+","SSS+","d8a08693c2ad69c5749aee5d0722310eb8ce35ea113878612e1e907613e87fc92478a1a4b9e3ac421836ef6f0e997713dc99f936f84acd22e1d7d43f46a8c7d9nzMqSCgrwhqaxvzEM3pAw%2BPzjVAggYa4I1JgXyMB6KQ%3DBasic","112","7025818836209") ON DUPLICATE KEY UPDATE chartid = "d8a08693c2ad69c5749aee5d0722310eb8ce35ea113878612e1e907613e87fc92478a1a4b9e3ac421836ef6f0e997713dc99f936f84acd22e1d7d43f46a8c7d9nzMqSCgrwhqaxvzEM3pAw%2BPzjVAggYa4I1JgXyMB6KQ%3DBasic";
                 //Obtaining Chartid for insert statement
                 //From basicscore array select the song using title and type
                 $songid = DB::select('SELECT songid FROM maimai_db.songs where name=? and type=?;', [$basicScore["title"], $basicScore["type"]]);
@@ -103,19 +117,35 @@ class DatabaseController extends Controller
                 $rating = CalculateRating($basicScore["score"], $chart_constant);
 
                 //Inserting of scores with the relevant data
-                $basicScore = DB::insert(
-                    'INSERT INTO scores(score, dxscore, combograde, syncgrade, scoregrade, chartid, chartrating, friendcode) VALUES (?,?,?,?,?,?,?,?)',
-                    [
-                        $basicScore["score"],
-                        $basicScore["dxscore"],
-                        $basicScore["combo"],
-                        $basicScore["sync"],
-                        $basicScore["scoregrade"],
-                        $chartid,
-                        $rating,
-                        $userData["friendcode"],
-                    ]
-                );
+                $check_score = DB::select('SELECT rowid FROM maimai_db.scores where chartid=?;', [$chartid]);
+                if (count($check_score) == 0) {
+                    $basicScore = DB::insert(
+                        'INSERT INTO scores(score, dxscore, combograde, syncgrade, scoregrade, chartid, chartrating, friendcode) VALUES (?,?,?,?,?,?,?,?)',
+                        [
+                            $basicScore["score"],
+                            $basicScore["dxscore"],
+                            $basicScore["combo"],
+                            $basicScore["sync"],
+                            $basicScore["scoregrade"],
+                            $chartid,
+                            $rating,
+                            $userData["friendcode"],
+                        ]
+                    );
+                } else {
+                    $basicScore = DB::insert(
+                        'UPDATE scores set score=?, dxscore=?, scoregrade=?, combograde=?, syncgrade=?, chartrating=? where chartid=?;',
+                        [
+                            $basicScore["score"],
+                            $basicScore["dxscore"],
+                            $basicScore["scoregrade"],
+                            $basicScore["combo"],
+                            $basicScore["sync"],
+                            $rating,
+                            $chartid,
+                        ]
+                    );
+                }
             }
         }
 
@@ -128,19 +158,35 @@ class DatabaseController extends Controller
                 $chart_array = DB::select('SELECT constant FROM maimai_db.charts where chartid=?;', [$chartid]);
                 $chart_constant = (float) $chart_array[0]->constant;
                 $rating = CalculateRating($advancedScore["score"], $chart_constant);
-                $advancedScore = DB::insert(
-                    'INSERT INTO scores(score, dxscore, combograde, syncgrade, scoregrade, chartid, chartrating, friendcode) VALUES (?,?,?,?,?,?,?,?)',
-                    [
-                        $advancedScore["score"],
-                        $advancedScore["dxscore"],
-                        $advancedScore["combo"],
-                        $advancedScore["sync"],
-                        $advancedScore["scoregrade"],
-                        $chartid,
-                        $rating,
-                        $userData["friendcode"],
-                    ]
-                );
+                $check_score = DB::select('SELECT rowid FROM maimai_db.scores where chartid=?;', [$chartid]);
+                if (count($check_score) == 0) {
+                    $advancedScore = DB::insert(
+                        'INSERT INTO scores(score, dxscore, combograde, syncgrade, scoregrade, chartid, chartrating, friendcode) VALUES (?,?,?,?,?,?,?,?)',
+                        [
+                            $advancedScore["score"],
+                            $advancedScore["dxscore"],
+                            $advancedScore["combo"],
+                            $advancedScore["sync"],
+                            $advancedScore["scoregrade"],
+                            $chartid,
+                            $rating,
+                            $userData["friendcode"],
+                        ]
+                    );
+                } else {
+                    $advancedScore = DB::insert(
+                        'UPDATE scores set score=?, dxscore=?, scoregrade=?, combograde=?, syncgrade=?, chartrating=? where chartid=?;',
+                        [
+                            $advancedScore["score"],
+                            $advancedScore["dxscore"],
+                            $advancedScore["scoregrade"],
+                            $advancedScore["combo"],
+                            $advancedScore["sync"],
+                            $rating,
+                            $chartid,
+                        ]
+                    );
+                }
             }
         }
 
@@ -153,19 +199,35 @@ class DatabaseController extends Controller
                 $chart_array = DB::select('SELECT constant FROM maimai_db.charts where chartid=?;', [$chartid]);
                 $chart_constant = (float) $chart_array[0]->constant;
                 $rating = CalculateRating($expertScore["score"], $chart_constant);
-                $expertScore = DB::insert(
-                    'INSERT INTO scores(score, dxscore, combograde, syncgrade, scoregrade, chartid, chartrating, friendcode) VALUES (?,?,?,?,?,?,?,?)',
-                    [
-                        $expertScore["score"],
-                        $expertScore["dxscore"],
-                        $expertScore["combo"],
-                        $expertScore["sync"],
-                        $expertScore["scoregrade"],
-                        $chartid,
-                        $rating,
-                        $userData["friendcode"],
-                    ]
-                );
+                $check_score = DB::select('SELECT rowid FROM maimai_db.scores where chartid=?;', [$chartid]);
+                if (count($check_score) == 0) {
+                    $expertScore = DB::insert(
+                        'INSERT INTO scores(score, dxscore, combograde, syncgrade, scoregrade, chartid, chartrating, friendcode) VALUES (?,?,?,?,?,?,?,?)',
+                        [
+                            $expertScore["score"],
+                            $expertScore["dxscore"],
+                            $expertScore["combo"],
+                            $expertScore["sync"],
+                            $expertScore["scoregrade"],
+                            $chartid,
+                            $rating,
+                            $userData["friendcode"],
+                        ]
+                    );
+                } else {
+                    $expertScore = DB::insert(
+                        'UPDATE scores set score=?, dxscore=?, scoregrade=?, combograde=?, syncgrade=?, chartrating=? where chartid=?;',
+                        [
+                            $expertScore["score"],
+                            $expertScore["dxscore"],
+                            $expertScore["scoregrade"],
+                            $expertScore["combo"],
+                            $expertScore["sync"],
+                            $rating,
+                            $chartid,
+                        ]
+                    );
+                }
             }
         }
 
@@ -179,19 +241,35 @@ class DatabaseController extends Controller
                 $chart_array = DB::select('SELECT constant FROM maimai_db.charts where chartid=?;', [$chartid]);
                 $chart_constant = (float) $chart_array[0]->constant;
                 $rating = CalculateRating($masterScore["score"], $chart_constant);
-                $masterScore = DB::insert(
-                    'INSERT INTO scores(score, dxscore, combograde, syncgrade, scoregrade, chartid, chartrating, friendcode) VALUES (?,?,?,?,?,?,?,?)',
-                    [
-                        $masterScore["score"],
-                        $masterScore["dxscore"],
-                        $masterScore["combo"],
-                        $masterScore["sync"],
-                        $masterScore["scoregrade"],
-                        $chartid,
-                        $rating,
-                        $userData["friendcode"],
-                    ]
-                );
+                $check_score = DB::select('SELECT rowid FROM maimai_db.scores where chartid=?;', [$chartid]);
+                if (count($check_score) == 0) {
+                    $masterScore = DB::insert(
+                        'INSERT INTO scores(score, dxscore, combograde, syncgrade, scoregrade, chartid, chartrating, friendcode) VALUES (?,?,?,?,?,?,?,?)',
+                        [
+                            $masterScore["score"],
+                            $masterScore["dxscore"],
+                            $masterScore["combo"],
+                            $masterScore["sync"],
+                            $masterScore["scoregrade"],
+                            $chartid,
+                            $rating,
+                            $userData["friendcode"],
+                        ]
+                    );
+                } else {
+                    $masterScore = DB::insert(
+                        'UPDATE scores set score=?, dxscore=?, scoregrade=?, combograde=?, syncgrade=?, chartrating=? where chartid=?;',
+                        [
+                            $masterScore["score"],
+                            $masterScore["dxscore"],
+                            $masterScore["scoregrade"],
+                            $masterScore["combo"],
+                            $masterScore["sync"],
+                            $rating,
+                            $chartid,
+                        ]
+                    );
+                }
             }
         }
 
@@ -204,19 +282,35 @@ class DatabaseController extends Controller
                 $chart_array = DB::select('SELECT constant FROM maimai_db.charts where chartid=?;', [$chartid]);
                 $chart_constant = (float) $chart_array[0]->constant;
                 $rating = CalculateRating($remasterScore["score"], $chart_constant);
-                $remasterScore = DB::insert(
-                    'INSERT INTO scores(score, dxscore, combograde, syncgrade, scoregrade, chartid, chartrating, friendcode) VALUES (?,?,?,?,?,?,?,?)',
-                    [
-                        $remasterScore["score"],
-                        $remasterScore["dxscore"],
-                        $remasterScore["combo"],
-                        $remasterScore["sync"],
-                        $remasterScore["scoregrade"],
-                        $chartid,
-                        $rating,
-                        $userData["friendcode"],
-                    ]
-                );
+                $check_score = DB::select('SELECT rowid FROM maimai_db.scores where chartid=?;', [$chartid]);
+                if (count($check_score) == 0) {
+                    $remasterScore = DB::insert(
+                        'INSERT INTO scores(score, dxscore, combograde, syncgrade, scoregrade, chartid, chartrating, friendcode) VALUES (?,?,?,?,?,?,?,?)',
+                        [
+                            $remasterScore["score"],
+                            $remasterScore["dxscore"],
+                            $remasterScore["combo"],
+                            $remasterScore["sync"],
+                            $remasterScore["scoregrade"],
+                            $chartid,
+                            $rating,
+                            $userData["friendcode"],
+                        ]
+                    );
+                } else {
+                    $remasterScore = DB::insert(
+                        'UPDATE scores set score=?, dxscore=?, scoregrade=?, combograde=?, syncgrade=?, chartrating=? where chartid=?;',
+                        [
+                            $remasterScore["score"],
+                            $remasterScore["dxscore"],
+                            $remasterScore["scoregrade"],
+                            $remasterScore["combo"],
+                            $remasterScore["sync"],
+                            $rating,
+                            $chartid,
+                        ]
+                    );
+                }
             }
         }
         // Return a JSON response with the new user's data
