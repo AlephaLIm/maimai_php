@@ -68,9 +68,12 @@
         @else
         <div class="songsbox" id="songbox">
             @foreach ($charts as $chart) 
-                @include('songbox', ['chart'=>$chart])
-                @include('songmodal', ['chart'=>$chart])
+                @include('songbox', [ 'chart'=>$chart ])
+                @include('songmodal', [ 'chart'=>$chart ])
             @endforeach
+        </div>
+        <div id="links" class="d-flex justify-content-center">
+            {{ $charts->appends($_GET)->links() }}
         </div>
         @endif
     </main>

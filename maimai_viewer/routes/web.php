@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Songfinder;
 use App\Http\Controllers\ChartLoader;
+use App\Http\Controllers\Paginate;
+use App\Models\Sorted;
 use App\Models\Navbar;
 use App\Models\Page_status;
 
@@ -24,7 +26,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+//Post API for scorescrapper.js
 Route::post('/data', 'App\Http\Controllers\DatabaseController@data');
+//Get API to send song information to scorescrapper.js
+Route::get('/songinfo', 'App\Http\Controllers\getsongController@get');
 
 Route::get('/nav_test', function() {
     return view('navbar', [
@@ -37,12 +42,10 @@ Route::get('/nav_test', function() {
 });
 
 Route::get('/songs', function(Request $request) {
-    if (count($request->all()) > 0) {
-        $charts = Chartloader::retrieve_result($request);
-    }
-    else {
-        $charts = [];
-    }
+    
+    $sorted = Chartloader::retrieve_result($request);
+    $charts = Paginate::generate_pagination($request, $sorted);
+
     return view('songs', [
         'title'=> 'Songs Finder',
         'description'=> "Search for songs in the Maimai database",
