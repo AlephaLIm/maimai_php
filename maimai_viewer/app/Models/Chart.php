@@ -11,21 +11,25 @@ class Chart {
     public $version;
     public $img;
     public $level;
+    public $level_val;
     public $constant;
     public $diff;
     public $type;
     public $type_col;
     public $scoregrade;
     public $score;
+    public $score_val;
     public $dxscore;
     public $sync_grade;
+    public $sync_val;
     public $combo_grade;
+    public $combo_val;
     public $rating;
     public $color;
 
     public static function create_chart($id, $name, $artist, $genre, $bpm, $version, $img, $level, $constant, $diff, $type, ?float $scoregrade = null, ?float $score = null, ?int $rating = null, ?string $combo_grade = null, ?string $sync_grade = null) {
         $d_search = ["Basic"=>"BASIC", "Advanced"=>"ADVANCED", "Expert"=>"EXPERT", "Master"=>"MASTER", "Remaster"=>"Re:MASTER"];
-
+        $sync_combo_map = ['' => 0, 'FC' => 1, 'FC+' => 2, 'AP' => 3, 'AP+' => 4, 'FS' => 1, 'FS+' => 2, 'FSD' => 3, 'FSD+' => 4];
         $c_sets = [
             "BASIC" => ["base"=>"#02A726", "bg"=>"#1F3615", "submain"=>"#1BD644","accent"=>"#81D955", "text"=>"#B00000"],
             "ADVANCED"=> ["base"=>"#D57100", "bg"=>"#3E1600", "submain"=>"#F8B709", "accent"=>"#CBA560", "text"=>"#00BBD8"],
@@ -54,6 +58,11 @@ class Chart {
         $chart->sync_grade = $sync_grade ?? '';
         $chart->color = $c_sets[$d_search[$diff]];
         $chart->type_col = $type_color[$type];
+
+        $chart->score_val = $score ?? 0;
+        $chart->level_val = floatval(str_replace("+", ".5", $level));
+        $chart->combo_val = $sync_combo_map[$chart->combo_grade];
+        $chart->sync_val = $sync_combo_map[$chart->sync_grade];
 
         if ($type == "Standard") {
             $chart->type = "SD";

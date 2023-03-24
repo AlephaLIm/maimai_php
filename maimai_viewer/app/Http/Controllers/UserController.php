@@ -3,11 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use App\Models\Navbar;
-use App\Models\Page_status;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\URL;
 
 class UserController extends Controller
 {
@@ -16,35 +13,30 @@ class UserController extends Controller
         return view('users.register',[
             'title'=> 'Register',
             'description'=> "Create a new user",
-            'logo_url'=> URL::asset('/images/nav_icons/bearhands.png'),
-            'user'=> Navbar::retrieveuser(),
-            'status'=>Page_status::set_status('')
         ]);
     }
 
 
     // create user
     public function store(Request $request){
-        $formFields = $request->validate([
+        $userData = $request->validate([
             'friendcode' => 'required|min:3|max:8|unique:users,friendcode',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|confirmed|min:8',
         ]);
 
         // encrypt password
-        $formFields['password'] = bcrypt($formFields['password']);
-
-        // create user
-        $user = User::create($formFields);
-
-        /*$userData = $request->input("user");
+        $userData['password'] = bcrypt($userData['password']);
+        
         $user = DB::insert(
-            'INSERT INTO users(id, friendcode, email, email_verified_at, password, remember_token, created_at, updated_at) values (?,?,?,?,?,?,?,?);',
-            ["1", $userData["friendcode"], "test@gmail", null, "password", null, null, null]
-        );*/
+            'INSERT INTO users(friendcode, email, email_verified_at, password, remember_token, created_at, updated_at) values (?,?,?,?,?,?,?);',
+            [$userData["friendcode"], $userData["email"], null, $userData["password"], null, null, null]
+        );
 
-        // login
-        auth()->login($user);
+        // authenticate if register is successful
+        if ($user){
+            auth()->login(User::create($user));
+        }
 
         // return to homepage
         return redirect('/')->with('message', 'User created and logged in');
@@ -63,11 +55,8 @@ class UserController extends Controller
     // login form
     public function login(){
         return view('users.login',[
-            'title'=> 'Register',
-            'description'=> "Create a new user",
-            'logo_url'=> URL::asset('/images/nav_icons/bearhands.png'),
-            'user'=> Navbar::retrieveuser(),
-            'status'=>Page_status::set_status('')
+            'title'=> 'Login',
+            'description'=> "Log in as existing user",
         ]);
     }
 

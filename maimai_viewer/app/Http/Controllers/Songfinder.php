@@ -51,7 +51,7 @@ class Songfinder extends Controller
         foreach (array_combine($difficulties, $diff_filter) as $diff => $diff_val) {
             $instance = Filterbox::initialize($diff, $diff_val);
             array_push($diff_list, $instance);
-            if (in_array($diff, $selected)){
+            if (in_array($diff_val, $selected)){
                 $instance->status = "selected";
             }
         }
@@ -74,12 +74,13 @@ class Songfinder extends Controller
     
     public static function initialize_sorts(Request $request) {
         $sorts = Filters::get_list('sort');
+        $sort_filter = Filters::get_filter('sort');
         $sort_list = [];
         $selected = self::extract_params($request, "sort");
-        foreach ($sorts as $sort) {
-            $instance = Filterbox::initialize($sort, $sort);
+        foreach (array_combine($sorts, $sort_filter) as $sort => $sort_val) {
+            $instance = Filterbox::initialize($sort, $sort_val);
             array_push($sort_list, $instance); 
-            if (in_array($sort, $selected)){
+            if (in_array($sort_val, $selected)){
                 $instance->status = "selected";
             }
         }

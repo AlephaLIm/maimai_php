@@ -65,6 +65,7 @@ body {
     width: 100%;
     margin-bottom: 13px;
     position: relative;
+    border-bottom: 2px solid darkgrey;
 }
 
 .label-input {
@@ -74,15 +75,13 @@ body {
     line-height: 1.5;
     padding-left: 7px;
     display: block;
-    
 }
 
 .input-field {
     background-image: initial;
     background-color: initial;
     outline: none;
-    border: none;
-    border-bottom: 2px solid darkgrey;
+    border: none; 
     color: whitesmoke;
     font-family: 'Poppins';
     font-weight: 500;
@@ -177,3 +176,17 @@ body {
     padding-top:20px;
 }
 
+.redirect a:hover{
+    color: #784BA0; 
+}
+
+.guest {
+    font-family: 'Poppins';
+    line-height: 1.2;
+    color: lightblue;
+    text-align: end;
+}
+
+.guest a:hover {
+    color: #784BA0;
+}

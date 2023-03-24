@@ -1,8 +1,10 @@
-@extends('navbar', ['title' => $title, 'description' => $description, 'logo_url' => $logo_url, 'user' => $user, 'status' => $status])
+@extends('metadata', ['title' => $title, 'description' => $description])
 
 @section('links')
     @parent
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/login.css') }}" />    
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/login.css') }}" />  
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,1,0" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@48,400,1,0" />    
 @endsection
 
 @section('body')
@@ -10,6 +12,7 @@
         <div class='login_wrapper'>
             <span class="title">
                 <h1>Login</h1>
+                <h6>For existing users</h6>
             </span>
             
             <form class="login-form" method="POST" action="/users/authenticate">
@@ -44,6 +47,13 @@
                     <p>
                     Don't have an account?
                     <a href="/register" class="redirect">Register</a>
+                    </p>
+                </div>
+
+                <div class="guest">
+                    <p>
+                    Otherwise,
+                    <a href="/" class="guest">Continue as Guest</a>
                     </p>
                 </div>
             </form>
