@@ -12,20 +12,20 @@ $("document").ready(function(){
                 label: 'Notes Breakdown',
                 data: dataset,
                 backgroundColor: [
-                    'rgb(123, 0, 218, 0.3)',
-                    'rgb(242, 209, 17, 0.3)',
-                    'rgb(152, 206, 0, 0.3)',
-                    'rgb(172, 0, 6, 0.3)',
-                    'rgb(55, 114, 255, 0.3)',
-                    'rgb(255, 119, 0, 0.3)'
+                    'rgb(241, 14, 122, 0.3)', //tap 
+                    'rgb(0, 255, 255, 0.3)',//slide
+                    'rgb(172, 0, 6, 0.3)',//hold
+                    'rgb(255, 110, 25, 0.3)',//break
+                    'rgb(255, 235, 41, 0.3)',//touch
+                    'rgb(255, 255, 255, 0.3)'//ex
                 ],
                 borderColor: [
-                    'rgb(123, 0, 218)',
-                    'rgb(242, 209, 17)',
-                    'rgb(152, 206, 0)',
-                    'rgb(172, 0, 6)',
-                    'rgb(55, 114, 255)',
-                    'rgb(255, 119, 0)'
+                    'rgb(241, 14, 122)', //tap 
+                    'rgb(0, 255, 255)',//slide
+                    'rgb(172, 0, 6)',//hold
+                    'rgb(255, 110, 25)',//break
+                    'rgb(255, 235, 41)',//touch
+                    'rgb(255, 255, 255)'//ex
                 ],
                 hoverOffset: 1.5
             }]

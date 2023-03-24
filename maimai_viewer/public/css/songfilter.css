@@ -31,6 +31,7 @@ main {
     padding-left: 20px;
     background: black;
     box-shadow: 0 0 2px 2px #3D087B;
+    color: white;
 }
 
 .sbox .searchinput::placeholder {
@@ -148,9 +149,13 @@ main {
 
 .pagination > li > a,
 .pagination > li > span {
-    color: #3D087B;
+    color: #FFBF00;
+    background-color: #100720;
 }
-
+.pagination > .page-item.disabled {
+    --bs-pagination-disabled-bg: rgb(71, 70, 70);
+    --bs-pagination-disabled-color: white;
+}
 .pagination > .active > a,
 .pagination > .active > a:focus,
 .pagination > .active > a:hover,
