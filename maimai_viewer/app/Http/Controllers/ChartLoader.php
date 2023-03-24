@@ -34,9 +34,9 @@ class ChartLoader extends Controller
                     $param .= $list_items[$filter].',';
                     $sql_statement = "select distinct * from (".$sql_statement.") as instance where instance.".$filter." =";
                     for ($i = 0; $i < $param_count; $i++) {
-                        $sql_statement = $sql_statement."? or where instance.".$filter." =";
+                        $sql_statement = $sql_statement."? or instance.".$filter." =";
                     }
-                    $sql_statement =  rtrim($sql_statement, "or where instance.".$filter." =");
+                    $sql_statement =  rtrim($sql_statement, "or instance.".$filter." =");
                 }
             }
             elseif ($filter == 'sort') {
