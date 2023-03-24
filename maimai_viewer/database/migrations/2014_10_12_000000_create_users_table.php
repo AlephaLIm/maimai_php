@@ -11,15 +11,27 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
-            $table->id();
-            $table->string('friendcode')->unique();
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
-            $table->timestamps();
-        });
+        if (Schema::hasTable('users')) {
+
+        }
+        else {
+            Schema::table('users', function($table)
+            {
+                $table->string('username', 255);
+                $table->string('email', 255);
+                $table->string('friendcode', 255);
+                $table->string('password', 255);
+                $table->binary('picture');
+                $table->integer('rating');
+                $table->string('title', 255);
+                $table->integer('playcount');
+                $table->string('classrank', 255);
+                $table->string('courserank', 255);
+                $table->timestamps();
+                $table->timestamp('score_updated');
+                $table->rememberToken();
+            });
+        }
     }
 
     /**
