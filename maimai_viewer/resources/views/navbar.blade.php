@@ -63,6 +63,8 @@
                 @auth
                 @csrf
                 <a class="nav-link ms-auto" href="logout"><span class="material-symbols-outlined">logout</span></a></form>
+                @else
+                <a class="nav-link ms-auto" href="login"><span class="material-symbols-outlined">login</span></a></form>
                 @endauth
             </div>
         </div>
