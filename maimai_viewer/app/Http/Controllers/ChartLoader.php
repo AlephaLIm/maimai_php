@@ -13,47 +13,56 @@ class ChartLoader extends Controller
 {
     public static function retrieve_result(Request $request) {
         $filters = ["genre", "version", "difficulty", "level", "sort"];
+        $sql_statement = "select distinct charts.chartid, songs.songid, songs.name, songs.jacket, songs.artist, songs.genre, songs.version, songs.bpm, songs.type, charts.level,
+                     charts.constant, charts.difficulty, charts.totalnotecount, charts.tapcount, charts.slidecount, charts.holdcount, charts.breakcount,
+                     charts.touchcount, charts.excount 
+                     from charts inner join songs on charts.parentsong = songs.songid";
         $list_items = [];
         $key = "desc";
         $chart_list = [];
+        $param = '';
+
         foreach ($filters as $filter) {
             if ($request->filled($filter)) {
-                $list_items[$filter] = Songfinder::extract_params($request, $filter);
+                $list_items[$filter] = implode(',', Songfinder::extract_params($request, $filter));
+                $param_count = count(explode(',', $list_items[$filter]));
+
+                if ($filter == 'sort') {
+                    continue;
+                }
+                else {
+                    $param .= $list_items[$filter].',';
+                    $sql_statement = "select distinct * from (".$sql_statement.") as instance where instance.".$filter." =";
+                    for ($i = 0; $i < $param_count; $i++) {
+                        $sql_statement = $sql_statement."? or where instance.".$filter." =";
+                    }
+                    $sql_statement =  rtrim($sql_statement, "or where instance.".$filter." =");
+                }
             }
-            else {
+            elseif ($filter == 'sort') {
                 $list_items[$filter] = Filters::get_filter($filter);
             }
         }
+
         if ($request->filled('key')) {
             $key = "asc";
         }
 
-        if ($request->filled('search')) {
-            $charts = DB::table('Charts')
-                                    ->join('Songs', 'Charts.parentsong', '=', 'Songs.songid')
-                                    ->join('Alias', 'Songs.songid', '=', 'Alias.songid')
-                                    ->select('Charts.chartid', 'Songs.name', 'Songs.jacket', 'Charts.level', 'Charts.constant', 'Charts.difficulty', 'Charts.totalnotecount', 'Charts.tapcount', 'Charts.slidecount', 'Charts.holdcount', 'Charts.breakcount', 'Charts.touchcount', 'Charts.excount', 'Songs.type', 'Songs.artist', 'Songs.genre', 'Songs.version', 'Songs.bpm')->distinct()
-                                    ->whereIn('Songs.genre', $list_items['genre'])
-                                    ->whereIn('Songs.version', $list_items['version'])
-                                    ->whereIn('Charts.difficulty', $list_items['difficulty'])
-                                    ->whereIn('Charts.level', $list_items['level'])
-                                    ->where(DB::raw('lower(Alias.alias)'), 'like', '%'.$request->get('search').'%')
-                                    ->get();
+        if ($request->has('search')) {
+            $sql_statement = "select *, alias.alias from (".$sql_statement." ) as search inner join alias on search.songid = alias.songid where alias.alias like concat('%', ?, '%')";
+            $param .= $request->get('search').',';
+        }
+
+        if (empty($param)) {
+            $charts = DB::select($sql_statement);
         }
         else {
-            $charts = DB::table('Charts')
-                                ->join('Songs', 'Charts.parentsong', '=', 'Songs.songid')
-                                ->select('Charts.chartid', 'Songs.name', 'Songs.jacket', 'Charts.level', 'Charts.constant', 'Charts.difficulty', 'Charts.totalnotecount', 'Charts.tapcount', 'Charts.slidecount', 'Charts.holdcount', 'Charts.breakcount', 'Charts.touchcount', 'Charts.excount', 'Songs.type', 'Songs.artist', 'Songs.genre', 'Songs.version', 'Songs.bpm')->distinct()
-                                ->whereIn('Songs.genre', $list_items['genre'])
-                                ->whereIn('Songs.version', $list_items['version'])
-                                ->whereIn('Charts.difficulty', $list_items['difficulty'])
-                                ->whereIn('Charts.level', $list_items['level'])
-                                ->get();
+            $params = rtrim($param, ',');
+            $charts = DB::select($sql_statement, explode(',', $params));
         }
 
         foreach ($charts as $chart) {
             $chart_obj = Chart::create_chart($chart->chartid, $chart->name, $chart->artist, $chart->genre, $chart->bpm, $chart->version, $chart->jacket, $chart->level, $chart->constant, $chart->difficulty, $chart->type);
-            $chart_obj->set_dx('99/100');
             $chart_obj->set_notes($chart->totalnotecount, $chart->tapcount, $chart->slidecount, $chart->holdcount, $chart->breakcount, $chart->touchcount, $chart->excount);
             array_push($chart_list, $chart_obj);
         }

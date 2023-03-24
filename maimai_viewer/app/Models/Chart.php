@@ -27,7 +27,7 @@ class Chart {
     public $scoregrade;
     public $score;
     public $score_val;
-    public $dxscore;
+    public $dxscore = 0;
     public $sync_grade;
     public $sync_val;
     public $combo_grade;
