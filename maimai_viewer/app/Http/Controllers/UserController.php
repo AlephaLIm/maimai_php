@@ -19,7 +19,7 @@ class UserController extends Controller
     // create user
     public function store(Request $request){
         $userData = $request->validate([
-            'friendcode' => 'required|min:3|max:8|unique:users,friendcode',
+            'friendcode' => 'required|min:3|max:13|unique:users,friendcode',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|confirmed|min:8',
         ]);
@@ -27,24 +27,22 @@ class UserController extends Controller
         // encrypt password
         $userData['password'] = bcrypt($userData['password']);
         
-        $user = DB::insert(
-            'INSERT INTO users(friendcode, email, email_verified_at, password, remember_token, created_at, updated_at) values (?,?,?,?,?,?,?);',
-            [$userData["friendcode"], $userData["email"], null, $userData["password"], null, null, null]
-        );
+        // $user = DB::insert(
+        //     'INSERT INTO users(friendcode, email, email_verified_at, password, remember_token, created_at, updated_at) values (?,?,?,?,?,?,?);',
+        //     [$userData["friendcode"], $userData["email"], null, $userData["password"], null, null, null]
+        // );
 
-        /* //new database
-        $user = DB::insert(
-            'INSERT INTO users(username, email, friendcode, password, picture, rating, title, playcount, classrank, courserank) values (?,?,?,?,?,?,?,?,?,?);',
-            [null, $userData["email"], $userData["friendcode"], $userData["password"], null, null, null, null, null, null`]
-        );*/
+     //new database
+        // $user = DB::insert(
+        //     'INSERT INTO users(username, email, friendcode, password, picture, rating, title, playcount, classrank, courserank) values (?,?,?,?,?,?,?,?,?,?);',
+        //     [null, $userData["email"], $userData["friendcode"], $userData["password"], null, null, null, null, null, null]
+        // );
 
         // authenticate if register is successful
-        if ($user){
-            auth()->login(User::create($user));
-        }
+        auth()->login(User::create($userData));
 
         // return to homepage
-        return redirect('/')->with('message', 'User created and logged in');
+        return redirect('/login')->with('message', 'User created and logged in');
     }
 
     // logout user
