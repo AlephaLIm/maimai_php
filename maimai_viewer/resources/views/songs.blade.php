@@ -65,7 +65,7 @@
                 </form>
             </div>
         </div>
-        @if (empty($charts))
+        @if ($charts->isEmpty())
         <div class="msg">There are no songs found.</div>
         @else
         <div class="songsbox" id="songbox">
@@ -73,6 +73,9 @@
                 @include('songbox', [ 'chart'=>$chart ])
                 @include('songmodal', [ 'chart'=>$chart ])
             @endforeach
+            @if ($charts->onLastPage())
+            <div class="msg">You have reached the end of the results.</div>
+            @endif
         </div>
         <div id="links" class="d-flex justify-content-center">
             {{ $charts->appends($_GET)->links() }}
