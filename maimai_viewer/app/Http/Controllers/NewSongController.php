@@ -15,7 +15,7 @@ class NewSongController extends Controller
             $eachSong = $songs[$i];
             DB::insert('INSERT INTO songs(songid, internalid, wikiid, name, type, version, genre, artist, bpm, jacket) values (?,?,?,?,?,?,?,?,?,?)',
             [
-                $eachSong["idx"],
+                $eachSong["songid"],
                 null,
                 null,
                 $eachSong["name"],
@@ -28,7 +28,7 @@ class NewSongController extends Controller
             ]);
 
             DB::insert('INSERT INTO alias(songid, alias) values (?,?)',[
-                $eachSong["idx"],
+                $eachSong["songid"],
                 $eachSong["name"],
             ]);
 
@@ -38,14 +38,14 @@ class NewSongController extends Controller
                 }else{
                     $constant = floatval($eachSong["basicLevel"]);
                 }
-                $chartid = $eachSong["idx"] . "Basic";
+                $chartid = $eachSong["songid"] . "Basic";
                 DB::insert('INSERT INTO charts(chartid, level, difficulty, constant, parentsong) values (?,?,?,?,?)',
                 [
                     $chartid,
                     $eachSong["basicLevel"],
                     "Basic",
                     $constant,
-                    $eachSong["idx"],
+                    $eachSong["songid"],
                 ]);
             }
 
@@ -55,14 +55,14 @@ class NewSongController extends Controller
                 }else{
                     $constant = floatval($eachSong["advancedLevel"]);
                 }
-                $chartid = $eachSong["idx"] . "Advanced";
+                $chartid = $eachSong["songid"] . "Advanced";
                 DB::insert('INSERT INTO charts(chartid, level, difficulty, constant, parentsong) values (?,?,?,?,?)',
                 [
                     $chartid,
                     $eachSong["advancedLevel"],
                     "Advanced",
                     $constant,
-                    $eachSong["idx"],
+                    $eachSong["songid"],
                 ]);
             }
 
@@ -72,14 +72,14 @@ class NewSongController extends Controller
                 }else{
                     $constant = floatval($eachSong["expertLevel"]);
                 }
-                $chartid = $eachSong["idx"] . "Expert";
+                $chartid = $eachSong["songid"] . "Expert";
                 DB::insert('INSERT INTO charts(chartid, level, difficulty, constant, parentsong) values (?,?,?,?,?)',
                 [
                     $chartid,
                     $eachSong["expertLevel"],
                     "Expert",
                     $constant,
-                    $eachSong["idx"],
+                    $eachSong["songid"],
                 ]);
             }
 
@@ -89,14 +89,14 @@ class NewSongController extends Controller
                 }else{
                     $constant = floatval($eachSong["masterLevel"]);
                 }
-                $chartid = $eachSong["idx"] . "Master";
+                $chartid = $eachSong["songid"] . "Master";
                 DB::insert('INSERT INTO charts(chartid, level, difficulty, constant, parentsong) values (?,?,?,?,?)',
                 [
                     $chartid,
                     $eachSong["masterLevel"],
                     "Master",
                     $constant,
-                    $eachSong["idx"],
+                    $eachSong["songid"],
                 ]);
             }
 
@@ -106,14 +106,14 @@ class NewSongController extends Controller
                 }else{
                     $constant = floatval($eachSong["remasterLevel"]);
                 }
-                $chartid = $eachSong["idx"] . "Remaster";
+                $chartid = $eachSong["songid"] . "Remaster";
                 DB::insert('INSERT INTO charts(chartid, level, difficulty, constant, parentsong) values (?,?,?,?,?)',
                 [
                     $chartid,
                     $eachSong["remasterLevel"],
                     "Remaster",
                     $constant,
-                    $eachSong["idx"],
+                    $eachSong["songid"],
                 ]);
             }
         }
