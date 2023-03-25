@@ -49,7 +49,7 @@ class ChartLoader extends Controller
         }
 
         if ($request->has('search')) {
-            $sql_statement = "select distinct *, alias.alias from (".$sql_statement." ) as search inner join alias on search.songid = alias.songid where alias.alias like concat('%', ?, '%')";
+            $sql_statement = "select distinct search.chartid, search.songid, search.name, search.jacket, search.artist, search.genre, search.version, search.bpm, search.type, search.level, search.constant, search.difficulty, search.totalnotecount, search.tapcount, search.slidecount, search.holdcount, search.breakcount, search.touchcount, search.excount from (".$sql_statement." ) as search inner join alias on search.songid = alias.songid where alias.alias like concat('%', ?, '%')";
             $param .= $request->get('search').',';
         }
 

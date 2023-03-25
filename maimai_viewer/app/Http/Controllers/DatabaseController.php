@@ -52,23 +52,96 @@ class DatabaseController extends Controller
             }
         }
 
-        // SELECT songid FROM maimai_db.songs where name='Backyun! －悪い女－' and type='Standard';
-        // print_r($userData);
-        // print("hello world\n");
-        // for ($i = 0; $i < count($masterData); $i++) {
-        //     $masterScore = $masterData[$i];
-        //     print($masterScore["score"]);
-        // }
-        // $basicScore = $basicData[0];
-        // $songid = DB::select('SELECT songid FROM maimai_db.songs where name=? and type=?;', [$basicScore["title"], $basicScore["type"]]);
-        // $songidString = (string) $songid[0]->songid;
-        // $chartid = $songidString . "Basic";
-        // $chart_array = DB::select('SELECT constant FROM maimai_db.charts where chartid=?;', [$chartid]);
-        // $chart_constant = (float) $chart_array[0]->constant;
-        // $rating = CalculateRating($basicScore["score"], $chart_constant);
-        // print_r($songidString);
+        function insertScore($values,$difficulty,$friendcode) {
+            if ($values != null) {
+                foreach ($values as $score) {
+                    //$score = $values[$i];
+                    $songid = DB::select('SELECT songid FROM songs where name=? and type=?;', [$score["title"], $score["type"]]);
+                    //when there is no song this will throw error
+                    if (count($songid) > 0) {
+                        $songidString = $songid[0]->songid;
+                        $chartid = $songidString . $difficulty;
+                        $chart_array = DB::select('SELECT constant FROM charts where chartid=?;', [$chartid]);
+                        $chart_constant = (float) $chart_array[0]->constant;
+                        $rating = CalculateRating($score["score"], $chart_constant);
+                        $check_score = DB::select('SELECT rowid FROM scores where chartid=?;', [$chartid]);
+                        if (count($check_score) == 0) {
+                            $score = DB::insert(
+                                'INSERT INTO scores(score, dxscore, combograde, syncgrade, scoregrade, chartid, chartrating, friendcode) VALUES (?,?,?,?,?,?,?,?)',
+                                [
+                                    $score["score"],
+                                    $score["dxscore"],
+                                    $score["combo"],
+                                    $score["sync"],
+                                    $score["scoregrade"],
+                                    $chartid,
+                                    $rating,
+                                    $friendcode,
+                                ]
+                            );
+                        } 
+                        else {
+                            $score = DB::insert(
+                                'UPDATE scores set score=?, dxscore=?, scoregrade=?, combograde=?, syncgrade=?, chartrating=? where chartid=?;',
+                                [
+                                    $score["score"],
+                                    $score["dxscore"],
+                                    $score["scoregrade"],
+                                    $score["combo"],
+                                    $score["sync"],
+                                    $rating,
+                                    $chartid,
+                                ]
+                            );
+                        }
+                    }
+                    //accounts for the no title song
+                    else {
+                        $songid = DB::select('SELECT songid FROM songs where name=? and type=?;', ["", $score["type"]]);
+                        if (count($songid) > 0) {
+                            $songidString = $songid[0]->songid;
+                            $chartid = $songidString . $difficulty;
+                            $chart_array = DB::select('SELECT constant FROM charts where chartid=?;', [$chartid]);
+                            $chart_constant = (float) $chart_array[0]->constant;
+                            $rating = CalculateRating($score["score"], $chart_constant);
+                            $check_score = DB::select('SELECT rowid FROM scores where chartid=?;', [$chartid]);
+                            if (count($check_score) == 0) {
+                                $score = DB::insert(
+                                    'INSERT INTO scores(score, dxscore, combograde, syncgrade, scoregrade, chartid, chartrating, friendcode) VALUES (?,?,?,?,?,?,?,?)',
+                                    [
+                                        $score["score"],
+                                        $score["dxscore"],
+                                        $score["combo"],
+                                        $score["sync"],
+                                        $score["scoregrade"],
+                                        $chartid,
+                                        $rating,
+                                        $friendcode,
+                                    ]
+                                );
+                            } 
+                            else {
+                                $score = DB::insert(
+                                    'UPDATE scores set score=?, dxscore=?, scoregrade=?, combograde=?, syncgrade=?, chartrating=? where chartid=?;',
+                                    [
+                                        $score["score"],
+                                        $score["dxscore"],
+                                        $score["scoregrade"],
+                                        $score["combo"],
+                                        $score["sync"],
+                                        $rating,
+                                        $chartid,
+                                    ]
+                                );
+                            }
+                    }
+                    
+                }
+            }
+    
+        }
 
-
+    }
         //Obtains the relevant JSON object which stores it in an array of objects
         $userData = $request->input("user");
         $basicData = $request->input("basicScores");
@@ -98,221 +171,12 @@ class DatabaseController extends Controller
             ]
         );
 
-        if ($basicData != null) {
-            for ($i = 0; $i < count($basicData); $i++) {
-                //Assign each array to basicscore
-                $basicScore = $basicData[$i];
-                //insert into scores(score, dxscore, combograde, syncgrade, scoregrade, chartid, chartrating, friendcode) values ("101.0000","123 / 495","AP+","FSD+","SSS+","d8a08693c2ad69c5749aee5d0722310eb8ce35ea113878612e1e907613e87fc92478a1a4b9e3ac421836ef6f0e997713dc99f936f84acd22e1d7d43f46a8c7d9nzMqSCgrwhqaxvzEM3pAw%2BPzjVAggYa4I1JgXyMB6KQ%3DBasic","112","7025818836209") ON DUPLICATE KEY UPDATE chartid = "d8a08693c2ad69c5749aee5d0722310eb8ce35ea113878612e1e907613e87fc92478a1a4b9e3ac421836ef6f0e997713dc99f936f84acd22e1d7d43f46a8c7d9nzMqSCgrwhqaxvzEM3pAw%2BPzjVAggYa4I1JgXyMB6KQ%3DBasic";
-                //Obtaining Chartid for insert statement
-                //From basicscore array select the song using title and type
-                $songid = DB::select('SELECT songid FROM maimai_db.songs where name=? and type=?;', [$basicScore["title"], $basicScore["type"]]);
-                //songidString is a stdobject in an array with a key of 0, the string is extracted using the below statement
-                $songidString = (string) $songid[0]->songid;
-                //chartid value is the combination of songid + difficulty
-                $chartid = $songidString . "Basic";
-
-                //Calculating of chartrating for insert statement
-                $chart_array = DB::select('SELECT constant FROM maimai_db.charts where chartid=?;', [$chartid]);
-                $chart_constant = (float) $chart_array[0]->constant;
-                $rating = CalculateRating($basicScore["score"], $chart_constant);
-
-                //Inserting of scores with the relevant data
-                $check_score = DB::select('SELECT rowid FROM maimai_db.scores where chartid=?;', [$chartid]);
-                if (count($check_score) == 0) {
-                    $basicScore = DB::insert(
-                        'INSERT INTO scores(score, dxscore, combograde, syncgrade, scoregrade, chartid, chartrating, friendcode) VALUES (?,?,?,?,?,?,?,?)',
-                        [
-                            $basicScore["score"],
-                            $basicScore["dxscore"],
-                            $basicScore["combo"],
-                            $basicScore["sync"],
-                            $basicScore["scoregrade"],
-                            $chartid,
-                            $rating,
-                            $userData["friendcode"],
-                        ]
-                    );
-                } else {
-                    $basicScore = DB::insert(
-                        'UPDATE scores set score=?, dxscore=?, scoregrade=?, combograde=?, syncgrade=?, chartrating=? where chartid=?;',
-                        [
-                            $basicScore["score"],
-                            $basicScore["dxscore"],
-                            $basicScore["scoregrade"],
-                            $basicScore["combo"],
-                            $basicScore["sync"],
-                            $rating,
-                            $chartid,
-                        ]
-                    );
-                }
-            }
-        }
-
-        if ($advancedData != null) {
-            for ($i = 0; $i < count($advancedData); $i++) {
-                $advancedScore = $advancedData[$i];
-                $songid = DB::select('SELECT songid FROM maimai_db.songs where name=? and type=?;', [$advancedScore["title"], $advancedScore["type"]]);
-                $songidString = (string) $songid[0]->songid;
-                $chartid = $songidString . "Advanced";
-                $chart_array = DB::select('SELECT constant FROM maimai_db.charts where chartid=?;', [$chartid]);
-                $chart_constant = (float) $chart_array[0]->constant;
-                $rating = CalculateRating($advancedScore["score"], $chart_constant);
-                $check_score = DB::select('SELECT rowid FROM maimai_db.scores where chartid=?;', [$chartid]);
-                if (count($check_score) == 0) {
-                    $advancedScore = DB::insert(
-                        'INSERT INTO scores(score, dxscore, combograde, syncgrade, scoregrade, chartid, chartrating, friendcode) VALUES (?,?,?,?,?,?,?,?)',
-                        [
-                            $advancedScore["score"],
-                            $advancedScore["dxscore"],
-                            $advancedScore["combo"],
-                            $advancedScore["sync"],
-                            $advancedScore["scoregrade"],
-                            $chartid,
-                            $rating,
-                            $userData["friendcode"],
-                        ]
-                    );
-                } else {
-                    $advancedScore = DB::insert(
-                        'UPDATE scores set score=?, dxscore=?, scoregrade=?, combograde=?, syncgrade=?, chartrating=? where chartid=?;',
-                        [
-                            $advancedScore["score"],
-                            $advancedScore["dxscore"],
-                            $advancedScore["scoregrade"],
-                            $advancedScore["combo"],
-                            $advancedScore["sync"],
-                            $rating,
-                            $chartid,
-                        ]
-                    );
-                }
-            }
-        }
-
-        if ($expertData != null) {
-            for ($i = 0; $i < count($expertData); $i++) {
-                $expertScore = $expertData[$i];
-                $songid = DB::select('SELECT songid FROM maimai_db.songs where name=? and type=?;', [$expertScore["title"], $expertScore["type"]]);
-                $songidString = (string) $songid[0]->songid;
-                $chartid = $songidString . "Expert";
-                $chart_array = DB::select('SELECT constant FROM maimai_db.charts where chartid=?;', [$chartid]);
-                $chart_constant = (float) $chart_array[0]->constant;
-                $rating = CalculateRating($expertScore["score"], $chart_constant);
-                $check_score = DB::select('SELECT rowid FROM maimai_db.scores where chartid=?;', [$chartid]);
-                if (count($check_score) == 0) {
-                    $expertScore = DB::insert(
-                        'INSERT INTO scores(score, dxscore, combograde, syncgrade, scoregrade, chartid, chartrating, friendcode) VALUES (?,?,?,?,?,?,?,?)',
-                        [
-                            $expertScore["score"],
-                            $expertScore["dxscore"],
-                            $expertScore["combo"],
-                            $expertScore["sync"],
-                            $expertScore["scoregrade"],
-                            $chartid,
-                            $rating,
-                            $userData["friendcode"],
-                        ]
-                    );
-                } else {
-                    $expertScore = DB::insert(
-                        'UPDATE scores set score=?, dxscore=?, scoregrade=?, combograde=?, syncgrade=?, chartrating=? where chartid=?;',
-                        [
-                            $expertScore["score"],
-                            $expertScore["dxscore"],
-                            $expertScore["scoregrade"],
-                            $expertScore["combo"],
-                            $expertScore["sync"],
-                            $rating,
-                            $chartid,
-                        ]
-                    );
-                }
-            }
-        }
-
-        if ($masterData != null) {
-            for ($i = 0; $i < count($masterData); $i++) {
-                $masterScore = $masterData[$i];
-                $songid = DB::select('SELECT songid FROM maimai_db.songs where name=? and type=?;', [$masterScore["title"], $masterScore["type"]]);
-                //when there is no song this will throw error
-                $songidString = (string) $songid[0]->songid;
-                $chartid = $songidString . "Master";
-                $chart_array = DB::select('SELECT constant FROM maimai_db.charts where chartid=?;', [$chartid]);
-                $chart_constant = (float) $chart_array[0]->constant;
-                $rating = CalculateRating($masterScore["score"], $chart_constant);
-                $check_score = DB::select('SELECT rowid FROM maimai_db.scores where chartid=?;', [$chartid]);
-                if (count($check_score) == 0) {
-                    $masterScore = DB::insert(
-                        'INSERT INTO scores(score, dxscore, combograde, syncgrade, scoregrade, chartid, chartrating, friendcode) VALUES (?,?,?,?,?,?,?,?)',
-                        [
-                            $masterScore["score"],
-                            $masterScore["dxscore"],
-                            $masterScore["combo"],
-                            $masterScore["sync"],
-                            $masterScore["scoregrade"],
-                            $chartid,
-                            $rating,
-                            $userData["friendcode"],
-                        ]
-                    );
-                } else {
-                    $masterScore = DB::insert(
-                        'UPDATE scores set score=?, dxscore=?, scoregrade=?, combograde=?, syncgrade=?, chartrating=? where chartid=?;',
-                        [
-                            $masterScore["score"],
-                            $masterScore["dxscore"],
-                            $masterScore["scoregrade"],
-                            $masterScore["combo"],
-                            $masterScore["sync"],
-                            $rating,
-                            $chartid,
-                        ]
-                    );
-                }
-            }
-        }
-
-        if ($remasterData != null) {
-            for ($i = 0; $i < count($remasterData); $i++) {
-                $remasterScore = $remasterData[$i];
-                $songid = DB::select('SELECT songid FROM maimai_db.songs where name=? and type=?;', [$remasterScore["title"], $remasterScore["type"]]);
-                $songidString = (string) $songid[0]->songid;
-                $chartid = $songidString . "Remaster";
-                $chart_array = DB::select('SELECT constant FROM maimai_db.charts where chartid=?;', [$chartid]);
-                $chart_constant = (float) $chart_array[0]->constant;
-                $rating = CalculateRating($remasterScore["score"], $chart_constant);
-                $check_score = DB::select('SELECT rowid FROM maimai_db.scores where chartid=?;', [$chartid]);
-                if (count($check_score) == 0) {
-                    $remasterScore = DB::insert(
-                        'INSERT INTO scores(score, dxscore, combograde, syncgrade, scoregrade, chartid, chartrating, friendcode) VALUES (?,?,?,?,?,?,?,?)',
-                        [
-                            $remasterScore["score"],
-                            $remasterScore["dxscore"],
-                            $remasterScore["combo"],
-                            $remasterScore["sync"],
-                            $remasterScore["scoregrade"],
-                            $chartid,
-                            $rating,
-                            $userData["friendcode"],
-                        ]
-                    );
-                } else {
-                    $remasterScore = DB::insert(
-                        'UPDATE scores set score=?, dxscore=?, scoregrade=?, combograde=?, syncgrade=?, chartrating=? where chartid=?;',
-                        [
-                            $remasterScore["score"],
-                            $remasterScore["dxscore"],
-                            $remasterScore["scoregrade"],
-                            $remasterScore["combo"],
-                            $remasterScore["sync"],
-                            $rating,
-                            $chartid,
-                        ]
-                    );
-                }
-            }
-        }
+        insertScore($basicData,"Basic",$userData["friendcode"]);
+        insertScore($advancedData,"Advanced",$userData["friendcode"]);
+        insertScore($expertData,"Expert",$userData["friendcode"]);
+        insertScore($masterData,"Master",$userData["friendcode"]);
+        insertScore($remasterData,"Remaster",$userData["friendcode"]);
+        
         // Return a JSON response with the new user's data
         return response()->json([
             'message' => 'success',

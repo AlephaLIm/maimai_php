@@ -10,29 +10,76 @@
 }
 
 body {
-    margin:0;
+    margin:0px;
 }
 
 .bg-limit {
     background-image: url("../images/bg/bg_img.jpg");
     width: 100%;
-    min-height: 100vh;
+    min-height: 120vh;
     background-repeat: no-repeat;
     background-size: cover;
 }
 
-.grid-container {
-    display: grid;
-    grid-template-columns: 30% auto;
-    padding: 80px;
-    column-gap: 30px;
-    row-gap: 40px; 
+.homeTitle{
+    color:whitesmoke;
+    font-family: 'Poppins';
+    text-align: center;
+    font-size: 80px;
+    font-weight: bold;  
+    padding-top:50px;
+    margin-top: 30px;
 }
 
-.grid-item {
-background-color: rgba(255, 255, 255, 0.8);
-border: 1px solid rgba(0, 0, 0, 0.8);
-padding: 20px;
-font-size: 30px;
-text-align: center;
+.homePicture {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.homeText {
+    color:whitesmoke;
+    font-family: 'Poppins';
+    text-align: center;
+    font-size: max(1vw, 10px);
+    
+}
+
+.homeContent {
+    color:whitesmoke;
+    font-family: 'Poppins';
+    text-align: center;
+    font-size: large;
+    border: 10px solid;
+}
+
+.achievement_icon {
+    border-radius: 100px;
+    width:200px;
+    height:auto;
+}
+
+.songs_icon {
+    border-radius: 100px;
+    width:200px;
+    height:auto;
+
+}
+
+.recommendation_icon {
+    border-radius: 100px;
+    width:200px;
+    height:auto;
+}
+
+.icons {
+    margin-top: 40px;
+    text-align: center;
+}
+
+.iconText {
+    color:whitesmoke;
+    font-family: 'Poppins';
+    text-align: center;
+    font-size: large;
+    padding-top: 20px;
 }

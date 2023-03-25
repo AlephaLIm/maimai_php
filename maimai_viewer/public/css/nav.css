@@ -25,6 +25,13 @@
     padding-left: 5px;
 }
 
+.navbar-toggler:focus,
+.navbar-toggler:active,
+.navbar-toggler-icon:focus {
+    outline: none;
+    box-shadow: none;
+}
+
 #nav-wrapper {
     padding-left: 0px;
     padding-right: 0px;
@@ -53,7 +60,7 @@
     font-size: 1.2rem;
     line-height: normal;
     top: min(6vw, 30px);
-    left: min(21vw, 110px);
+    left: min(23vw, 110px);
 }
 
 #profile-box .title-box {
@@ -61,6 +68,7 @@
     bottom: 0.3vw;
     left: min(22vw, 105px);
     padding: 10px 55px 10px 55px;
+    width: min(60vw, 280px);
     background: #100720;
     text-align: center;
     border-radius: 20px;
@@ -82,7 +90,7 @@
     box-shadow: 0 0 3px 3px #3D087B;
     position: absolute;
     top: min(3.5vw, 23px);
-    left: min(53vw, 250px);
+    left: min(54vw, 250px);
 }
 
 .ratings p {
@@ -116,8 +124,26 @@
 @media screen and (max-width: 500px) {
     #profile-box .title-box {
         padding: 7px 50px 7px 50px;
+        width: min(67vw, 265px);
     }
     #profile-box .profile-user h4 {
         font-size: 1.1rem;
+    }
+}
+
+@media screen and (max-width: 380px) {
+    #profile-box .title-box { 
+        bottom: 0vw;
+        width: 65vw;
+    }
+    #nav-row #profile-box .profile-user .ratings {
+        left: 50vw;
+        top: 2vw;
+    }
+    #profile-img {
+        min-width: 70px;
+    }
+    #profile-box .profile-user h2 {
+        font-size: 1rem;
     }
 }

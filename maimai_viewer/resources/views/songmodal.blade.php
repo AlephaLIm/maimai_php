@@ -52,7 +52,11 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+<<<<<<< HEAD
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="background: {{ $chart->color['bg'] }};">Close</button>
+=======
+                <button style="background:{{ $chart->color['bg'] }};" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+>>>>>>> b67be14 (recoded and sumamrised the code logic for DatabaseController.php into 1 function, fixing bug caused by nameless song)
             </div>
         </div>
     </div>

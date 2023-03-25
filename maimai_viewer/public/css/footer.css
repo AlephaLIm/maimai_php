@@ -1,0 +1,18 @@
+.bg {
+    display: block;
+    min-height: 15vh;
+}
+
+.footerText {
+    color: whitesmoke;
+    font-family: 'Poppins';
+    text-align: center;
+    font-size: xx-small;
+    padding:20px;
+    padding-top: 30px;
+}
+
+.footerLink {
+    text-decoration: none;
+    color: whitesmoke;
+}

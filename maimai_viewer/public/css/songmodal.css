@@ -163,8 +163,11 @@
 }
 
 .modal-footer button {
-    background: -webkit-linear-gradient(left, red , yellow, cyan, purple);
-    color: #141414;
+<<<<<<< HEAD
+=======
+
+>>>>>>> b67be14 (recoded and sumamrised the code logic for DatabaseController.php into 1 function, fixing bug caused by nameless song)
+    color: white;
     font-weight: bold;
 }
 

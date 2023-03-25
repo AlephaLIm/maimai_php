@@ -21,7 +21,7 @@ class UserController extends Controller
         $userData = $request->validate([
             'friendcode' => 'required|min:13|max:13|unique:users,friendcode',
             'email' => 'required|email|unique:users,email',
-            'password' => 'required|confirmed|min:8',
+            'password' => 'required|confirmed|min:8|uncompromised|mixedCase|letters|numbers|symbols',
         ]);
 
         // encrypt password
