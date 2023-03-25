@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\URL;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\NavController;
 use App\Http\Controllers\Songfinder;
 use App\Http\Controllers\ChartLoader;
 use App\Http\Controllers\Paginate;
@@ -41,7 +42,7 @@ Route::get('/songs', function(Request $request) {
     return view('songs', [
         'title'=> 'Songs Finder',
         'description'=> "Search for songs in the Maimai database",
-        'user'=> Navbar::retrieveuser(),
+        'user'=> NavController::get_user($request),
         'status'=>Page_status::set_status('songs'),
         'genres'=>Songfinder::initialize_genre($request),
         'versions'=>Songfinder::initialize_ver($request),
