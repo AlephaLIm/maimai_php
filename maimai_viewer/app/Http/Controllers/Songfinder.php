@@ -65,7 +65,7 @@ class Songfinder extends Controller
         foreach ($levels as $level) {
             $instance = Filterbox::initialize($level, $level);
             array_push($level_list, $instance); 
-            if (in_array($level, $selected)){
+            if (in_array($level, $selected, true)){
                 $instance->status = "selected";
             }
         }

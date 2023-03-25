@@ -1,4 +1,4 @@
-<a href="" data-bs-toggle="modal" data-bs-target="#modal_{{ $chart->id }}">
+<a href="" data-bs-toggle="modal" data-bs-target="#modal_{{ str_replace(' ', '', $chart->id) }}">
     <div class="song_container" style="background-color: {{ $chart->color['base'] }};">
         <div class="song_bg" style="background-color: {{ $chart->color['bg'] }};">
             <img src="{{ url($chart->img) }}" style="box-shadow: 0 0 5px 5px {{ $chart->color['base'] }};" alt="Song_Image">

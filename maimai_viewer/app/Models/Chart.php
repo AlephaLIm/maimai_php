@@ -35,7 +35,7 @@ class Chart {
     public $rating;
     public $color;
 
-    public static function create_chart($id, $name, $artist, $genre, $bpm, $version, $img, $level, $constant, $diff, $type, ?float $scoregrade = null, ?float $score = null, ?int $rating = null, ?string $combo_grade = null, ?string $sync_grade = null) {
+    public static function create_chart($id, $name, $artist, $genre, $bpm, $version, $img, $level, $constant, $diff, $type, ?string $scoregrade = null, ?float $score = null, ?int $rating = null, ?string $combo_grade = null, ?string $sync_grade = null) {
         $d_search = ["Basic"=>"BASIC", "Advanced"=>"ADVANCED", "Expert"=>"EXPERT", "Master"=>"MASTER", "Remaster"=>"Re:MASTER"];
         $sync_combo_map = ['' => 0, 'FC' => 1, 'FC+' => 2, 'AP' => 3, 'AP+' => 4, 'FS' => 1, 'FS+' => 2, 'FSD' => 3, 'FSD+' => 4];
         $c_sets = [
@@ -84,25 +84,30 @@ class Chart {
     }
 
     public function set_dx($dxscore_val) {
-        $params = explode('/', $dxscore_val);
-        $dx = floatval($params[0]) / floatval($params[1]);
-        if ($dx >= 0.97) {
-            $this->dxscore = 5;
-        }
-        elseif ($dx >= 0.95) {
-            $this->dxscore = 4;
-        }
-        elseif ($dx >= 0.93) {
-            $this->dxscore = 3;
-        }
-        elseif ($dx >= 0.90) {
-            $this->dxscore = 2;
-        }
-        elseif ($dx >= 0.85) {
-            $this->dxscore = 1;
+        if (is_null($dxscore_val)) {
+            $this->dxscore = 0;            
         }
         else {
-            $this->dxscore = 0;
+            $params = explode('/', $dxscore_val);
+            $dx = floatval($params[0]) / floatval($params[1]);
+            if ($dx >= 0.97) {
+                $this->dxscore = 5;
+            }
+            elseif ($dx >= 0.95) {
+                $this->dxscore = 4;
+            }
+            elseif ($dx >= 0.93) {
+                $this->dxscore = 3;
+            }
+            elseif ($dx >= 0.90) {
+                $this->dxscore = 2;
+            }
+            elseif ($dx >= 0.85) {
+                $this->dxscore = 1;
+            }
+            else {
+                $this->dxscore = 0;
+            }
         }
     }
 
