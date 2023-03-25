@@ -13,13 +13,21 @@ class Chart {
     public $level;
     public $level_val;
     public $constant;
+    public $notecount;
+    public $tap;
+    public $slide;
+    public $hold;
+    public $break;
+    public $touch;
+    public $ex;
+    public $chart_view = 'disabled';
     public $diff;
     public $type;
     public $type_col;
     public $scoregrade;
     public $score;
     public $score_val;
-    public $dxscore;
+    public $dxscore = 0;
     public $sync_grade;
     public $sync_val;
     public $combo_grade;
@@ -74,6 +82,7 @@ class Chart {
 
         return $chart;
     }
+
     public function set_dx($dxscore_val) {
         $params = explode('/', $dxscore_val);
         $dx = floatval($params[0]) / floatval($params[1]);
@@ -95,5 +104,17 @@ class Chart {
         else {
             $this->dxscore = 0;
         }
+    }
+
+    public function set_notes($notecount, $tapnotes, $slidenotes, $holdnotes, $breaknotes, $touchnotes, $exnotes) {
+        $this->notecount = $notecount;
+        $this->tap = $tapnotes;
+        $this->slide = $slidenotes;
+        $this->hold = $holdnotes;
+        $this->break = $breaknotes;
+        $this->touch = $touchnotes;
+        $this->ex = $exnotes;
+
+        $this->chart_view = "enabled";
     }
 }

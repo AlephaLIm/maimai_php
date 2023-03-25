@@ -22,9 +22,20 @@ use App\Models\Page_status;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//Route::get('/', function () {
+//    return view('welcome');
+//});
+
+// home page
+Route::get('/', function() {
+    return view('home', [
+        'title'=> 'Home Page',
+        'description'=> "Welcome to Mai Mai",
+        'logo_url'=> URL::asset('/images/nav_icons/bearhands.png'),
+        'user'=> Navbar::retrieveuser(),
+        'status'=>Page_status::set_status('home')
+    ]);
+}); 
 
 //Post API for scorescrapper.js
 Route::post('/data', 'App\Http\Controllers\DatabaseController@data');
@@ -32,16 +43,6 @@ Route::post('/data', 'App\Http\Controllers\DatabaseController@data');
 Route::post('/songinfo', 'App\Http\Controllers\getsongController@get');
 //Post API for new songs
 Route::post('/newsongs', 'App\Http\Controllers\NewSongController@songs');
-
-Route::get('/nav_test', function() {
-    return view('navbar', [
-        'title'=> 'Navbar Test',
-        'description'=> "Testing the navbar port",
-        'logo_url'=> URL::asset('/images/nav_icons/bearhands.png'),
-        'user'=> Navbar::retrieveuser(),
-        'status'=>Page_status::set_status('home')
-    ]);
-});
 
 Route::get('/songs', function(Request $request) {
     
@@ -51,7 +52,6 @@ Route::get('/songs', function(Request $request) {
     return view('songs', [
         'title'=> 'Songs Finder',
         'description'=> "Search for songs in the Maimai database",
-        'logo_url'=> URL::asset('/images/nav_icons/bearhands.png'),
         'user'=> Navbar::retrieveuser(),
         'status'=>Page_status::set_status('songs'),
         'genres'=>Songfinder::initialize_genre($request),

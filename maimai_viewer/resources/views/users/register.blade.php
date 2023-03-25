@@ -58,9 +58,11 @@
                 </div>
                 
                 <div class="submit-button-container">
-                    <button type="submit" class="submit-button">
-                    Sign Up
-                    </button>
+                    <div class="shadow-wrapper">
+                        <button type="submit" class="submit-button">
+                        Sign Up
+                        </button>
+                    </div>
                 </div>
                 
                 <div class="redirect">
