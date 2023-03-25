@@ -25,6 +25,13 @@
     padding-left: 5px;
 }
 
+.navbar-toggler:focus,
+.navbar-toggler:active,
+.navbar-toggler-icon:focus {
+    outline: none;
+    box-shadow: none;
+}
+
 #nav-wrapper {
     padding-left: 0px;
     padding-right: 0px;
@@ -53,7 +60,7 @@
     font-size: 1.2rem;
     line-height: normal;
     top: min(6vw, 30px);
-    left: min(21vw, 110px);
+    left: min(23vw, 110px);
 }
 
 #profile-box .title-box {
@@ -61,7 +68,7 @@
     bottom: 0.3vw;
     left: min(22vw, 105px);
     padding: 10px 55px 10px 55px;
-    width: 280px;
+    width: min(60vw, 280px);
     background: #100720;
     text-align: center;
     border-radius: 20px;
