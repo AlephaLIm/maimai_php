@@ -22,12 +22,21 @@ class ChartLoader extends Controller
         $chart_list = [];
         $param = '';
 
+        if (auth()->check()) {
+            $id = $request->user()->friendcode;
+            $sql_statement = "select distinct charts.chartid, songs.songid, songs.name, songs.jacket, songs.artist, songs.genre, songs.version, songs.bpm, songs.type, charts.level,
+                            charts.constant, charts.difficulty, charts.totalnotecount, charts.tapcount, charts.slidecount, charts.holdcount, charts.breakcount,
+                            charts.touchcount, charts.excount, scores.score, scores.dxscore, scores.scoregrade, scores.combograde, scores.syncgrade, scores.chartrating 
+            from charts inner join songs on charts.parentsong = songs.songid left join scores on charts.chartid = scores.chartid and scores.friendcode = ".$id;
+        }
+
         foreach ($filters as $filter) {
             if ($request->filled($filter)) {
                 $list_items[$filter] = implode(',', Songfinder::extract_params($request, $filter));
                 $param_count = count(explode(',', $list_items[$filter]));
 
                 if ($filter == 'sort') {
+                    $list_items[$filter] = explode(',', $list_items[$filter]);
                     continue;
                 }
                 else {
@@ -49,7 +58,18 @@ class ChartLoader extends Controller
         }
 
         if ($request->has('search')) {
-            $sql_statement = "select distinct search.chartid, search.songid, search.name, search.jacket, search.artist, search.genre, search.version, search.bpm, search.type, search.level, search.constant, search.difficulty, search.totalnotecount, search.tapcount, search.slidecount, search.holdcount, search.breakcount, search.touchcount, search.excount from (".$sql_statement." ) as search inner join alias on search.songid = alias.songid where alias.alias like concat('%', ?, '%')";
+            if (auth()->check()) {
+                $sql_statement = "select distinct search.chartid, search.songid, search.name, search.jacket, search.artist, search.genre, search.version, search.bpm, search.type, search.level,
+                        search.constant, search.difficulty, search.totalnotecount, search.tapcount, search.slidecount, search.holdcount, search.breakcount,
+                        search.touchcount, search.excount, search.score, search.dxscore, search.scoregrade, search.combograde, search.syncgrade, search.chartrating
+                from (".$sql_statement." ) as search inner join alias on search.songid = alias.songid where alias.alias like concat('%', ?, '%')";
+            }
+            else {
+                $sql_statement = "select distinct search.chartid, search.songid, search.name, search.jacket, search.artist, search.genre, search.version, search.bpm, search.type, search.level,
+                        search.constant, search.difficulty, search.totalnotecount, search.tapcount, search.slidecount, search.holdcount, search.breakcount,
+                        search.touchcount, search.excount 
+                from (".$sql_statement." ) as search inner join alias on search.songid = alias.songid where alias.alias like concat('%', ?, '%')";
+            }
             $param .= $request->get('search').',';
         }
 
@@ -62,7 +82,13 @@ class ChartLoader extends Controller
         }
 
         foreach ($charts as $chart) {
-            $chart_obj = Chart::create_chart($chart->chartid, $chart->name, $chart->artist, $chart->genre, $chart->bpm, $chart->version, $chart->jacket, $chart->level, $chart->constant, $chart->difficulty, $chart->type);
+            if (auth()->check()) {
+                $chart_obj = Chart::create_chart($chart->chartid, $chart->name, $chart->artist, $chart->genre, $chart->bpm, $chart->version, $chart->jacket, $chart->level, $chart->constant, $chart->difficulty, $chart->type, $chart->scoregrade, $chart->score, $chart->chartrating, $chart->combograde, $chart->syncgrade);
+                $chart_obj->set_dx($chart->dxscore);
+            }
+            else {
+                $chart_obj = Chart::create_chart($chart->chartid, $chart->name, $chart->artist, $chart->genre, $chart->bpm, $chart->version, $chart->jacket, $chart->level, $chart->constant, $chart->difficulty, $chart->type);
+            }
             $chart_obj->set_notes($chart->totalnotecount, $chart->tapcount, $chart->slidecount, $chart->holdcount, $chart->breakcount, $chart->touchcount, $chart->excount);
             array_push($chart_list, $chart_obj);
         }

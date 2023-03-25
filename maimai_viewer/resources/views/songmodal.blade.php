@@ -1,4 +1,4 @@
-<div class="modal fade" id="modal_{{ $chart->id }}" tabindex="-1" title="{{ $chart->name }}_{{ $chart->diff }}" aria-labelledby="modal_label" aria-hidden="true">
+<div class="modal fade" id="modal_{{ str_replace(' ','',$chart->id) }}" tabindex="-1" title="{{ $chart->name }}_{{ $chart->diff }}" aria-labelledby="modal_label" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header" style="background-color: {{ $chart->color['bg'] }};">
@@ -48,7 +48,12 @@
                     <h3 style="color:{{ $chart->color['text'] }};">Version: <p style="color:white;">{{ $chart->version }}</p></h3>
                 </div>
                 <div class="radar_div">
+                    @if (is_null($chart->notecount))
+                    <img class="error_radar" src="{{ asset('/images/error/no_chart.jpg') }}" alt="error_no_data">
+                    <p>No note data available!</p>
+                    @else
                     <canvas class="radar" data-tap="{{ $chart->tap }}" data-slide="{{ $chart->slide }}" data-hold="{{ $chart->hold }}" data-break="{{ $chart->break }}" data-touch="{{ $chart->touch }}" data-ex="{{ $chart->ex }}"></canvas>
+                    @endif
                 </div>
             </div>
             <div class="modal-footer">
