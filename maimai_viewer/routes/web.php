@@ -40,17 +40,9 @@ Route::get('/', function() {
 //Post API for scorescrapper.js
 Route::post('/data', 'App\Http\Controllers\DatabaseController@data');
 //Get API to send song information to scorescrapper.js
-Route::get('/songinfo', 'App\Http\Controllers\getsongController@get');
-
-Route::get('/nav_test', function() {
-    return view('navbar', [
-        'title'=> 'Navbar Test',
-        'description'=> "Testing the navbar port",
-        'logo_url'=> URL::asset('/images/nav_icons/bearhands.png'),
-        'user'=> Navbar::retrieveuser(),
-        'status'=>Page_status::set_status('home')
-    ]);
-});
+Route::post('/songinfo', 'App\Http\Controllers\getsongController@get');
+//Post API for new songs
+Route::post('/newsongs', 'App\Http\Controllers\NewSongController@songs');
 
 Route::get('/songs', function(Request $request) {
     
@@ -60,7 +52,6 @@ Route::get('/songs', function(Request $request) {
     return view('songs', [
         'title'=> 'Songs Finder',
         'description'=> "Search for songs in the Maimai database",
-        'logo_url'=> URL::asset('/images/nav_icons/bearhands.png'),
         'user'=> Navbar::retrieveuser(),
         'status'=>Page_status::set_status('songs'),
         'genres'=>Songfinder::initialize_genre($request),
@@ -87,3 +78,4 @@ Route::get('/login', [UserController::class, 'login'])->name('login')->middlewar
 
 // login user
 Route::post('/users/authenticate', [UserController::class, 'authenticate']);
+

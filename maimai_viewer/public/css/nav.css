@@ -48,7 +48,7 @@
     box-shadow: 0 0 3px 2px #3D087B;
 }
 
-#profile-box .profile-user h4 {
+#profile-box .profile-user h2 {
     position: absolute;
     font-size: 1.2rem;
     line-height: normal;
@@ -67,7 +67,7 @@
     box-shadow: 0 0 3px 3px #3D087B inset;
 }
 
-.title-box h5 {
+.title-box h3 {
     font-size: 1rem;
     color:white;
     margin-bottom: 0;

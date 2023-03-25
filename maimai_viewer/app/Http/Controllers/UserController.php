@@ -28,16 +28,17 @@ class UserController extends Controller
         $userData['password'] = bcrypt($userData['password']);
         
 
-        $user = User::create($userData);
-        auth()->login($user);
+     //new database
+        // $user = DB::insert(
+        //     'INSERT INTO users(username, email, friendcode, password, picture, rating, title, playcount, classrank, courserank) values (?,?,?,?,?,?,?,?,?,?);',
+        //     [null, $userData["email"], $userData["friendcode"], $userData["password"], null, null, null, null, null, null]
+        // );
 
-        //DB::statement(
-        //    "UPDATE users SET username=?, friendcode=?, password=?, picture=?, rating=?, title=?, playcount=?, classrank=?, courserank=?  WHERE email=?",
-        //    [null, $userData["friendcode"], $userData["password"], null, null, null, null, null, null, $userData["email"]]
-        //);
+        // authenticate if register is successful
+        auth()->login(User::create($userData));
 
         // return to homepage
-        return redirect('/')->with('message', 'User created and logged in');
+        return redirect('/login')->with('message', 'User created and logged in');
     }
 
     // logout user
@@ -74,3 +75,4 @@ class UserController extends Controller
     }
 
 }
+

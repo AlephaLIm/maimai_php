@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Megrim&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Josefin+Slab&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;500;700&display=swap');
 
 .modal-header {
     color: white;
@@ -17,7 +17,7 @@
 }
 
 .modal-body {
-    height: 650px;
+    height: 700px;
     padding-left: 0px;
     padding-right: 0px;
     background-color: #1b1b1b;
@@ -33,7 +33,7 @@
 .modal-body .user_stats {
     position: absolute;
     top: 40px;
-    left: max(12.5vw, 210px);
+    left: max(13vw, 215px);
     text-align: start;
 }
 
@@ -65,6 +65,10 @@
     font-size: 25px;
     font-style: italic;
     font-family: 'Megrim', 'cursive';
+    color: white;
+}
+
+.modal-body .clear_badges h4 {
     color: white;
 }
 
@@ -124,7 +128,7 @@
     position: absolute;
     top: 250px;
     left: 28px;
-    width: 300px;
+    width: 350px;
     text-align: start;
     border-top: 2px solid white;
     padding-top: 30px;
@@ -133,23 +137,25 @@
 }
 
 .modal-body .note_stats h3 {
-    font-family: 'Josefin Slab', serif;
+    font-family: 'Poppins';
+    font-weight: 200;
     padding-bottom: 10px;
 }
 
 .modal-body .note_stats h3 p {
     display: inline;
-    font-size: 23px;
+    font-size: 20px;
 }
 
-.modal-body .radar {
+.modal-body .radar_div {
     position: absolute;
     top: 250px;
-    right: 20px;
+    right: 15px;
     padding-right: 15px;
-    width: max(20vw, 350px);
-    background-color: #141414;
-    border: 3px solid white;
+    height: max(20.5vw, 430px);
+    width: max(20vw, 420px);
+
+
 }
 
 .modal-footer {
@@ -171,19 +177,20 @@
 
 @media screen and (max-width: 900px) {
     .modal-body {
-        height: 1150px;
+        height: 1100px;
     }
     .modal-body .clear_badges {
-        top: 220px;
+        top: 225px;
         left: 70px;
     }
     .modal-body .note_stats {
         position: static;
-        margin-top: 420px;
+        margin-top: 430px;
         margin-left: 20px;
         margin-right: 20px;
+        width: 350px;
     }
-    .modal-body .radar {
+    .modal-body .radar_div {
         position: static;
         margin-top: 10px;
     }
