@@ -11,8 +11,8 @@ class NewSongController extends Controller
     {
         $songs = $request->all();
         // print_r($songs);
-        for ($i = 0; $i < count($songs); $i++) {
-            $eachSong = $songs[$i];
+        foreach ($songs as $eachSong) {
+            //$eachSong = $songs[$i];
             DB::insert('INSERT INTO songs(songid, internalid, wikiid, name, type, version, genre, artist, bpm, jacket) values (?,?,?,?,?,?,?,?,?,?)',
             [
                 $eachSong["songid"],
