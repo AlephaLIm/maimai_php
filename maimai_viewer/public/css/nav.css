@@ -124,9 +124,26 @@
 @media screen and (max-width: 500px) {
     #profile-box .title-box {
         padding: 7px 50px 7px 50px;
-        width: 265px;
+        width: min(67vw, 265px);
     }
     #profile-box .profile-user h4 {
         font-size: 1.1rem;
+    }
+}
+
+@media screen and (max-width: 380px) {
+    #profile-box .title-box { 
+        bottom: 0vw;
+        width: 65vw;
+    }
+    #nav-row #profile-box .profile-user .ratings {
+        left: 50vw;
+        top: 2vw;
+    }
+    #profile-img {
+        min-width: 70px;
+    }
+    #profile-box .profile-user h2 {
+        font-size: 1rem;
     }
 }
