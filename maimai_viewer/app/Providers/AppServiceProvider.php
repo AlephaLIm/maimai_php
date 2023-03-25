@@ -21,9 +21,11 @@ class AppServiceProvider extends ServiceProvider
      * Bootstrap any application services.
      */
     public function boot(): void
-    {
-        $this->app['request']->server->set('HTTPS','on');
-        URL::forceScheme('https');
+    {   
+        if ($this->app->environment('production')) {
+            $this->app['request']->server->set('HTTPS','on');
+            URL::forceScheme('https');
+        }
         Paginator::useBootstrap();
     }
 }
