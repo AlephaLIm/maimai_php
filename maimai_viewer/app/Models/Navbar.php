@@ -8,12 +8,12 @@ class Navbar {
     public $rating;
     public $profile_img;
     
-    public static function retrieveuser() {
+    public static function retrieveuser(?string $name = null, ?string $title = null, ?string $rating = null, ?string $img = null) {
         $user = new Navbar();
-        $user->name = "H O S H I N O";
-        $user->title = "響け！CHIREI MY WAY!";
-        $user->rating = "15000";
-        $user->profile_img = "/images/nav_icons/user_img.png";
+        $user->name = $name ?? " Guest_User";
+        $user->title = $title ?? "-- No Title --";
+        $user->rating = $rating ?? "------";
+        $user->profile_img = $img ?? "/images/nav_icons/guest.jpg";
 
         return $user;
     }
