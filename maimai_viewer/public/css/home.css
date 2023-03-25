@@ -33,13 +33,15 @@ body {
 
 .homePicture {
     margin-top: 30px;
+    text-align: center;
 }
 
 .homeText {
     color:whitesmoke;
     font-family: 'Poppins';
     text-align: center;
-    font-size: large;
+    font-size: max(1vw, 10px);
+    
 }
 
 .homeContent {
