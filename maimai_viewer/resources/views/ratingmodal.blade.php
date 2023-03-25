@@ -26,7 +26,7 @@
                         <h4>Rating</h4>
                         <div class="empty_badges">
                             <h5 class="medal" style="color: #00fd00; border: 6px solid #00fd00;">
-                                {{ $chart->chartrating }}</h5>
+                                {{ $chart->rating }}</h5>
                         </div>
                     </div>
                     <div class="fsd_badges">

@@ -11,25 +11,24 @@ class RatingController extends Controller
     public static function index(Request $request)
     {
         $chart_list = [];
-        $festival = $request;
-        if ($festival == "festival") {
+        if ($request->get('festival')) {
             $charts = DB::select("
-        SELECT DISTINCT charts.chartid, songs.name, songs.jacket, charts.level, charts.constant, charts.difficulty, songs.type, songs.artist, songs.genre, songs.version, songs.bpm, scores.chartrating, scores.score  
-        FROM charts
-        JOIN songs ON charts.parentsong = songs.songid
-        JOIN scores ON charts.chartid = scores.chartid
-        ORDER BY scores.chartrating DESC 
-        LIMIT 15
-        ");
+            SELECT DISTINCT charts.chartid, songs.name, songs.jacket, charts.level, charts.constant, charts.difficulty, songs.type, songs.artist, songs.genre, songs.version, songs.bpm, scores.chartrating, scores.score  
+            FROM charts
+            JOIN songs ON charts.parentsong = songs.songid
+            JOIN scores ON charts.chartid = scores.chartid
+            ORDER BY scores.chartrating DESC 
+            LIMIT 15
+            ");
         } else {
             $charts = DB::select("
-        SELECT DISTINCT charts.chartid, songs.name, songs.jacket, charts.level, charts.constant, charts.difficulty, songs.type, songs.artist, songs.genre, songs.version, songs.bpm, scores.chartrating, scores.score 
-        FROM charts
-        JOIN songs ON charts.parentsong = songs.songid
-        JOIN scores ON charts.chartid = scores.chartid
-        ORDER BY scores.chartrating DESC 
-        LIMIT 35
-        ");
+            SELECT DISTINCT charts.chartid, songs.name, songs.jacket, charts.level, charts.constant, charts.difficulty, songs.type, songs.artist, songs.genre, songs.version, songs.bpm, scores.chartrating, scores.score 
+            FROM charts
+            JOIN songs ON charts.parentsong = songs.songid
+            JOIN scores ON charts.chartid = scores.chartid
+            ORDER BY scores.chartrating DESC 
+            LIMIT 35
+            ");
         }
 
 
