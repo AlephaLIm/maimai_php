@@ -53,7 +53,7 @@ class Chart {
         $chart->name = $name;
         $chart->artist = $artist;
         $chart->genre = $genre;
-        $chart->bpm = $bpm;
+        $chart->bpm = $bpm ?? 'Unknown';
         $chart->version = $version;
         $chart->img = $img;
         $chart->level = $level;
