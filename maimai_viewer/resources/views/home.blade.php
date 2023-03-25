@@ -44,13 +44,13 @@
                     <a href="/recommendations">
                         <img class="recommendation_icon" src="{{ asset('/images/home_icons/recommendation.jpg') }} " alt="recommendation_icon">
                     </a>
-                    <p class="iconText">Find Songs!</p>
+                    <p class="iconText">Be recommended songs to play!</p>
                 </div>
                 <div class="col-sm-4 icons">
                     <a href="/songs">
                         <img class="songs_icon" src="{{ asset('/images/home_icons/songs.png') }} " alt="songs_icon">
                     </a>
-                    <p class="iconText">Be recommendated songs to play!</p>
+                    <p class="iconText">Find Songs!</p>
                 </div>
             </div>
         </div>
