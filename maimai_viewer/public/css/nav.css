@@ -61,6 +61,7 @@
     bottom: 0.3vw;
     left: min(22vw, 105px);
     padding: 10px 55px 10px 55px;
+    width: 280px;
     background: #100720;
     text-align: center;
     border-radius: 20px;
@@ -82,7 +83,7 @@
     box-shadow: 0 0 3px 3px #3D087B;
     position: absolute;
     top: min(3.5vw, 23px);
-    left: min(53vw, 250px);
+    left: min(54vw, 250px);
 }
 
 .ratings p {
@@ -116,6 +117,7 @@
 @media screen and (max-width: 500px) {
     #profile-box .title-box {
         padding: 7px 50px 7px 50px;
+        width: 265px;
     }
     #profile-box .profile-user h4 {
         font-size: 1.1rem;
