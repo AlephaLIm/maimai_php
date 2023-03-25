@@ -19,7 +19,7 @@ class UserController extends Controller
     // create user
     public function store(Request $request){
         $userData = $request->validate([
-            'friendcode' => 'required|min:3|max:13|unique:users,friendcode',
+            'friendcode' => 'required|min:13|max:13|unique:users,friendcode',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|confirmed|min:8',
         ]);
@@ -27,10 +27,6 @@ class UserController extends Controller
         // encrypt password
         $userData['password'] = bcrypt($userData['password']);
         
-        // $user = DB::insert(
-        //     'INSERT INTO users(friendcode, email, email_verified_at, password, remember_token, created_at, updated_at) values (?,?,?,?,?,?,?);',
-        //     [$userData["friendcode"], $userData["email"], null, $userData["password"], null, null, null]
-        // );
 
      //new database
         // $user = DB::insert(
@@ -79,3 +75,4 @@ class UserController extends Controller
     }
 
 }
+

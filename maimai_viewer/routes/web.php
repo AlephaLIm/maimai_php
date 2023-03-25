@@ -23,9 +23,20 @@ use App\Models\Page_status;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//Route::get('/', function () {
+//    return view('welcome');
+//});
+
+// home page
+Route::get('/', function() {
+    return view('home', [
+        'title'=> 'Home Page',
+        'description'=> "Welcome to Mai Mai",
+        'logo_url'=> URL::asset('/images/nav_icons/bearhands.png'),
+        'user'=> Navbar::retrieveuser(),
+        'status'=>Page_status::set_status('home')
+    ]);
+}); 
 
 //Post API for scorescrapper.js
 Route::post('/data', 'App\Http\Controllers\DatabaseController@data');
@@ -68,3 +79,4 @@ Route::get('/login', [UserController::class, 'login'])->name('login')->middlewar
 
 // login user
 Route::post('/users/authenticate', [UserController::class, 'authenticate']);
+
