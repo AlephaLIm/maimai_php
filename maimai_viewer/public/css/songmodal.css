@@ -163,8 +163,7 @@
 }
 
 .modal-footer button {
-    background: -webkit-linear-gradient(left, red , yellow, cyan, purple);
-    color: #141414;
+    color: white;
     font-weight: bold;
 }
 
