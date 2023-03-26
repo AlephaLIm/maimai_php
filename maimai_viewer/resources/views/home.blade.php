@@ -76,6 +76,10 @@
                         <img src="{{ asset('/images/home_icons/about_us.png') }}" alt="Maimai Scoreviewer chan">
                     </div>
                 </div>
+                <hr>
+                <div class="about_wrapper">
+
+                </div>
             </div>
         </div> 
 </main>
