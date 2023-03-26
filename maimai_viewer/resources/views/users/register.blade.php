@@ -8,18 +8,19 @@
 @endsection
 
 @section('body')
+<main>
     <div class='bg-limit' style="background: linear-gradient(rgba(0, 0, 0, 0.40), rgba(0, 0, 0, 0.40)), url({{ asset('images/nav_bg/bg_img.jpg') }}), no-repeat;">
         <div class='login_wrapper'>
             <span class="title">
                 <h1>Register</h1>
-                <h6>Create account to view profile</h6>
+                <p>Create account to view profile</p>
             </span>
             
             <form class="login-form" method="POST" action="/users">
                 @csrf
                 <div class="input-box">             
                     <label for="friendcode" class="label-input"> Friendcode </label>
-                    <span id="icons" class="material-symbols-outlined">pin</span>
+                    <span class="material-symbols-outlined icons">pin</span>
                     <input type="text" class="input-field" name="friendcode" placeholder="Enter friendcode" />
                 
                     @error('friendcode')
@@ -29,7 +30,7 @@
 
                 <div class="input-box">
                     <label for="email" class="label-input"> Email </label>
-                    <span id="icons" class="material-symbols-outlined">mail</span>
+                    <span class="material-symbols-outlined icons">mail</span>
                     <input type="email" class="input-field" name="email" placeholder="Enter email" />
                 
                     @error('email')
@@ -39,7 +40,7 @@
                 
                 <div class="input-box">
                     <label for="password" class="label-input"> Password </label>
-                    <span id="icons" class="material-symbols-outlined">lock</span>
+                    <span class="material-symbols-outlined icons">lock</span>
                     <input type="password" class="input-field" name="password" placeholder="Enter password" />
                 
                     @error('password')
@@ -49,7 +50,7 @@
                 
                 <div class="input-box">
                     <label for="password_confirmation" class="label-input"> Password Confirmation </label>
-                    <span id="icons" class="material-symbols-outlined">lock</span>
+                    <span class="material-symbols-outlined icons">lock</span>
                     <input type="password" class="input-field" name="password_confirmation" placeholder="Confirm password" />
                 
                     @error('password_confirmation')
@@ -81,4 +82,5 @@
             </form>
         </div>
     </div>
+</main>
 @endsection

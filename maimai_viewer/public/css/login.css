@@ -55,7 +55,7 @@ body {
     color: white;
 }
 
-.title h6 {
+.title p {
     font-family: 'Poppins';
     color: white;
 }
@@ -93,7 +93,7 @@ body {
     z-index: 1;
 }
 
-#icons {
+.icons {
     position: absolute;
     display: block;
     padding-top: 15px;
