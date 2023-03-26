@@ -9,113 +9,60 @@ class NewSongController extends Controller
 {
     public function songs(Request $request)
     {
+        function insertCharts($values, $difficulty)
+        {
+            if ($values[$difficulty . "Level"] != null) {
+                if (str_contains($values[$difficulty . "Level"], "+")) {
+                    $constant = floatval(str_replace("+", ".7", $values[$difficulty . "Level"]));
+                } else {
+                    $constant = floatval($values[$difficulty . "Level"]);
+                }
+                //To capitalize the first letter
+                $c_difficulty = ucfirst($difficulty);
+                $chartid = $values["songid"] . $c_difficulty;
+                DB::insert(
+                    'INSERT INTO charts(chartid, level, difficulty, constant, parentsong) values (?,?,?,?,?)',
+                    [
+                        $chartid,
+                        $values[$difficulty . "Level"],
+                        $c_difficulty,
+                        $constant,
+                        $values["songid"],
+                    ]
+                );
+            }
+        }
+
         $songs = $request->all();
         // print_r($songs);
         foreach ($songs as $eachSong) {
             //$eachSong = $songs[$i];
-            DB::insert('INSERT INTO songs(songid, internalid, wikiid, name, type, version, genre, artist, bpm, jacket) values (?,?,?,?,?,?,?,?,?,?)',
-            [
+            DB::insert(
+                'INSERT INTO songs(songid, internalid, wikiid, name, type, version, genre, artist, bpm, jacket) values (?,?,?,?,?,?,?,?,?,?)',
+                [
+                    $eachSong["songid"],
+                    null,
+                    null,
+                    $eachSong["name"],
+                    $eachSong["type"],
+                    "FESTiVAL",
+                    $eachSong["genre"],
+                    $eachSong["artist"],
+                    null,
+                    $eachSong["jacket"],
+                ]
+            );
+
+            DB::insert('INSERT INTO alias(songid, alias) values (?,?)', [
                 $eachSong["songid"],
-                null,
-                null,
                 $eachSong["name"],
-                $eachSong["type"],
-                "FESTiVAL",
-                $eachSong["genre"],
-                $eachSong["artist"],
-                null,
-                $eachSong["jacket"],
             ]);
 
-            DB::insert('INSERT INTO alias(songid, alias) values (?,?)',[
-                $eachSong["songid"],
-                $eachSong["name"],
-            ]);
-
-            if ($eachSong["basicLevel"] != null){
-                if(str_contains($eachSong["basicLevel"],"+")){
-                    $constant = floatval(str_replace("+",".7",$eachSong["basicLevel"]));
-                }else{
-                    $constant = floatval($eachSong["basicLevel"]);
-                }
-                $chartid = $eachSong["songid"] . "Basic";
-                DB::insert('INSERT INTO charts(chartid, level, difficulty, constant, parentsong) values (?,?,?,?,?)',
-                [
-                    $chartid,
-                    $eachSong["basicLevel"],
-                    "Basic",
-                    $constant,
-                    $eachSong["songid"],
-                ]);
-            }
-
-            if ($eachSong["advancedLevel"] != null){
-                if(str_contains($eachSong["advancedLevel"],"+")){
-                    $constant = floatval(str_replace("+",".7",$eachSong["advancedLevel"]));
-                }else{
-                    $constant = floatval($eachSong["advancedLevel"]);
-                }
-                $chartid = $eachSong["songid"] . "Advanced";
-                DB::insert('INSERT INTO charts(chartid, level, difficulty, constant, parentsong) values (?,?,?,?,?)',
-                [
-                    $chartid,
-                    $eachSong["advancedLevel"],
-                    "Advanced",
-                    $constant,
-                    $eachSong["songid"],
-                ]);
-            }
-
-            if ($eachSong["expertLevel"] != null){
-                if(str_contains($eachSong["expertLevel"],"+")){
-                    $constant = floatval(str_replace("+",".7",$eachSong["expertLevel"]));
-                }else{
-                    $constant = floatval($eachSong["expertLevel"]);
-                }
-                $chartid = $eachSong["songid"] . "Expert";
-                DB::insert('INSERT INTO charts(chartid, level, difficulty, constant, parentsong) values (?,?,?,?,?)',
-                [
-                    $chartid,
-                    $eachSong["expertLevel"],
-                    "Expert",
-                    $constant,
-                    $eachSong["songid"],
-                ]);
-            }
-
-            if ($eachSong["masterLevel"] != null){
-                if(str_contains($eachSong["masterLevel"],"+")){
-                    $constant = floatval(str_replace("+",".7",$eachSong["masterLevel"]));
-                }else{
-                    $constant = floatval($eachSong["masterLevel"]);
-                }
-                $chartid = $eachSong["songid"] . "Master";
-                DB::insert('INSERT INTO charts(chartid, level, difficulty, constant, parentsong) values (?,?,?,?,?)',
-                [
-                    $chartid,
-                    $eachSong["masterLevel"],
-                    "Master",
-                    $constant,
-                    $eachSong["songid"],
-                ]);
-            }
-
-            if ($eachSong["remasterLevel"] != null){
-                if(str_contains($eachSong["remasterLevel"],"+")){
-                    $constant = floatval(str_replace("+",".7",$eachSong["remasterLevel"]));
-                }else{
-                    $constant = floatval($eachSong["remasterLevel"]);
-                }
-                $chartid = $eachSong["songid"] . "Remaster";
-                DB::insert('INSERT INTO charts(chartid, level, difficulty, constant, parentsong) values (?,?,?,?,?)',
-                [
-                    $chartid,
-                    $eachSong["remasterLevel"],
-                    "Remaster",
-                    $constant,
-                    $eachSong["songid"],
-                ]);
-            }
+            insertCharts($eachSong, "basic");
+            insertCharts($eachSong, "advanced");
+            insertCharts($eachSong, "expert");
+            insertCharts($eachSong, "master");
+            insertCharts($eachSong, "remaster");
         }
         return response()->json([
             'message' => 'success',
