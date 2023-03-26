@@ -32,7 +32,7 @@
                         </a>
                     </div>
                     <div class="profile">
-                        <a href="./achievements">
+                        <a href="./profile">
                             <div class="img_wrapper">
                                 <img src="{{ asset('/images/home_icons/songs.jpg') }}" alt="Profile">
                                 <div class="desc_text"><p>Profile</p>View your stats and details!</div>
@@ -40,7 +40,7 @@
                         </a>
                     </div>
                     <div class="songs">
-                        <a href="./achievements">
+                        <a href="./songs">
                             <div class="img_wrapper">
                                 <img src="{{ asset('/images/home_icons/songs.jpg') }}" alt="Songs Finder">
                                 <div class="desc_text"><p>Song Finder</p>Searching for a song?</div>
@@ -48,7 +48,7 @@
                         </a>
                     </div>
                     <div class="recommendation">
-                        <a href="./achievements">
+                        <a href="./recommmendation">
                             <div class="img_wrapper">
                                 <img src="{{ asset('/images/home_icons/songs.jpg') }}" alt="Recommendations">
                                 <div class="desc_text"><p>Recommendations</p>What song should you play next?</div>
