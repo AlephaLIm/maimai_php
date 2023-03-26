@@ -8,7 +8,7 @@
 @endsection
 
 @section('body')
-    <div class='bg-limit'>
+    <div class='bg-limit' style="background: linear-gradient(rgba(0, 0, 0, 0.40), rgba(0, 0, 0, 0.40)), url({{ asset('images/nav_bg/bg_img.jpg') }}), no-repeat;">
         <div class='login_wrapper'>
             <span class="title">
                 <h1>Register</h1>

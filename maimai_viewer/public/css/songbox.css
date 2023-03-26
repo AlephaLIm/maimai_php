@@ -22,7 +22,7 @@
     box-shadow: 0 0 2px 2px black;
 }
 
-.songs_box .song_container:hover {
+.songsbox .song_container:hover {
     box-shadow: 0 0 8px 8px whitesmoke;
 }
 

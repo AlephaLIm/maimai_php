@@ -66,6 +66,10 @@
     border-radius: 5px;
 }
 
+.container .routes .achieve:hover {
+    box-shadow: 0 0 3px 3px #FFBF00;
+}
+
 .container .routes .profile {
     height: 310px;
     position: absolute;
@@ -73,6 +77,10 @@
     right: 30px;
     background-color: black;
     border-radius: 5px;
+}
+
+.container .routes .profile:hover {
+    box-shadow: 0 0 3px 3px #FFBF00;
 }
 
 .container .routes .songs {
@@ -84,6 +92,10 @@
     border-radius: 5px;
 }
 
+.container .routes .songs:hover {
+    box-shadow: 0 0 3px 3px #FFBF00;
+}
+
 .container .routes .recommendation {
     height: 310px;
     position: absolute;
@@ -91,6 +103,10 @@
     right: 30px;
     background-color: black;
     border-radius: 5px;
+}
+
+.container .routes .recommendation:hover {
+    box-shadow: 0 0 3px 3px #FFBF00;
 }
 
 .routes img {

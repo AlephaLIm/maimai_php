@@ -5,7 +5,6 @@ body {
 }
 
 .bg-limit {
-    background-image: url("../images/bg/bg_img.jpg");
     width: 100%;
     min-height: 100vh;
     display: flex;
