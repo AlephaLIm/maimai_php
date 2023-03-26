@@ -17,7 +17,7 @@ class NavController extends Controller
                 $base64encoded = null;
             }
             else {
-                $base64encoded = base64_encode($user[0]->picture);
+                $base64encoded = "data:image/png;base64, ".base64_encode($user[0]->picture);
             }
 
             $user_obj = Navbar::retrieveuser($user[0]->username, $user[0]->title, $user[0]->rating, $base64encoded);
