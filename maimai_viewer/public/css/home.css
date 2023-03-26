@@ -1,85 +1,263 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Megrim&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@1,300&display=swap');
+
 
 .alert {
-    background-color: skyblue;
+    background: linear-gradient(rgba(61, 8, 123, 0.40), transparent);
     font-family: 'Poppins';
     text-align: center;
     margin-bottom:0px;
-    border: solid rgb(60, 120, 144); 
+    border: none; 
     border-radius: 0px;
 }
 
-body {
-    margin:0px;
-}
-
 .bg-limit {
-    background-image: url("../images/bg/bg_img.jpg");
     width: 100%;
-    min-height: 120vh;
+    min-height: 80vh;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
     background-repeat: no-repeat;
     background-size: cover;
 }
 
-.homeTitle{
-    color:whitesmoke;
-    font-family: 'Poppins';
-    text-align: center;
-    font-size: 80px;
-    font-weight: bold;  
-    padding-top:50px;
+.container {
+    background-color: #1b1b1b;
+    width: 90vw;
     margin-top: 30px;
+    margin-bottom: 60px;
+    box-shadow: 0 3px 5px 5px #3D087B;
 }
 
-.homePicture {
-    margin-top: 30px;
+.container .welcome {
+    font-family: 'Lato', sans-serif;
     text-align: center;
+    margin-top: 50px;
+    color: white;
 }
 
-.homeText {
-    color:whitesmoke;
-    font-family: 'Poppins';
+.container .welcome h1 {
+    font-size: 56px;
+}
+
+.container .welcome h2 {
+    margin-top: 50px;
+}
+
+.container hr {
+    margin-bottom: 10px;
+    width: 50vw;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.routes {
+    height: 660px;
+    margin-left: 10px;
+    margin-right: 10px;
+    position: relative;
+}
+
+.container .routes .achieve {
+    height: 310px;
+    position: absolute;
+    top: 10px;
+    left: 30px;
+    background-color: black;
+    border-radius: 5px;
+}
+
+.container .routes .achieve:hover {
+    box-shadow: 0 0 3px 3px #FFBF00;
+}
+
+.container .routes .profile {
+    height: 310px;
+    position: absolute;
+    top: 10px;
+    right: 30px;
+    background-color: black;
+    border-radius: 5px;
+}
+
+.container .routes .profile:hover {
+    box-shadow: 0 0 3px 3px #FFBF00;
+}
+
+.container .routes .songs {
+    height: 310px;
+    position: absolute;
+    top: 330px;
+    left: 30px;
+    background-color: black;
+    border-radius: 5px;
+}
+
+.container .routes .songs:hover {
+    box-shadow: 0 0 3px 3px #FFBF00;
+}
+
+.container .routes .recommendation {
+    height: 310px;
+    position: absolute;
+    top: 330px;
+    right: 30px;
+    background-color: black;
+    border-radius: 5px;
+}
+
+.container .routes .recommendation:hover {
+    box-shadow: 0 0 3px 3px #FFBF00;
+}
+
+.routes img {
+    opacity: 0.7;
+    height: 310px;
+    border: solid 1px #3D087B;
+    border-radius: 5px;
+}
+
+.routes .img_wrapper {
+    position: relative;
+    text-align: start;
+    box-shadow: 0 0 2px 2px white inset;
+    border-radius: 5px;
+}
+
+.routes .desc_text {
+   position: absolute;
+   bottom: 0px;
+   left: 0px; 
+   width: 100%;
+   background: linear-gradient(transparent, rgba(255, 255, 255, 0.40));
+   padding-left: 10px;
+   padding-bottom: 8px;
+   color: #FFBF00;
+}
+ 
+.routes .desc_text p {
+    margin-bottom: 0;
+    font-family: 'Lato', sans-serif;
+    font-weight: bold;
+    font-size: 20px;
+    color: white;
+    text-shadow: 1px 1px 2px #3D087B;
+}
+
+.container .about_wrapper {
     text-align: center;
-    font-size: max(1vw, 10px);
+    padding-bottom: 50px;
+}
+
+.container .about {
+    text-align: center;
+    margin-top: 50px;
+    display: inline-block;
+    padding-bottom: 50px;
+    vertical-align: middle;
+    color: white;
+}
+
+.container .about h3 {
+    font-family: 'Lato', sans-serif;
+    font-size: 32px;
+    margin-bottom: 30px;
+}
+
+.container .about_icon {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+.container .about_icon img {
+    width: 300px;   
+}
+
+::-webkit-scrollbar {
+    width: 3px;
+}
+
+@media screen and (max-width: 1400px) {
+    .routes img {
+        height: auto;
+        width: 40vw;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .container .welcome h1 {
+        font-size: 32px;
+    }
     
+    .container .welcome hr {
+        width: 70vw;
+    }
+    .routes img {
+        height: auto;
+        width: 80vw;
+    }
+    .routes {
+        height: fit-content;
+        text-align: center;
+        position: static;
+    }
+    .container .routes .achieve {
+        height: auto;
+        position: static;
+        display: inline-block;
+        margin: 10px;
+        margin-left: 0px;
+    }
+    
+    .container .routes .profile {
+        height: auto;
+        position: static;
+        display: inline-block;
+        margin: 10px;
+        margin-left: 0px;
+    }
+    
+    .container .routes .songs {
+        height: auto;
+        position: static;
+        display: inline-block;
+        margin: 10px;
+        margin-left: 0px;
+    }
+    
+    .container .routes .recommendation {
+        height: auto;
+        position: static;
+        display: inline-block;
+        margin: 10px;
+        margin-left: 0px;
+    }
 }
 
-.homeContent {
-    color:whitesmoke;
-    font-family: 'Poppins';
-    text-align: center;
-    font-size: large;
-    border: 10px solid;
-}
+@media screen and (max-width: 500px) {
+    .container .welcome h1 {
+        font-size: 32px;
+    }
+    .container .welcome h2 {
+        font-size: 18px;
+    }
 
-.achievement_icon {
-    border-radius: 100px;
-    width:200px;
-    height:auto;
-}
+    .container .about_icon{ 
+        margin-left: 0;
+        margin-right: 0;
+    }
 
-.songs_icon {
-    border-radius: 100px;
-    width:200px;
-    height:auto;
-
-}
-
-.recommendation_icon {
-    border-radius: 100px;
-    width:200px;
-    height:auto;
-}
-
-.icons {
-    margin-top: 40px;
-    text-align: center;
-}
-
-.iconText {
-    color:whitesmoke;
-    font-family: 'Poppins';
-    text-align: center;
-    font-size: large;
-    padding-top: 20px;
+    .container .about p{
+        font-size: 12px;
+    }
+    .container .about h3 {
+        font-size: 24px;
+    }
+    .container .about_icon img {
+        width: 80vw;   
+    }
 }

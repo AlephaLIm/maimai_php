@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,1,0" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@48,400,1,0" />
     <link rel="stylesheet" type="text/css" href="{{ asset('css/nav.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/footer.css') }}" />
 @endsection
 
 @section('header')
@@ -25,7 +26,7 @@
     <nav class="navbar navbar-expand-lg bg-dark navbar-dark" aria-label="nav_panel" id="nav-row">
         @auth
         <div class="navbar-brand" id="profile-box">
-            <img id="profile-img" src="{{ asset($user->profile_img) }}" alt="Profile Photo">
+            <img id="profile-img" src="{{ $user->profile_img }}" alt="Profile Photo">
             <div class="profile-user">
                 <h2>{{ $user->name }}</h2>
                 <div class="ratings">
@@ -56,7 +57,7 @@
         </button>
         <div class="collapse navbar-collapse" id="Navlinks">
             <div class="navbar-nav">
-                <a class="nav-link ms-auto {{ $status->home }}" href="./"><p>Home</p></a>
+                <a class="nav-link ms-auto {{ $status->home }}" href="/"><p>Home</p></a>
                 <a class="nav-link ms-auto {{ $status->achievements }}" href="./achievements"><p>Achievements</p></a>
                 <a class="nav-link ms-auto {{ $status->songs }}" href="./songs"><p>Songs</p></a>
                 <a class="nav-link ms-auto {{ $status->recommendations }}" href="./recommendations"><p>Recommendations</p></a>
@@ -69,4 +70,9 @@
             </div>
         </div>
     </nav>
+@endsection
+
+
+@section('footer')
+    @include('footer')
 @endsection

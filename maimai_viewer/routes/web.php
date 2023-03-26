@@ -28,12 +28,11 @@ use App\Models\Page_status;
 //});
 
 // home page
-Route::get('/', function() {
+Route::get('/', function(Request $request) {
     return view('home', [
         'title'=> 'Home Page',
         'description'=> "Welcome to Mai Mai",
-        'logo_url'=> URL::asset('/images/nav_icons/bearhands.png'),
-        'user'=> Navbar::retrieveuser(),
+        'user'=> NavController::get_user($request),
         'status'=>Page_status::set_status('home')
     ]);
 }); 

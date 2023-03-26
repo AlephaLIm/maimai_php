@@ -1,12 +1,7 @@
-@section('links')
-    @parent
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/footer.css') }}" />
-@endsection
-
-@section('footer')
-<footer class="bg-dark bg">
-    <p class="footerText">MaiMai Scoreviewer is operated by Javier and Co.<br>
-        Special Thanks to <a class="footerLink" href="https://www.freepik.com/">Freepik</a> for the images.<br>     
-        Please enable JavaScript and CSS (style sheet). You may not be able to view properly if they are not enabled.</p>
-</footer>
-@endsection
+<div class="container-fluid" id="foot_box" style="background: linear-gradient(rgba(0, 0, 0, 0.40), rgba(0, 0, 0, 0.40)), url({{ asset('images/nav_bg/bg_img.jpg') }}), no-repeat;">
+    <hr class="footer_hr">
+    <div class="info">Support us @ <br> <a href="https://github.com/AlephaLIm/maimai_php" class="foot_info">https://github.com/AlephaLIm/maimai_php</a>!</div>
+    <div class="devs">
+        <div class="dev_label">Contributers: </div>
+        <div class="dev_ppl">OhsterTohster @@Github<br>Alepha @@Github<br>brdley @@Github<br>SimYanZhe @@Github<br>Nydrel2 @@Github</div>
+</div>

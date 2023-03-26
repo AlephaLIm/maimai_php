@@ -167,10 +167,6 @@
 }
 
 .modal-footer button {
-<<<<<<< HEAD
-=======
-
->>>>>>> b67be14 (recoded and sumamrised the code logic for DatabaseController.php into 1 function, fixing bug caused by nameless song)
     color: white;
     font-weight: bold;
 }
