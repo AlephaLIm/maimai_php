@@ -26,7 +26,7 @@
     <nav class="navbar navbar-expand-lg bg-dark navbar-dark" aria-label="nav_panel" id="nav-row">
         @auth
         <div class="navbar-brand" id="profile-box">
-            <img id="profile-img" src="{{ asset($user->profile_img) }}" alt="Profile Photo">
+            <img id="profile-img" src="{{ $user->profile_img }}" alt="Profile Photo">
             <div class="profile-user">
                 <h2>{{ $user->name }}</h2>
                 <div class="ratings">

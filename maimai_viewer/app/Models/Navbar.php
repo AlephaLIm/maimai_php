@@ -1,6 +1,6 @@
 <?php
 namespace App\Models;
-
+use Illuminate\Support\Facades\URL;
 
 class Navbar {
     public $name;
@@ -13,7 +13,7 @@ class Navbar {
         $user->name = $name ?? " Guest_User";
         $user->title = $title ?? "-- No Title --";
         $user->rating = $rating ?? "------";
-        $user->profile_img = $img ?? "/images/nav_icons/guest.jpg";
+        $user->profile_img = $img ?? URL::asset("/images/nav_icons/guest.jpg");
 
         return $user;
     }
