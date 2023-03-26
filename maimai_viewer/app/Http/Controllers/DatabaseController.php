@@ -64,7 +64,7 @@ class DatabaseController extends Controller
                         $chart_array = DB::select('SELECT constant FROM charts where chartid=?;', [$chartid]);
                         $chart_constant = (float) $chart_array[0]->constant;
                         $rating = CalculateRating($score["score"], $chart_constant);
-                        $check_score = DB::select('SELECT rowid FROM scores where chartid=?;', [$chartid]);
+                        $check_score = DB::select('SELECT rowid FROM scores where chartid=? AND friendcode=?;', [$chartid,$friendcode]);
                         if (count($check_score) == 0) {
                             $score = DB::insert(
                                 'INSERT INTO scores(score, dxscore, combograde, syncgrade, scoregrade, chartid, chartrating, friendcode) VALUES (?,?,?,?,?,?,?,?)',
@@ -159,30 +159,41 @@ class DatabaseController extends Controller
         // );
         //print_r($_POST);
      
-        $user = DB::update(
-            'UPDATE users set username=?, picture=?, rating=?, title=?, playcount=?, classrank=?, courserank=? where friendcode=?;',
-            [
-                $userData["name"],
-                $image,
-                $userData["rating"],
-                $userData["title"],
-                $userData["playcount"],
-                $userData["classrank"],
-                $userData["courserank"],
-                $userData["friendcode"],
-            ]
-        );
-
-        insertScore($basicData,"Basic",$userData["friendcode"]);
-        insertScore($advancedData,"Advanced",$userData["friendcode"]);
-        insertScore($expertData,"Expert",$userData["friendcode"]);
-        insertScore($masterData,"Master",$userData["friendcode"]);
-        insertScore($remasterData,"Remaster",$userData["friendcode"]);
+        $user = DB::select('SELECT * FROM users where friendcode=?;', [$userData["friendcode"]]);
+        if (count($user) == 1) {
+            DB::update(
+                'UPDATE users set username=?, picture=?, rating=?, title=?, playcount=?, classrank=?, courserank=? where friendcode=?;',
+                [
+                    $userData["name"],
+                    $image,
+                    $userData["rating"],
+                    $userData["title"],
+                    $userData["playcount"],
+                    $userData["classrank"],
+                    $userData["courserank"],
+                    $userData["friendcode"],
+                ]
+            );
+    
+            insertScore($basicData,"Basic",$userData["friendcode"]);
+            insertScore($advancedData,"Advanced",$userData["friendcode"]);
+            insertScore($expertData,"Expert",$userData["friendcode"]);
+            insertScore($masterData,"Master",$userData["friendcode"]);
+            insertScore($remasterData,"Remaster",$userData["friendcode"]);
+            return response()->json([
+                'message' => 'success',
+            ], 201);
+        }
+        else {
+            return response()->json([
+                'message' => 'User does not exist',
+            ], 409);
+        }
+        
+        
         
         // Return a JSON response with the new user's data
-        return response()->json([
-            'message' => 'success',
-        ], 201);
+        
     }
     public function connection(Request $request)
     {
