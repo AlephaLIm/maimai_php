@@ -58,6 +58,9 @@
         <div class="collapse navbar-collapse" id="Navlinks">
             <div class="navbar-nav">
                 <a class="nav-link ms-auto {{ $status->home }}" href="/"><p>Home</p></a>
+                @if (auth()->check())
+                        <a class="nav-link ms-auto {{ $status->home }}" href="/profile/{{ $request->user()->friendcode }}"><p>Profile</p></a>
+                @endif
                 <a class="nav-link ms-auto {{ $status->achievements }}" href="/achievements"><p>Achievements</p></a>
                 <a class="nav-link ms-auto {{ $status->songs }}" href="/songs"><p>Songs</p></a>
                 <a class="nav-link ms-auto {{ $status->recommendations }}" href="/recommendations"><p>Recommendations</p></a>

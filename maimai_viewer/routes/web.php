@@ -7,6 +7,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\NavController;
 use App\Http\Controllers\Songfinder;
 use App\Http\Controllers\ChartLoader;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Paginate;
 use App\Models\Sorted;
 use App\Models\Navbar;
@@ -32,11 +33,22 @@ Route::get('/', function(Request $request) {
     return view('home', [
         'title'=> 'Home Page',
         'description'=> "Welcome to Mai Mai",
+        'request'=>$request,
         'user'=> NavController::get_user($request),
         'status'=>Page_status::set_status('home')
     ]);
 }); 
-
+ 
+Route::get('/profile/{id}', function(Request $request, $id) {
+    return view('Profile', [
+        'title'=> 'Profile Page',
+        'description'=> "Welcome to Mai Mai",
+        'request'=>$request,
+        'levelArray'=> ProfileController::profile($id),
+        'user'=> NavController::get_user($request),
+        'status'=>Page_status::set_status('home')
+    ]);
+}); 
 //Post API for scorescrapper.js
 Route::post('/data', 'App\Http\Controllers\DatabaseController@data');
 //Get API to send song information to scorescrapper.js
