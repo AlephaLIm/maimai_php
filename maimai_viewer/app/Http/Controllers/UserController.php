@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Password;
+use Illuminate\Validation\Rules\Password;
 
 class UserController extends Controller
 {
@@ -22,8 +22,16 @@ class UserController extends Controller
         $userData = $request->validate([
             'friendcode' => 'required|min:13|max:13|unique:users,friendcode',
             'email' => 'required|email|unique:users,email',
-            'password' => ['required','confirmed', Password::min(8)->mixedCase()->letters()->numbers()->symbols()->uncompromised(),] 
-            
+            'password' => [
+                'required',
+                'confirmed',
+                Password::min(8)
+                    ->mixedCase()
+                    ->letters()
+                    ->numbers()
+                    ->symbols()
+                    ->uncompromised(),
+            ],
         ]);
 
         // encrypt password

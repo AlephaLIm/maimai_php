@@ -149,6 +149,7 @@ class DatabaseController extends Controller
         $expertData = $request->input("expertScores");
         $masterData = $request->input("masterScores");
         $remasterData = $request->input("remasterScores");
+        $image = base64_decode($userData["picture"]);
 
         //Inserting of userData
         // print_r($userData);
@@ -157,11 +158,12 @@ class DatabaseController extends Controller
         //     [$userData["name"], $userData["rating"], $userData["playcount"], null, $userData["friendcode"], $userData["classrank"], $userData["courserank"], $userData["title"], "test@gmail", "password", $userData["friendcode"]]
         // );
         //print_r($_POST);
+     
         $user = DB::update(
             'UPDATE users set username=?, picture=?, rating=?, title=?, playcount=?, classrank=?, courserank=? where friendcode=?;',
             [
                 $userData["name"],
-                null,
+                $image,
                 $userData["rating"],
                 $userData["title"],
                 $userData["playcount"],
