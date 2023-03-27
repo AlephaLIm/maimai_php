@@ -1,0 +1,46 @@
+.bg-limit {
+    background: linear-gradient(rgba(0, 0, 0, 0.40), rgba(0, 0, 0, 0.40)),
+        url('../images/nav_bg/bg_img.jpg'),
+        no-repeat;
+}
+
+.table-responsive {
+    height: 500px;
+    overflow-y: scroll;
+}
+
+.table td {
+    vertical-align: middle;
+    font-size: 20px;
+}
+
+.table tr {
+    vertical-align: middle;
+    font-size: 20px;
+}
+
+table {
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+@media only screen and (max-width: 768px) {
+    .table td img {
+        max-width: 30px;
+        max-height: 30px;
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 992px) {
+    .table td img {
+        max-width: 40px;
+        max-height: 40px;
+    }
+}
+
+@media only screen and (min-width: 992px) {
+    .table td img {
+        max-width: 50px;
+        max-height: 50px;
+    }
+}
