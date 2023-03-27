@@ -7,6 +7,8 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\NavController;
 use App\Http\Controllers\Songfinder;
 use App\Http\Controllers\ChartLoader;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\StatsController;
 use App\Http\Controllers\Paginate;
 use App\Models\Sorted;
 use App\Models\Navbar;
@@ -32,11 +34,22 @@ Route::get('/', function(Request $request) {
     return view('home', [
         'title'=> 'Home Page',
         'description'=> "Welcome to Mai Mai",
+        'request'=>$request,
         'user'=> NavController::get_user($request),
         'status'=>Page_status::set_status('home')
     ]);
 }); 
-
+ 
+Route::get('/stats/{id}', function(Request $request, $id) {
+    return view('stats', [
+        'title'=> 'Statistics Page',
+        'description'=> "View your Mai Mai Statistics.",
+        'request'=>$request,
+        'levelArray'=> StatsController::stats($id),
+        'user'=> NavController::get_user($request),
+        'status'=>Page_status::set_status('home')
+    ]);
+}); 
 //Post API for scorescrapper.js
 Route::post('/data', 'App\Http\Controllers\DatabaseController@data');
 //Get API to send song information to scorescrapper.js
@@ -51,6 +64,7 @@ Route::get('/songs', function(Request $request) {
 
     return view('songs', [
         'title'=> 'Songs Finder',
+        'request'=>$request,
         'description'=> "Search for songs in the Maimai database",
         'user'=> NavController::get_user($request),
         'status'=>Page_status::set_status('songs'),
