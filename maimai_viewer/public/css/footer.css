@@ -1,0 +1,71 @@
+@import url('https://fonts.googleapis.com/css2?family=Megrim&display=swap');
+
+#foot_box {
+    position: relative;
+    height: 240px;
+    box-shadow: -3px 0 3px 3px #100720;
+}
+
+.footer_hr {
+    position: absolute;
+    left:0;
+    right:0;
+    margin-left: auto;
+    margin-right: auto;
+    width: 95vw;
+    display: block;
+    color: darkgray;
+}
+
+.foot_info {
+    color: #5800FF;
+}
+
+.info {
+    position: absolute;
+    text-align: center;
+    width: 80vw;
+    left: 0;
+    right: 0;
+    top: 40px;
+    margin-left: auto;
+    margin-right: auto;
+    color: white;
+}
+
+.devs {
+    position: absolute;
+    width: 300px;
+    left: 0;
+    right: 0;
+    top: 100px;
+    margin-left: auto;
+    margin-right: auto;
+    /* font-family: 'Megrim', 'cursive'; */
+    color: white;
+}
+
+.dev_label {
+    display: inline-block;
+    text-align: center;
+    margin-right: 5px;
+    vertical-align: top;
+    color: white;
+}
+
+.dev_ppl {
+    display: inline-block;
+    text-align: start; 
+    color: white;
+}
+
+@media  screen and (max-width: 500px) {
+    #foot_box {
+        height: 300px;
+    }
+    .devs {
+        top: 170px;
+
+    }
+    
+}

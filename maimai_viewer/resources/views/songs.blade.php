@@ -1,17 +1,18 @@
-@extends('navbar', ['title' => $title, 'description' => $description, 'logo_url' => $logo_url, 'user' => $user, 'status' => $status])
+@extends('navbar', ['title' => $title, 'description' => $description, 'user' => $user, 'status' => $status])
 
 @section('links')
     @parent
     <link rel="stylesheet" type="text/css" href="{{ asset('css/songfilter.css') }}" />
     <link rel="stylesheet" type="text/css" href="{{ asset('css/songbox.css') }}" />
     <link rel="stylesheet" type="text/css" href="{{ asset('css/songmodal.css') }}" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
     <script defer src="{{ asset('js/song_finder.js') }}"></script>
+    <script defer src="{{ asset('js/radar.js') }}"></script>
 @endsection
 
 @section('body')
     <main>
-
         <div class="container">
             <div class="filterwrapper">
                 <form class="filter-form" id="song_form" action="/songs/" method="GET">
@@ -63,14 +64,20 @@
                 </form>
             </div>
         </div>
-        @if (empty($charts))
+        @if ($charts->isEmpty())
         <div class="msg">There are no songs found.</div>
         @else
         <div class="songsbox" id="songbox">
             @foreach ($charts as $chart) 
-                @include('songbox', ['chart'=>$chart])
-                @include('songmodal', ['chart'=>$chart])
+                @include('songbox', [ 'chart'=>$chart ])
+                @include('songmodal', [ 'chart'=>$chart ])
             @endforeach
+            @if ($charts->onLastPage())
+            <div class="msg">You have reached the end of the results.</div>
+            @endif
+        </div>
+        <div id="links" class="d-flex justify-content-center">
+            {{ $charts->appends($_GET)->links() }}
         </div>
         @endif
     </main>

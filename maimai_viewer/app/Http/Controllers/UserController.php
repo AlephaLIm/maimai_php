@@ -3,11 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use App\Models\Navbar;
-use App\Models\Page_status;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\URL;
+use Illuminate\Validation\Rules\Password;
 
 class UserController extends Controller
 {
@@ -16,38 +14,41 @@ class UserController extends Controller
         return view('users.register',[
             'title'=> 'Register',
             'description'=> "Create a new user",
-            'logo_url'=> URL::asset('/images/nav_icons/bearhands.png'),
-            'user'=> Navbar::retrieveuser(),
-            'status'=>Page_status::set_status('')
         ]);
     }
 
-
     // create user
     public function store(Request $request){
-        $formFields = $request->validate([
-            'friendcode' => 'required|min:3|max:8|unique:users,friendcode',
+        $userData = $request->validate([
+            'friendcode' => 'required|min:13|max:13|unique:users,friendcode',
             'email' => 'required|email|unique:users,email',
-            'password' => 'required|confirmed|min:8',
+            'password' => [
+                'required',
+                'confirmed',
+                Password::min(8)
+                    ->mixedCase()
+                    ->letters()
+                    ->numbers()
+                    ->symbols()
+                    ->uncompromised(),
+            ],
         ]);
 
         // encrypt password
-        $formFields['password'] = bcrypt($formFields['password']);
+        $userData['password'] = bcrypt($userData['password']);
+        
 
-        // create user
-        $user = User::create($formFields);
+     //new database
+        // $user = DB::insert(
+        //     'INSERT INTO users(username, email, friendcode, password, picture, rating, title, playcount, classrank, courserank) values (?,?,?,?,?,?,?,?,?,?);',
+        //     [null, $userData["email"], $userData["friendcode"], $userData["password"], null, null, null, null, null, null]
+        // );
 
-        /*$userData = $request->input("user");
-        $user = DB::insert(
-            'INSERT INTO users(id, friendcode, email, email_verified_at, password, remember_token, created_at, updated_at) values (?,?,?,?,?,?,?,?);',
-            ["1", $userData["friendcode"], "test@gmail", null, "password", null, null, null]
-        );*/
-
-        // login
-        auth()->login($user);
+        // authenticate if register is successful
+        auth()->login(User::create($userData));
 
         // return to homepage
-        return redirect('/')->with('message', 'User created and logged in');
+        return redirect('/login')->with('message', 'User created and logged in');
     }
 
     // logout user
@@ -63,11 +64,8 @@ class UserController extends Controller
     // login form
     public function login(){
         return view('users.login',[
-            'title'=> 'Register',
-            'description'=> "Create a new user",
-            'logo_url'=> URL::asset('/images/nav_icons/bearhands.png'),
-            'user'=> Navbar::retrieveuser(),
-            'status'=>Page_status::set_status('')
+            'title'=> 'Login',
+            'description'=> "Log in as existing user",
         ]);
     }
 
@@ -85,4 +83,6 @@ class UserController extends Controller
 
         return back()->withErrors(['email' => 'Invalid Credentials'])->onlyInput('email');
     }
+
 }
+

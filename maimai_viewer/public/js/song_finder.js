@@ -14,7 +14,7 @@ $("document").ready(function () {
         if (selected) {
             for (const el of selected) {
                 let name = el.name
-                let val = el.value
+                let val = encodeURIComponent(el.value)
                 if (name != null) {
                     if (!(name in dict)) {
                         dict[name] = val

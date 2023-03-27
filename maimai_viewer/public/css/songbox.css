@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Megrim&display=swap');
 
-.songs_box a {
+.songsbox a {
     text-decoration: none;
 }
 
@@ -22,8 +22,8 @@
     box-shadow: 0 0 2px 2px black;
 }
 
-.songs_box .song_container:hover {
-    box-shadow: 0 0 8px 8px whitesmoke;
+.songsbox .song_container:hover {
+    box-shadow: 0 0 5px 5px whitesmoke;
 }
 
 .song_container img {

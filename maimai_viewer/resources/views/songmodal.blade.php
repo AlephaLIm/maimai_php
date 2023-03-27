@@ -1,4 +1,4 @@
-<div class="modal fade" id="modal_{{ $chart->id }}" tabindex="-1" aria-labelledby="modal_label" aria-hidden="true">
+<div class="modal fade" id="modal_{{ str_replace(' ','',$chart->id) }}" tabindex="-1" title="{{ $chart->name }}_{{ $chart->diff }}" aria-labelledby="modal_label" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header" style="background-color: {{ $chart->color['bg'] }};">
@@ -17,7 +17,7 @@
                         @endfor
                     </div>
                     <h4 class="rank_label">{{ $chart->scoregrade }}</h4>
-                    <h5 class="score_label">Score: {{ $chart->scoregrade }}</h5>
+                    <h5 class="score_label">Score: {{ $chart->score }}%</h5>
                 </div>
                 <div class="clear_badges">
                     <div class="ap_badges">
@@ -42,14 +42,22 @@
                     </div>
                 </div>
                 <div class="note_stats">
-                    <h3>Artist: <p>{{ $chart->artist }}</p></h3>
-                    <h3>Genre: <p>{{ $chart->genre }}</p></h3>
-                    <h3>BPM: <p>{{ $chart->bpm }}</p></h3>
-                    <h3>Version: <p>{{ $chart->version }}</p></h3>
+                    <h3 style="color:{{ $chart->color['text'] }};">Artist: <p style="color:white;">{{ $chart->artist }}</p></h3>
+                    <h3 style="color:{{ $chart->color['text'] }};">Genre: <p style="color:white;">{{ $chart->genre }}</p></h3>
+                    <h3 style="color:{{ $chart->color['text'] }};">BPM: <p style="color:white;">{{ $chart->bpm }}</p></h3>
+                    <h3 style="color:{{ $chart->color['text'] }};">Version: <p style="color:white;">{{ $chart->version }}</p></h3>
+                </div>
+                <div class="radar_div">
+                    @if (is_null($chart->notecount))
+                    <img class="error_radar" src="{{ asset('/images/error/no_chart.jpg') }}" alt="error_no_data">
+                    <p>No note data available!</p>
+                    @else
+                    <canvas class="radar" data-tap="{{ $chart->tap }}" data-slide="{{ $chart->slide }}" data-hold="{{ $chart->hold }}" data-break="{{ $chart->break }}" data-touch="{{ $chart->touch }}" data-ex="{{ $chart->ex }}"></canvas>
+                    @endif
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button style="background:{{ $chart->color['bg'] }};" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
     </div>

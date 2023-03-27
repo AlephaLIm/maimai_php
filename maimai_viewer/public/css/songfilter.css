@@ -16,7 +16,7 @@ main {
     width: 55vw;
     background: #100720;
     border-radius: 10px;
-    box-shadow: 0 0 4px 3px #3D087B inset;
+    box-shadow: 0 0 4px 3px #310662 inset;
     text-align: center;
     padding-bottom: 20px;
     padding-top: 20px;
@@ -29,8 +29,13 @@ main {
     outline: none;
     border: none;
     padding-left: 20px;
-    background: #141414;
+    background: black;
     box-shadow: 0 0 2px 2px #3D087B;
+    color: white;
+}
+
+.sbox .searchinput::placeholder {
+    color: #909090;
 }
 
 .sbox .searchsubmit {
@@ -116,23 +121,50 @@ main {
 }
 
 .filter-form .filterrow button {
-    background: darkgray;
+    background: #282B2D;
     border-radius: 3px;
     color: white;
     font-size: 18px;
     margin-bottom: 5px;
-    border: 2px solid darkgray;
+    border: 2px solid #7B7265;
 }
 
 .msg {
     text-align: center;
     margin-top: 20px;
+    color: white;
 }
 
 .songsbox {
     margin-top: 10px;
     overflow-y: scroll;
     text-align: center;
+}
+
+#links {
+    margin-top: 20px;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.pagination > li > a,
+.pagination > li > span {
+    color: #FFBF00;
+    background-color: #100720;
+}
+.pagination > .page-item.disabled {
+    --bs-pagination-disabled-bg: rgb(71, 70, 70);
+    --bs-pagination-disabled-color: white;
+}
+.pagination > .active > a,
+.pagination > .active > a:focus,
+.pagination > .active > a:hover,
+.pagination > .active > span,
+.pagination > .active > span:focus,
+.pagination > .active > span:hover {
+    background-color: #FFBF00;
+    border-color: #FFBF00;
 }
 
 .songsbox::-webkit-scrollbar {
@@ -188,5 +220,19 @@ main {
     }
     .filter-form .filterrow #keyselected {
         margin-right:16px;
+    }
+    li.page-item {
+
+        display: none;
+    }
+
+    .page-item:first-child,
+    .page-item:nth-child( 2 ),
+    .page-item:nth-last-child( 2 ),
+    .page-item:last-child,
+    .page-item.active,
+    .page-item.disabled {
+
+        display: block;
     }
 }

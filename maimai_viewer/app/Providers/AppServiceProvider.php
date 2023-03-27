@@ -3,6 +3,9 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\URL;
+
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -18,7 +21,11 @@ class AppServiceProvider extends ServiceProvider
      * Bootstrap any application services.
      */
     public function boot(): void
-    {
-        //
+    {   
+        if ($this->app->environment('production')) {
+            $this->app['request']->server->set('HTTPS','on');
+            URL::forceScheme('https');
+        }
+        Paginator::useBootstrap();
     }
 }
