@@ -103,7 +103,7 @@ async function checkLatestVersion() {
                         }
                     }
                     var songid = title.trim() + details.artist.trim() + chartType;
-                    songid = songid.replaceAll(/[!,'()"]/g, '');
+                    songid = songid.replaceAll(/[!,'()]/g, '');
                     var song = {
                         "name": title,
                         "type": chartType,
@@ -180,13 +180,24 @@ async function fetchScores(url) {
             if ((score == null) || (score == "")) {
                 continue;
             }
-            if (row.children[1].src == "https://maimaidx-eng.com/maimai-mobile/img/music_dx.png") {
-                var chartType = "DX";
-            } else {
-                var chartType = "Standard"
+            if (row.children.length == 3) {
+                if (row.children[2].src == "https://maimaidx-eng.com/maimai-mobile/img/music_dx.png") {
+                    var chartType = "DX";
+                } else {
+                    var chartType = "Standard"
+                }
             }
+            else {
+                if (row.children[1].src == "https://maimaidx-eng.com/maimai-mobile/img/music_dx.png") {
+                    var chartType = "DX";
+                } else {
+                    var chartType = "Standard"
+                }
+            }
+           
 
             var title = row.children[0].children[0].children[3].innerText.trim();
+        
             if (title == "Link") {
                 //console.log(row.children[0].children[0].children['idx']);
                 var newUrl = "https://maimaidx-eng.com/maimai-mobile/record/musicDetail/?idx=" + encodeURIComponent(row.children[0].children[0].children['idx'].value);
