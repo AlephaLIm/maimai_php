@@ -8,6 +8,7 @@ use App\Http\Controllers\NavController;
 use App\Http\Controllers\Songfinder;
 use App\Http\Controllers\ChartLoader;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\StatsController;
 use App\Http\Controllers\Paginate;
 use App\Models\Sorted;
 use App\Models\Navbar;
@@ -39,12 +40,12 @@ Route::get('/', function(Request $request) {
     ]);
 }); 
  
-Route::get('/profile/{id}', function(Request $request, $id) {
-    return view('Profile', [
-        'title'=> 'Profile Page',
-        'description'=> "Welcome to Mai Mai",
+Route::get('/stats/{id}', function(Request $request, $id) {
+    return view('stats', [
+        'title'=> 'Statistics Page',
+        'description'=> "View your Mai Mai Statistics.",
         'request'=>$request,
-        'levelArray'=> ProfileController::profile($id),
+        'levelArray'=> StatsController::stats($id),
         'user'=> NavController::get_user($request),
         'status'=>Page_status::set_status('home')
     ]);
