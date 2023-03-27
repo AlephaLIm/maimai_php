@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\URL;
 
 class Navbar {
     public $name;
+    public $friendcode;
     public $title;
     public $rating;
     public $profile_img;
@@ -16,6 +17,10 @@ class Navbar {
         $user->profile_img = $img ?? URL::asset("/images/nav_icons/guest.jpg");
 
         return $user;
+    }
+
+    public function store_friendcode($friendcode) {
+        $this->friendcode = $friendcode;
     }
 };
 

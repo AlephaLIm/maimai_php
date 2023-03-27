@@ -34,7 +34,6 @@ Route::get('/', function(Request $request) {
     return view('home', [
         'title'=> 'Home Page',
         'description'=> "Welcome to Mai Mai",
-        'request'=>$request,
         'user'=> NavController::get_user($request),
         'status'=>Page_status::set_status('home')
     ]);
@@ -44,10 +43,9 @@ Route::get('/stats/{id}', function(Request $request, $id) {
     return view('stats', [
         'title'=> 'Statistics Page',
         'description'=> "View your Mai Mai Statistics.",
-        'request'=>$request,
         'levelArray'=> StatsController::stats($id),
         'user'=> NavController::get_user($request),
-        'status'=>Page_status::set_status('home')
+        'status'=>Page_status::set_status('profile')
     ]);
 }); 
 //Post API for scorescrapper.js
