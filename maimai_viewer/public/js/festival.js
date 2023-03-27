@@ -1,43 +1,48 @@
 $("document").ready(function () {
-    $(".festivalsubmit").click(function (event) {
-        var selected = document.getElementsByClassName('selected');
-        const ifselected = event.target.classList.contains('selected');
+    // Get a reference to the festival form and the festival button
+    const festivalForm = document.getElementById('festival_form');
+    const festivalButton = document.querySelector('.festivalsubmit');
 
-        if (ifselected) {
-            event.target.classList.remove('selected');
-        }
-        else {
-            event.target.classList.add('selected');
-        };
+    // Define a function to send the GET request
+    function sendFestivalRequest() {
+        // Construct the query string parameter
+        const festivalParam = 'festival=festival';
 
-        var dict = {};
-        if (selected) {
-            for (const el of selected) {
-                let name = el.name
-                let val = el.value
-                if (name != null) {
-                    if (!(name in dict)) {
-                        dict[name] = val
-                    }
-                    else {
-                        dict[name] = dict[name] + ',' + val
-                    }
+        // Build the URL for the GET request
+        const url = `${festivalForm.action}?${festivalParam}`;
+
+        // Send the GET request
+        fetch(url)
+            .then(response => {
+                if (response.ok) {
+                    console.log('GET request sent successfully!');
+                } else {
+                    console.error('Failed to send GET request!');
                 }
-            };
-        }
+            })
+            .catch(error => {
+                console.error('Failed to send GET request!', error);
+            });
+    }
 
-        let entrystr = '?';
-        for (const [k, v] of Object.entries(dict)) {
-            entrystr += (k + "=" + v + "&")
-        };
+    // Define a function to toggle the festival button
+    function toggleFestivalButton() {
+        // Check if the festival button is currently active
+        const isFestivalActive = festivalButton.classList.contains('active');
 
-        if (document.getElementById('sinput').value.length != 0) {
-            laststr = entrystr + "search=" + document.getElementById('sinput').value
+        // Send or remove the GET request as appropriate
+        if (!isFestivalActive) {
+            // Activate the festival button
+            festivalButton.classList.add('active');
+            sendFestivalRequest();
+        } else {
+            // Deactivate the festival button
+            festivalButton.classList.remove('active');
+            window.history.replaceState({}, '', festivalForm.action);
         }
-        else {
-            laststr = entrystr.substring(0, entrystr.length - 1)
-        }
+    }
 
-        fetch('/rating' + laststr).then(response => response).then(window.location.href = "/rating" + laststr)
-    });
+    // Attach a click event listener to the festival button
+    festivalButton.addEventListener('click', toggleFestivalButton);
+
 });
