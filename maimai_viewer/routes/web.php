@@ -64,6 +64,7 @@ Route::get('/songs', function(Request $request) {
 
     return view('songs', [
         'title'=> 'Songs Finder',
+        'request'=>$request,
         'description'=> "Search for songs in the Maimai database",
         'user'=> NavController::get_user($request),
         'status'=>Page_status::set_status('songs'),
