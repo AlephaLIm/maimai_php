@@ -19,7 +19,7 @@
         <nav class="navbar navbar-expand-lg bg-dark navbar-dark" aria-label="nav_bg" id="logo-wrapper">
             <div class="header-logo"
                 style="background: linear-gradient(rgba(0, 0, 0, 0.40), rgba(0, 0, 0, 0.40)), url({{ asset('images/nav_bg/bg_img.jpg') }}), no-repeat;">
-                <a class="navbar-brand" href="#">
+                <a class="navbar-brand" href="/">
                     <img src="{{ asset('/images/nav_icons/bearhands.png') }} " alt="Logo">
                     <h1>Maiviewer</h1>
                 </a>
