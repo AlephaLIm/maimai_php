@@ -62,6 +62,9 @@
                     <a class="nav-link ms-auto {{ $status->home }}" href="/">
                         <p>Home</p>
                     </a>
+                    <a class="nav-link ms-auto {{ $status->aboutus }}" href="/aboutus">
+                        <p>About</p>
+                    </a>
                     @if (auth()->check())
                         <a class="nav-link ms-auto {{ $status->profile }}" href="/stats">
                             <p>Statistics</p>
@@ -71,7 +74,7 @@
                         </a>
                     @endif
                     <a class="nav-link ms-auto {{ $status->achievements }}" href="/ratings">
-                        <p>Achievements</p>
+                        <p>Ratings</p>
                     </a>
                     <a class="nav-link ms-auto {{ $status->songs }}" href="/songs">
                         <p>Songs</p>
