@@ -77,8 +77,20 @@
                     </div>
                 </div>
                 <hr>
-                <div class="about_wrapper">
-
+                <div class="about_wrapper" id="instructions">
+                    <div class="about_icon">
+                        <img src="{{ asset('/images/home_icons/instruct.png') }}" alt="Maimai Scoreviewer chan">
+                    </div>
+                    <div class="instructions">
+                        <h3>How to setup your account!</h3>
+                        <p>
+                            1. Create a new bookmark in your browser <br>
+                            2. Copy this code and insert it into the URL segment of the bookmark <br>
+                            <code>javascript:(d=>{let s=d.createElement("script"); s.type="text/javascript"; <br> s.src="https://maiviewer.ordinarymagician.com/scorescraper.js";<br> d.head.appendChild(s);})(document);</code> <br>
+                            3. Log into Mainet with your account <br>
+                            4. While logged in, click on your newly created bookmark
+                        </p>
+                    </div>
                 </div>
             </div>
         </div> 

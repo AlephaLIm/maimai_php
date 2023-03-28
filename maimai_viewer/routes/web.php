@@ -38,12 +38,30 @@ Route::get('/', function (Request $request) {
     ]);
 });
 
+Route::get('/stats/{id}', function (Request $request, $id) {
+    return view('stats', [
+        'title' => 'Statistics Page',
+        'description' => "View your Mai Mai Statistics.",
+        'levelArray' => StatsController::stats($id),
+        'user' => NavController::get_user($request),
+        'status' => Page_status::set_status('profile')
+    ]);
+})->middleware('auth');
 //Post API for scorescrapper.js
 Route::post('/data', 'App\Http\Controllers\DatabaseController@data');
 //Get API to send song information to scorescrapper.js
 Route::post('/songinfo', 'App\Http\Controllers\getsongController@get');
 //Post API for new songs
 Route::post('/newsongs', 'App\Http\Controllers\NewSongController@songs');
+
+Route::get('/edit_profile', function () {
+    return view('users/modify', [
+        'title' => 'Modify User',
+        'description' => 'Change email and password'
+    ]);
+})->middleware('auth');
+
+Route::post('/update_profile', [ProfileController::class, 'updateProfile'])->middleware('auth');
 
 Route::get('/songs', function (Request $request) {
 
@@ -52,6 +70,7 @@ Route::get('/songs', function (Request $request) {
 
     return view('songs', [
         'title' => 'Songs Finder',
+        'request' => $request,
         'description' => "Search for songs in the Maimai database",
         'user' => NavController::get_user($request),
         'status' => Page_status::set_status('songs'),
@@ -62,30 +81,6 @@ Route::get('/songs', function (Request $request) {
         'sorts' => Songfinder::initialize_sorts($request),
         'key' => Songfinder::key($request),
         'charts' => $charts
-    ]);
-});
-
-Route::get('/rating/{id}', function (Request $request, $id) {
-    $charts = RatingController::index($request);
-    return view('rating', [
-        'title' => 'Top songs',
-        'description' => "Displays your top songs",
-        'logo_url' => URL::asset('/images/nav_icons/bearhands.png'),
-        'user' => Navbar::retrieveuser(),
-        'status' => Page_status::set_status('rating'),
-        'songs' => $charts
-    ]);
-});
-
-Route::get('/reccomendation/{id}', function (Request $request, $id) {
-    $charts = RatingController::reccomendation($request);
-    return view('rating', [
-        'title' => 'Reccomendation',
-        'description' => "Show which songs gives you the most rating",
-        'logo_url' => URL::asset('/images/nav_icons/bearhands.png'),
-        'user' => Navbar::retrieveuser(),
-        'status' => Page_status::set_status('reccomendation'),
-        'songs' => $charts
     ]);
 });
 

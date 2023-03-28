@@ -6,7 +6,7 @@
 }
 
 .modal-header .modal_label {
-    height: max(3vw, 40px);
+    height: max(3.2vw, 45px);
     width: 33vw;
     text-align: start;
     overflow: hidden;
@@ -152,7 +152,7 @@
     top: 250px;
     right: 15px;
     padding-right: 15px;
-    height: max(20.5vw, 430px);
+    height: max(20.5vw, 410px);
     width: max(20vw, 410px);
     text-align: center;
 }
@@ -178,13 +178,17 @@
 }
 
 
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 990px) {
     .modal-body {
         height: 1100px;
     }
     .modal-body .clear_badges {
         top: 225px;
         left: 70px;
+    }
+    .modal-body .user_stats {
+        top: 20px;
+        left: 220px;
     }
     .modal-body .note_stats {
         position: static;
@@ -204,10 +208,12 @@
 
 @media screen and (max-width: 400px) {
     .modal-body {
-        height: 1000px;
+        height: 1050px;
     }
     .modal-body .radar_div {
         width: 97vw;
+        margin-left: auto;
+        margin-right: auto;
     }
     .modal-body .error_radar {
         margin-top: 5px;
@@ -231,5 +237,11 @@
     }
     .modal-body .clear_badges {
         left: 40px;
+    }
+}
+
+@media screen and (max-width: 359px) {
+    .modal-body {
+        height: 1000px;
     }
 }
