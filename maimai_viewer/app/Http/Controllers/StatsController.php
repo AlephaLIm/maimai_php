@@ -32,21 +32,23 @@ class StatsController extends Controller
                 $uniqueLevels[] = $data[$i]->level;
             }
         }
-        foreach ($uniqueLevels as $level) {
-            $SSP_data = select_scoregrade($id, "SS+", $level);
-            $SSS_data = select_scoregrade($id, "SSS", $level);
-            $SSSP_data = select_scoregrade($id, "SSS+", $level);
-            $AP_data = select_combograde($id, "AP", $level);
-            $APP_data = select_combograde($id, "AP+", $level);
-            $data = DB::select('SELECT avg(scores.score) as "avg" from scores inner join charts on scores.chartid=charts.chartid AND scores.friendcode = ? AND charts.level = ?', [$id, $level]);
+        foreach ($uniqueLevels as $level){
+            $SSP_data = select_scoregrade($id,"SS+",$level);
+            $SSS_data = select_scoregrade($id,"SSS",$level);
+            $SSSP_data = select_scoregrade($id,"SSS+",$level);
+            $FCP_data = select_combograde($id,"FC+",$level);
+            $AP_data = select_combograde($id,"AP",$level);
+            $APP_data = select_combograde($id,"AP+",$level);
+            $data = DB::select('SELECT avg(scores.score) as "avg" from scores inner join charts on scores.chartid=charts.chartid AND scores.friendcode = ? AND charts.level = ?',[$id,$level]);
             $avg_data = $data[0]->avg;
             $levelData = [
                 "Level" => $level,
-                "SS+" => $SSP_data,
+                "SSP" => $SSP_data,
                 "SSS" => $SSS_data,
-                "SSS+" => $SSSP_data,
+                "SSSP" => $SSSP_data,
+                "FCP" => $FCP_data,
                 "AP" => $AP_data,
-                "AP+" => $APP_data,
+                "APP" => $APP_data,
                 "avg" => $avg_data,
             ];
             array_push($levelArray, $levelData);
