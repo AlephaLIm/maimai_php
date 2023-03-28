@@ -2,7 +2,7 @@
 
 @section('links')
     @parent
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/aboutus.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/aboutus.css') }}" >
     <script src="//unpkg.com/alpinejs" defer></script>
 @endsection
 
@@ -26,7 +26,7 @@
                 
                 <div class="about_wrapper">
                     <div class="about">
-                        <h3>Built for Maimai Players, By Maimai Players</h3>
+                        <h2 class="headur">Built for Maimai Players, By Maimai Players</h2>
                         <br><br>
                         <p>
                             Maiviewer was built with one purpose in mind, to give the maimai community better access and insight into their score data. <br>We provide the community with utilities that leverages score data to provide better insights about the player,<br> as well as provide better access to song and chart information.

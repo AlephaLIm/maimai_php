@@ -190,6 +190,11 @@
     /* margin-bottom: 30px; */
 }
 
+.container .about .headur {
+    font-family: 'Lato', sans-serif;
+    font-size: 32px;
+}
+
 .container .about_icon {
     display: inline-block;
     vertical-align: middle;
