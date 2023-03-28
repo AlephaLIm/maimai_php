@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class StatsController extends Controller
 {
-    public static function stats($id)
+    public static function stats(Request $request)
     {
         function select_scoregrade($id, $grade, $level)
         {
@@ -23,6 +23,7 @@ class StatsController extends Controller
         }
 
         //SELECT charts.level, scores.score, scores.scoregrade, scores.combograde from scores inner join charts on scores.chartid=charts.chartid AND scores.friendcode = '7025818836209';
+        $id = $request->user()->friendcode;
         $user = DB::select('select * from users where friendcode = ?;', [$id]);
         $data = DB::select('SELECT charts.level, scores.score, scores.scoregrade, scores.combograde from scores inner join charts on scores.chartid=charts.chartid AND scores.friendcode = ? AND scores.scoregrade LIKE "S%" order by constant DESC;', [$id]);
         $uniqueLevels = array();

@@ -63,7 +63,7 @@
                         <p>Home</p>
                     </a>
                     @if (auth()->check())
-                        <a class="nav-link ms-auto {{ $status->profile }}" href="/stats/{{ $user->friendcode }}">
+                        <a class="nav-link ms-auto {{ $status->profile }}" href="/stats">
                             <p>Statistics</p>
                         </a>
                         <a class="nav-link ms-auto {{ $status->edit }}" href="/edit_profile">
