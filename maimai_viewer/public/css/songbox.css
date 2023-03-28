@@ -110,3 +110,9 @@
     border-radius: 10px;
     font-weight: bold;
 }
+
+@media screen and (max-width: 413px) {
+    .chart_const {
+        left: max(45vw, 180px);
+    }
+}
