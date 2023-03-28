@@ -20,8 +20,9 @@ class ProfileController extends Controller
         $userData = $request->validate([
             'email' => 'required|email',
             'password' => 'required',
-            'new_email' => 'email|unique:users,email',
+            'new_email' => 'nullable|email|unique:users,email',
             'new_password' => [
+                'nullable',
                 Password::min(8)
                     ->mixedCase()
                     ->letters()
