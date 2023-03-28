@@ -77,7 +77,11 @@ class UserController extends Controller
 
         if(auth()->attempt($formFields)){
             $request->session()->regenerate();
-
+            $id = array($request->user()->friendcode);
+            $user = DB::select('select username from users where friendcode = ?', $id);
+            if (is_null($user[0]->username)) {
+                return redirect('/#instructions')->with('message', 'You are now logged in!');
+            }           
             return redirect('/')->with('message', 'You are now logged in!');
         }
 
