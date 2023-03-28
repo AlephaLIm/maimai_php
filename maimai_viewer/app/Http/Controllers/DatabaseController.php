@@ -82,7 +82,7 @@ class DatabaseController extends Controller
                         } 
                         else {
                             $score = DB::insert(
-                                'UPDATE scores set score=?, dxscore=?, scoregrade=?, combograde=?, syncgrade=?, chartrating=? where chartid=?;',
+                                'UPDATE scores SET score=?, dxscore=?, scoregrade=?, combograde=?, syncgrade=?, chartrating=? WHERE chartid=? AND friendcode = ?;',
                                 [
                                     $score["score"],
                                     $score["dxscore"],
@@ -91,6 +91,7 @@ class DatabaseController extends Controller
                                     $score["sync"],
                                     $rating,
                                     $chartid,
+                                    $friendcode
                                 ]
                             );
                         }
