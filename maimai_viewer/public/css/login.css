@@ -103,6 +103,7 @@ body {
     height: 55px;
     padding: 0 7px 0 43px;
     z-index: 1;
+    inline-size: 85%;
 }
 
 .icons {
