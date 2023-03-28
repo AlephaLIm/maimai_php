@@ -26,7 +26,7 @@
                     <div class="achieve">
                         <a href="/achievements">
                             <div class="img_wrapper">
-                                <img src="{{ asset('/images/home_icons/songs.jpg') }}" alt="Achievements">
+                                <img src="{{ asset('/images/home_icons/achieve.png') }}" alt="Achievements">
                                 <div class="desc_text"><p>Achievements</p>View your best songs!</div>
                             </div>
                         </a>
@@ -38,7 +38,7 @@
                         <a href="/login">
                         @endif
                             <div class="img_wrapper">
-                                <img src="{{ asset('/images/home_icons/songs.jpg') }}" alt="Profile">
+                                <img src="{{ asset('/images/home_icons/profile.jpg') }}" alt="Profile">
                                 <div class="desc_text"><p>Profile</p>View your stats and details!</div>
                             </div>
                         </a>
@@ -46,7 +46,7 @@
                     <div class="songs">
                         <a href="/songs">
                             <div class="img_wrapper">
-                                <img src="{{ asset('/images/home_icons/songs.jpg') }}" alt="Songs Finder">
+                                <img src="{{ asset('/images/home_icons/profile.jpg') }}" alt="Songs Finder">
                                 <div class="desc_text"><p>Song Finder</p>Searching for a song?</div>
                             </div>
                         </a>
@@ -54,7 +54,7 @@
                     <div class="recommendation">
                         <a href="/recommmendation">
                             <div class="img_wrapper">
-                                <img src="{{ asset('/images/home_icons/songs.jpg') }}" alt="Recommendations">
+                                <img src="{{ asset('/images/home_icons/achieve.png') }}" alt="Recommendations">
                                 <div class="desc_text"><p>Recommendations</p>What song should you play next?</div>
                             </div>
                         </a>
