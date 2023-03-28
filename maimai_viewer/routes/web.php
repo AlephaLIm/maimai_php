@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\NavController;
+use App\Http\Controllers\StatsController;
 use App\Http\Controllers\RatingController;
 use App\Http\Controllers\Songfinder;
 use App\Http\Controllers\ChartLoader;

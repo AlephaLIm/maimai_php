@@ -8,7 +8,7 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
         integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
     </script>
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/profile.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/stats.css') }}" />
     <script src="//unpkg.com/alpinejs" defer></script>
 @endsection
 
@@ -28,7 +28,7 @@
                                 <tr style="text-align: center">
                                     <th scope="col">LvL</th>
                                     <th colspan="3" scope="colgroup">Score</th>
-                                    <th colspan="2" scope="colgroup">Combo</th>
+                                    <th colspan="3" scope="colgroup">Combo</th>
                                     <th scope="col">Average Score</th>
                                 </tr>
                             </thead>
@@ -36,15 +36,17 @@
                                 @foreach ($levelArray as $level)
                                     <tr style="text-align: center">
                                         <th scope="row">LvL{{ $level['Level'] }}</th>
-                                        <td>{{ $level['SS+'] }}<img src="{{ asset('/images/stats_icons/ssp.png') }}"
+                                        <td>{{ $level['SSP'] }}<img src="{{ asset ('/images/stats_icons/'.urlencode("SS+").'.png') }}"
                                                 alt="SS+"></td>
-                                        <td>{{ $level['SSS'] }}<img src="{{ asset('/images/stats_icons/sss.png') }}"
+                                        <td>{{ $level['SSS'] }}<img src="{{ asset('/images/stats_icons/SSS.png') }}"
                                                 alt="SSS"></td>
-                                        <td>{{ $level['SSS+'] }}<img src="{{ asset('/images/stats_icons/sssp.png') }}"
+                                        <td>{{ $level['SSSP'] }}<img src="{{ asset('/images/stats_icons/'.urlencode("SSS+").'.png') }}"
                                                 alt="SSS+"></td>
-                                        <td>{{ $level['AP'] }}<img src="{{ asset('/images/stats_icons/ap.png') }}"
+                                        <td>{{ $level['FCP'] }}<img src="{{ asset('/images/stats_icons/'.urlencode("FC+").'.png') }}"
+                                                alt="FC+"></td>
+                                        <td>{{ $level['AP'] }}<img src="{{ asset('/images/stats_icons/AP.png') }}"
                                                 alt="AP"></td>
-                                        <td>{{ $level['AP+'] }}<img src="{{ asset('/images/stats_icons/app.png') }}"
+                                        <td>{{ $level['APP'] }}<img src="{{ asset('/images/stats_icons/'.urlencode("AP+").'.png') }}"
                                                 alt="AP+"></td>
                                         <td>{{ $level['avg'] }}</td>
                                     </tr>
