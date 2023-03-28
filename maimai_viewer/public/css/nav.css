@@ -41,6 +41,10 @@
     padding-top: 0px;
 }
 
+#nav-row {
+    height: 120px;
+}
+
 #profile-box {
     width: 77%;
     position: relative;
@@ -50,7 +54,7 @@
 #profile-img {
     max-width: 100px;
     min-width: 80px;
-    width:10vw;
+    width:18vw;
     border-radius: 10px;
     box-shadow: 0 0 3px 2px #3D087B;
 }
@@ -121,10 +125,20 @@
     text-shadow: 0 0 5px #FFBF00;
 }
 
+@media screen and (max-width: 850px) {
+    #profile-box .title-box {
+        bottom: 0.5vw;
+    }
+}
+
 @media screen and (max-width: 500px) {
+    #nav-row {
+        height: 105px;
+    }
     #profile-box .title-box {
         padding: 7px 50px 7px 50px;
         width: min(67vw, 265px);
+        bottom: 0.2vw;
     }
     #profile-box .profile-user h4 {
         font-size: 1.1rem;
