@@ -30,34 +30,16 @@
                     <div class="ap_badges">
                         <h4>COMBO</h4>
                         <div class="empty_badges">
-<<<<<<< HEAD
                             @if (!empty($chart->combo_grade))
                                 <img class="medal" src="{{ asset('/images/stats_icons/'.urlencode($chart->combo_grade).'.png') }}" alt="{{ $chart->combo_grade }}">
-=======
-                            @if (strcmp($chart->combo_grade, 'FC') == 0 || strcmp($chart->combo_grade, 'FC+') == 0)
-                                <h5 class="medal" style="color: #00fd00; border: 6px solid #00fd00;">
-                                    {{ $chart->combo_grade }}</h5>
-                            @elseif (strcmp($chart->combo_grade, 'AP') == 0 || strcmp($chart->combo_grade, 'AP+') == 0)
-                                <h5 class="medal" style="color: orange; border: 6px solid orange;">
-                                    {{ $chart->combo_grade }}</h5>
->>>>>>> main
                             @endif
                         </div>
                     </div>
                     <div class="fsd_badges">
                         <h4>SYNC</h4>
                         <div class="empty_badges">
-<<<<<<< HEAD
                             @if (!empty($chart->sync_grade))
                                 <img class="medal" src="{{ asset('/images/stats_icons/'.urlencode($chart->sync_grade).'.png') }}" alt="{{ $chart->sync_grade }}">
-=======
-                            @if (strcmp($chart->sync_grade, 'FS') == 0 || strcmp($chart->sync_grade, 'FS+') == 0)
-                                <h5 class="medal" style="color: cyan; border: 6px solid cyan;">
-                                    {{ $chart->sync_grade }}</h5>
-                            @elseif (strcmp($chart->sync_grade, 'FSD') == 0 || strcmp($chart->sync_grade, 'FSD+') == 0)
-                                <h5 class="medal" style="color: orange; border: 6px solid orange;">
-                                    {{ $chart->sync_grade }}</h5>
->>>>>>> main
                             @endif
                         </div>
                     </div>
@@ -78,13 +60,8 @@
                 </div>
                 <div class="radar_div">
                     @if (is_null($chart->notecount))
-<<<<<<< HEAD
                     <img class="error_radar" src="{{ asset('/images/error/no_chart.jpg') }}" alt="error_no_data">
                     <p>No note data available!</p>
-=======
-                        <img class="error_radar" src="{{ asset('/images/error/no_chart.jpg') }}" alt="error_no_data">
-                        <p style="color:white;">No note data available!</p>
->>>>>>> main
                     @else
                         <canvas class="radar" data-tap="{{ $chart->tap }}" data-slide="{{ $chart->slide }}"
                             data-hold="{{ $chart->hold }}" data-break="{{ $chart->break }}"
