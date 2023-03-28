@@ -48,9 +48,13 @@
     color: #FFBF00;
 }
 
-.modal-body .user_stats .rank_label {
-    font-size: 35px;
+.modal .modal-body .user_stats .rank_label {
     width: 80px;
+    background-image: none;
+}
+
+.modal-body .user_stats .rank_label h4{
+    font-size: 35px;
     font-weight: bold;
     background: -webkit-linear-gradient(left, red , yellow, cyan, purple);
     background: -o-linear-gradient(right, red, yellow, cyan, purple);
@@ -116,12 +120,8 @@
 }
 
 .modal-body .clear_badges .empty_badges .medal {
-    border-radius: 50%;
     width: 70px;
     height: 70px;
-    font-size: 25px;
-    padding-top: 12.5px;
-    text-shadow: 2px 2px 3px black;
 }
 
 .modal-body .note_stats {
@@ -180,10 +180,10 @@
 
 @media screen and (max-width: 990px) {
     .modal-body {
-        height: 1100px;
+        height: 1105px;
     }
     .modal-body .clear_badges {
-        top: 225px;
+        top: 235px;
         left: 70px;
     }
     .modal-body .user_stats {
@@ -208,7 +208,7 @@
 
 @media screen and (max-width: 400px) {
     .modal-body {
-        height: 1050px;
+        height: 1055px;
     }
     .modal-body .radar_div {
         width: 97vw;
@@ -242,6 +242,6 @@
 
 @media screen and (max-width: 359px) {
     .modal-body {
-        height: 1000px;
+        height: 1005px;
     }
 }
