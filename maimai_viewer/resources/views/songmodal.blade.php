@@ -50,7 +50,7 @@
                 <div class="radar_div">
                     @if (is_null($chart->notecount))
                     <img class="error_radar" src="{{ asset('/images/error/no_chart.jpg') }}" alt="error_no_data">
-                    <p>No note data available!</p>
+                    <p style="color:white;">No note data available!</p>
                     @else
                     <canvas class="radar" data-tap="{{ $chart->tap }}" data-slide="{{ $chart->slide }}" data-hold="{{ $chart->hold }}" data-break="{{ $chart->break }}" data-touch="{{ $chart->touch }}" data-ex="{{ $chart->ex }}"></canvas>
                     @endif

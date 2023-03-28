@@ -42,7 +42,7 @@
 }
 
 #nav-row {
-    height: 120px;
+    min-height: 120px;
 }
 
 #profile-box {
@@ -124,6 +124,7 @@
 .active p {
     text-shadow: 0 0 5px #FFBF00;
 }
+ 
 
 @media screen and (max-width: 850px) {
     #profile-box .title-box {
@@ -133,7 +134,7 @@
 
 @media screen and (max-width: 500px) {
     #nav-row {
-        height: 105px;
+        min-height: 105px;
     }
     #profile-box .title-box {
         padding: 7px 50px 7px 50px;
