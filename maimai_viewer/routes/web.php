@@ -47,13 +47,22 @@ Route::get('/stats/{id}', function(Request $request, $id) {
         'user'=> NavController::get_user($request),
         'status'=>Page_status::set_status('profile')
     ]);
-}); 
+})->middleware('auth'); 
 //Post API for scorescrapper.js
 Route::post('/data', 'App\Http\Controllers\DatabaseController@data');
 //Get API to send song information to scorescrapper.js
 Route::post('/songinfo', 'App\Http\Controllers\getsongController@get');
 //Post API for new songs
 Route::post('/newsongs', 'App\Http\Controllers\NewSongController@songs');
+
+Route::get('/edit_profile', function() {
+    return view('users/modify', [
+        'title' => 'Modify User',
+        'description' => 'Change email and password'
+    ]);
+})->middleware('auth');
+
+Route::post('/update_profile', [ProfileController::class, 'updateProfile'])->middleware('auth');
 
 Route::get('/songs', function(Request $request) {
     

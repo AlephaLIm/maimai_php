@@ -24,6 +24,11 @@ table {
     overflow: hidden;
 }
 
+::-webkit-scrollbar {
+    width: 3px;
+    height: 3px;
+}
+
 @media only screen and (max-width: 768px) {
     .table td img {
         max-width: 30px;
