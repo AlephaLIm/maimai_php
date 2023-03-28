@@ -22,11 +22,11 @@
         <div class="bg-limit">
             <div class="row justify-content-center" style="padding-top: 1.5em;">
                 <div class="col-auto">
-                    <div class="table-responsive">
-                        <table class="table table-bordered table-dark">
+                    <div class="table-responsive" tabindex="0">
+                        <table class="table table-dark">
                             <thead class="thead-light">
                                 <tr style="text-align: center">
-                                    <th scope="col">Level</th>
+                                    <th scope="col">LvL</th>
                                     <th colspan="3" scope="colgroup">Score</th>
                                     <th colspan="2" scope="colgroup">Combo</th>
                                     <th scope="col">Average Score</th>
@@ -35,7 +35,7 @@
                             <tbody>
                                 @foreach ($levelArray as $level)
                                     <tr style="text-align: center">
-                                        <th scope="row">Lvl{{ $level['Level'] }}</th>
+                                        <th scope="row">LvL{{ $level['Level'] }}</th>
                                         <td>{{ $level['SS+'] }}<img src="{{ asset('/images/stats_icons/ssp.png') }}"
                                                 alt="SS+"></td>
                                         <td>{{ $level['SSS'] }}<img src="{{ asset('/images/stats_icons/sss.png') }}"
