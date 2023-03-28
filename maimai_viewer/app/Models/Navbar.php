@@ -11,7 +11,7 @@ class Navbar {
     
     public static function retrieveuser(?string $name = null, ?string $title = null, ?string $rating = null, ?string $img = null,?string $friendcode = null) {
         $user = new Navbar();
-        $user->name = $name ?? " Guest_User";
+        $user->name = $name ?? " Guest";
         $user->title = $title ?? "-- No Title --";
         $user->rating = $rating ?? "------";
         $user->profile_img = $img ?? URL::asset("/images/nav_icons/guest.jpg");

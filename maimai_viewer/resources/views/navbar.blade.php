@@ -21,7 +21,7 @@
                 style="background: linear-gradient(rgba(0, 0, 0, 0.40), rgba(0, 0, 0, 0.40)), url({{ asset('images/nav_bg/bg_img.jpg') }}), no-repeat;">
                 <a class="navbar-brand" href="#">
                     <img src="{{ asset('/images/nav_icons/bearhands.png') }} " alt="Logo">
-                    <h1>Maimai<br>Scoreviewer</h1>
+                    <h1>Maiviewer</h1>
                 </a>
             </div>
         </nav>

@@ -59,18 +59,14 @@
                 <hr>
                 <div class="about_wrapper">
                     <div class="about">
-                        <h3>Welcome to Maimai Scoreviewer!</h3>
+                        <h3>Welcome to Maiviewer!</h3>
                         <p>
-                            Maimai is an arcade rhythm game series developed <br>
-                            and distributed by Sega, in which the player interacts with objects<br>
-                            on a touchscreen and executes dance-like movements.<br> 
-                            The game supports both single-player and multiplayer gameplay with up to 4 players.
+                            <a href="/login">Log in</a> with your account to view your scores and stats.
+                            <br>
+                            <br>
+                            If you're new, <a href="/register">register</a> an account with us and use the javascript bookmark below to scrape your maimai data.
                         </p>
-                        <p>
-                            This app is a community project <br>
-                            that aims to enchance your experience by <br>
-                            extending more features to the official Maimai website.
-                        </p>
+                        
                     </div>
                     <div class="about_icon">
                         <img src="{{ asset('/images/home_icons/about_us.png') }}" alt="Maimai Scoreviewer chan">
