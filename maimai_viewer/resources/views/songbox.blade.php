@@ -1,12 +1,7 @@
 <a href="" class="_box" data-bs-toggle="modal" data-bs-target="#modal_{{ str_replace(' ', '', $chart->id) }}">
     <div class="song_container" style="background-color: {{ $chart->color['base'] }};">
         <div class="song_bg" style="background-color: {{ $chart->color['bg'] }};">
-<<<<<<< HEAD
             <img class="chart_img" src="{{ url($chart->img) }}" style="box-shadow: 0 0 5px 5px {{ $chart->color['base'] }};" alt="Song_Image">
-=======
-            <img src="{{ url($chart->img) }}" style="box-shadow: 0 0 5px 5px {{ $chart->color['base'] }};"
-                alt="Song_Image">
->>>>>>> main
             <h4 class="s_name">{{ $chart->name }}</h4>
             <h4 class="chart_const"
                 style="border: 2px solid {{ $chart->color['submain'] }}; color: {{ $chart->color['text'] }};">
