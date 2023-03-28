@@ -62,17 +62,22 @@
                     <a class="nav-link ms-auto {{ $status->home }}" href="/">
                         <p>Home</p>
                     </a>
+                    @if (auth()->check())
+                        <a class="nav-link ms-auto {{ $status->profile }}" href="/stats/{{ $user->friendcode }}">
+                            <p>Statistics</p>
+                        </a>
+                        <a class="nav-link ms-auto {{ $status->edit }}" href="/edit_profile">
+                            <p>Edit</p>
+                        </a>
+                    @endif
                     <a class="nav-link ms-auto {{ $status->achievements }}" href="/achievements">
                         <p>Achievements</p>
                     </a>
                     <a class="nav-link ms-auto {{ $status->songs }}" href="/songs">
                         <p>Songs</p>
                     </a>
-                    <a class="nav-link ms-auto {{ $status->rating }}" href="/rating">
-                        <p>Top Songs</p>
-                    </a>
-                    <a class="nav-link ms-auto {{ $status->recommendation }}" href="/recommendation">
-                        <p>Top Songs</p>
+                    <a class="nav-link ms-auto {{ $status->recommendations }}" href="/recommendations">
+                        <p>Recommendations</p>
                     </a>
                     @auth
                         @csrf
