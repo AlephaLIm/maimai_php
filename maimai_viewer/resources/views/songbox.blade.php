@@ -8,9 +8,7 @@
                 {{ $chart->level }}</h4>
             <h5 class="chart_diff" style="background-color: {{ $chart->color['base'] }};">{{ $chart->diff }}</h5>
             <h5 class="c_type" style="background: {{ $chart->type_col }};">{{ $chart->type }}</h5>
-            @if (strcmp($chart->scoregrade, '---') == 0)
-                <h4 class="badge">{{ $chart->scoregrade }}</h4>
-            @else 
+            @if ($chart->scoregrade != '---')
                 <img class="badge" src="{{ asset('/images/stats_icons/'.urlencode($chart->scoregrade).'.png') }}" alt="{{ $chart->combo_grade }}">
             @endif
             <h4 class="score">Score: {{ $chart->score }}%</h4>

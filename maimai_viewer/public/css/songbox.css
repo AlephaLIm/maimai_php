@@ -93,6 +93,7 @@
 .song_container .badge h4 {
     font-size: 30px;
     padding-left: 0;
+    display: inline;
     background: -webkit-linear-gradient(left, red , yellow, cyan, purple);
     background: -o-linear-gradient(right, red, yellow, cyan, purple);
     background: -moz-linear-gradient(right, red, yellow, cyan, purple);

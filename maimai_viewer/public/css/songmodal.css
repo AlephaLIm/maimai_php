@@ -53,18 +53,6 @@
     background-image: none;
 }
 
-.modal-body .user_stats .rank_label h4{
-    font-size: 35px;
-    font-weight: bold;
-    background: -webkit-linear-gradient(left, red , yellow, cyan, purple);
-    background: -o-linear-gradient(right, red, yellow, cyan, purple);
-    background: -moz-linear-gradient(right, red, yellow, cyan, purple);
-    background: linear-gradient(to right, red , yellow, cyan, purple);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
 .modal-body .user_stats .score_label {
     font-size: 25px;
     font-style: italic;
