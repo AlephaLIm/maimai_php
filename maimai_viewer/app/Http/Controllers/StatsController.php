@@ -17,15 +17,14 @@ class StatsController extends Controller
         }
         function select_combograde($id, $grade, $level)
         {
-            $data = DB::select('SELECT count(scores.scoregrade) as "total" from scores inner join charts on scores.chartid=charts.chartid AND scores.friendcode = ? AND scores.combograde = ? AND charts.level = ?', [$id, $grade, $level]);
+            $data = DB::select('SELECT count(scores.combograde) as "total" from scores inner join charts on scores.chartid=charts.chartid AND scores.friendcode = ? AND scores.combograde = ? AND charts.level = ?', [$id, $grade, $level]);
             $std_data = $data[0]->total;
             return $std_data;
         }
 
         //SELECT charts.level, scores.score, scores.scoregrade, scores.combograde from scores inner join charts on scores.chartid=charts.chartid AND scores.friendcode = '7025818836209';
         $id = $request->user()->friendcode;
-        $user = DB::select('select * from users where friendcode = ?;', [$id]);
-        $data = DB::select('SELECT charts.level, scores.score, scores.scoregrade, scores.combograde from scores inner join charts on scores.chartid=charts.chartid AND scores.friendcode = ? AND scores.scoregrade LIKE "S%" order by constant DESC;', [$id]);
+        $data = DB::select('SELECT charts.level, scores.score, scores.scoregrade, scores.combograde from scores inner join charts on scores.chartid=charts.chartid AND scores.friendcode = ? order by constant DESC;', [$id]);
         $uniqueLevels = array();
         $levelArray = array();
         for ($i = 0; $i < count($data); $i++) {
