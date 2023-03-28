@@ -9,6 +9,7 @@ use App\Http\Controllers\Songfinder;
 use App\Http\Controllers\ChartLoader;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StatsController;
+use App\Http\Controllers\RatingController;
 use App\Http\Controllers\Paginate;
 use App\Models\Sorted;
 use App\Models\Navbar;
@@ -82,7 +83,6 @@ Route::get('/songs', function(Request $request) {
 
     return view('songs', [
         'title'=> 'Songs Finder',
-        'request'=>$request,
         'description'=> "Search for songs in the Maimai database",
         'user'=> NavController::get_user($request),
         'status'=>Page_status::set_status('songs'),
@@ -95,6 +95,16 @@ Route::get('/songs', function(Request $request) {
         'charts'=> $charts
     ]);
 });
+
+Route::get('/ratings', function(Request $request) {
+    return view('rating', [
+        'title'=> 'Achievements',
+        'description'=> "View your best played songs!",
+        'user'=> NavController::get_user($request),
+        'status'=> Page_status::set_status('achievement'),
+        'songs'=> RatingController::rating($request)
+    ]);
+})->middleware('auth');
 
 // register form
 Route::get('/register', [UserController::class, 'create'])->middleware('guest');

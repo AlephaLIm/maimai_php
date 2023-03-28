@@ -70,14 +70,11 @@
                             <p>Edit</p>
                         </a>
                     @endif
-                    <a class="nav-link ms-auto {{ $status->achievements }}" href="/achievements">
+                    <a class="nav-link ms-auto {{ $status->achievements }}" href="/ratings">
                         <p>Achievements</p>
                     </a>
                     <a class="nav-link ms-auto {{ $status->songs }}" href="/songs">
                         <p>Songs</p>
-                    </a>
-                    <a class="nav-link ms-auto {{ $status->rating }}" href="/rating">
-                        <p>Top</p>
                     </a>
                     <a class="nav-link ms-auto {{ $status->recommendation }}" href="/recommendation">
                         <p>Recommendations</p>
