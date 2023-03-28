@@ -131,7 +131,7 @@
    bottom: 0px;
    left: 0px; 
    width: 100%;
-   background: linear-gradient(transparent, rgba(255, 255, 255, 0.40));
+   background: linear-gradient(transparent, rgba(0, 0, 0, 0.40));
    padding-left: 10px;
    padding-bottom: 8px;
    color: #FFBF00;

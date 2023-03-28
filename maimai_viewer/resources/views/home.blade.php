@@ -42,7 +42,7 @@
                     <div class="songs">
                         <a href="./songs">
                             <div class="img_wrapper">
-                                <img src="{{ asset('/images/home_icons/profile.jpg') }}" alt="Songs Finder">
+                                <img src="{{ asset('/images/home_icons/songs.png') }}" alt="Songs Finder">
                                 <div class="desc_text"><p>Song Finder</p>Searching for a song?</div>
                             </div>
                         </a>
@@ -50,7 +50,7 @@
                     <div class="recommendation">
                         <a href="./recommmendation">
                             <div class="img_wrapper">
-                                <img src="{{ asset('/images/home_icons/achieve.png') }}" alt="Recommendations">
+                                <img src="{{ asset('/images/home_icons/recommendations.png') }}" alt="Recommendations">
                                 <div class="desc_text"><p>Recommendations</p>What song should you play next?</div>
                             </div>
                         </a>

@@ -20,33 +20,69 @@
             <div class="container">
                 <div class="welcome">
                     <h1>About Us</h1>
-                    <hr>
-                    <h2>A utility website to store and view you Maimai Scores!</h2>
+                    <hr class="white">
+        
                 </div>
-                <hr>
+                
                 <div class="about_wrapper">
                     <div class="about">
-                        <h3>Passionate gamers at heart!</h3>
+                        <h3>Built for Maimai Players, By Maimai Players</h3>
+                        <br><br>
                         <p>
-                            Maimai is an arcade rhythm game series developed <br>
-                            and distributed by Sega, in which the player interacts with objects<br>
-                            on a touchscreen and executes dance-like movements.<br>
-                            The game supports both single-player and multiplayer gameplay with up to 4 players.
+                            Maiviewer was built with one purpose in mind, to give the maimai community better access and insight into their score data. <br>We provide the community with utilities that leverages score data to provide better insights about the player,<br> as well as provide better access to song and chart information.
                         </p>
-                        <p>
-                            This app is a community project <br>
-                            that aims to enchance your experience by <br>
-                            extending more features to the official Maimai website.
-                        </p>
+                        <br>
+                       
                     </div>
                 </div>
-                <hr>
-                <div class="about_wrapper" id="instructions">
-                    <div class="about">
-                        <h3>Meet the team</h3>
-                        
+                
+                <hr class="white">
+                <div class="about_wrapper">
+                    <div class="about"><h3 class="shiro">Meet the team</h3> </div>
+                    
+                    <div class="row">
+                      <div class="col-lg-6 col-md-6 text-center">
+                        <div class="shiro">
+                          <img src="https://avatars.githubusercontent.com/u/59667279?v=4" class="pfp" alt="">
+                          <h3><a href="https://github.com/OhsterTohster">@@OhsterTohster</a></h3>
+                          <p>Resident Rhythm Game Enjoyer</p>
+                        </div>
+                      </div>
+                      <div class="col-lg-6 col-md-6 text-center">
+                        <div class="shiro">
+                          <img src="https://avatars.githubusercontent.com/u/51186021?v=4" class="pfp" alt="">
+                          <h3 class="shiro"><a href="https://github.com/AlephaLIm">@@AlephaLIm</a></h3>
+                          <p>Resident Gacha Game Enjoyer</p>
+                        </div>
+                      </div>
+                      <div class="col-lg-4 col-md-6 text-center">
+                        <div class="shiro">
+                          <img src="https://avatars.githubusercontent.com/u/126781541?v=4" class="pfp" alt="">
+                          <h3 class="shiro"><a href="https://github.com/brdley">@@brdley</a></h3>
+                          <p>Full Stack Engineer</p>
+                        </div>
+                      </div>
+                      <div class="col-lg-4 col-md-6 text-center">
+                        <div class="shiro">
+                          <img src="https://avatars.githubusercontent.com/u/123640583?v=4" class="pfp" alt="">
+                          <h3 class="shiro"><a href="https://github.com/SimYanZhe">@@SimYanZhe</a></h3>
+                          <p>Full Stack Engineer</p>
+                        </div>
+                      </div>
+                      <div class="col-lg-4 col-md-6 text-center">
+                        <div class="shiro">
+                          <img src="https://avatars.githubusercontent.com/u/122660764?v=4" class="pfp" alt="">
+                          <h3 class="shiro"><a href="https://github.com/Nydrel2">@@Nydrel2</a></h3>
+                          <p>Full Stack Engineer</p>
+                        </div>
+                      </div>
+                      
                     </div>
-                </div>
+                  </div>
+                  <br>
+                  <br>
+                  <br>
+                  
             </div>
         </div>
     </main>

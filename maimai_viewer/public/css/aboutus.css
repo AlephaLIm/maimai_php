@@ -3,6 +3,31 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@1,300&display=swap');
 
 
+.shiro{
+    color: white;
+}
+.pfp {
+	border-radius: 50%;
+	width: 15em;
+	margin-top: 5em;
+}
+.white{
+    background-color: white;
+    border-color: white;
+    border-width: 3px;
+    color: white;
+    opacity: 1;
+}
+
+.short {
+    border-color: white;
+    max-width: 100px;
+    border-width: 3px;
+    color: white;
+    opacity: 1;
+    background-color: white;
+}
+
 .alert {
     background: linear-gradient(rgba(61, 8, 123, 0.40), transparent);
     font-family: 'Poppins';
@@ -162,7 +187,7 @@
 .container .about h3 {
     font-family: 'Lato', sans-serif;
     font-size: 32px;
-    margin-bottom: 30px;
+    /* margin-bottom: 30px; */
 }
 
 .container .about_icon {
