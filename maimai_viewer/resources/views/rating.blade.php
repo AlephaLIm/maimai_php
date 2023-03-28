@@ -1,4 +1,4 @@
-@extends('navbar', ['title' => $title, 'description' => $description, 'logo_url' => $logo_url, 'user' => $user, 'status' => $status])
+@extends('navbar', ['title' => $title, 'description' => $description, 'user' => $user, 'status' => $status])
 
 @section('links')
     @parent
@@ -21,7 +21,7 @@
             <ul>
                 @foreach ($songs as $song)
                     @include('songbox', ['chart' => $song])
-                    @include('ratingmodal', ['chart' => $song])
+                    @include('songmodal', ['chart' => $song])
                 @endforeach
             </ul>
         </div>

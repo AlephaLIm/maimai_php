@@ -76,6 +76,18 @@ body {
     display: block;
 }
 
+#checkbox_label {
+    display: inline;
+    vertical-align: middle;
+}
+#validate {
+    vertical-align: middle;
+}
+
+.check {
+    margin-top: 20px;   
+}
+
 .input-field {
     background-image: initial;
     background-color: initial;
