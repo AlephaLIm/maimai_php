@@ -4,6 +4,7 @@ namespace App\Models;
 class Page_status {
     public $home = '';
     public $profile = '';
+    public $edit = '';
     public $achievements = '';
     public $songs = '';
     public $recommendations = '';
@@ -16,6 +17,9 @@ class Page_status {
         }
         elseif ($page == 'profile') {
             $status->profile = 'active';
+        }
+        elseif ($page == 'edit') {
+            $status->edit = 'active';
         }
         elseif ($page == 'achievement') {
             $status->achievements = 'active';
