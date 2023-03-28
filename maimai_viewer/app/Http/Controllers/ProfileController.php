@@ -22,7 +22,6 @@ class ProfileController extends Controller
             'password' => 'required',
             'new_email' => 'email|unique:users,email',
             'new_password' => [
-                'confirmed',
                 Password::min(8)
                     ->mixedCase()
                     ->letters()
