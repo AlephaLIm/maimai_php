@@ -29,7 +29,7 @@
                 </div>
 
                 <div class="input-box">
-                    <label for="new_email" class="label-input"> Email </label>
+                    <label for="new_email" class="label-input">New Email</label>
                     <span class="material-symbols-outlined icons">mail</span>
                     <input type="email" class="input-field" name="new_email" placeholder="Enter new email" />
                     
@@ -76,6 +76,13 @@
                     <p>
                     Go back to 
                     <a href="/" class="redirect">Home</a>
+                    </p>
+                </div>
+
+                <div class="guest">
+                    <p>
+                    I wish to delete my
+                    <a href="/deleteUser" class="guest">Account</a>
                     </p>
                 </div>
             </form>
