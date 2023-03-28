@@ -19,9 +19,7 @@
                             <span class="material-symbols-sharp">star</span>
                         @endfor
                     </div>
-                    @if (strcmp($chart->scoregrade, '---') == 0)
-                        <h4 class="rank_label">{{ $chart->scoregrade }}</h4>
-                    @else 
+                    @if ($chart->scoregrade != '---')
                         <img class="rank_label" src="{{ asset('/images/stats_icons/'.urlencode($chart->scoregrade).'.png') }}" alt="{{ $chart->combo_grade }}">
                     @endif
                     <h5 class="score_label">Score: {{ $chart->score }}%</h5>
