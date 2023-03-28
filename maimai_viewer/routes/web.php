@@ -40,13 +40,17 @@ Route::get('/', function (Request $request) {
 });
 
 Route::get('/stats/{id}', function (Request $request, $id) {
-    return view('stats', [
-        'title' => 'Statistics Page',
-        'description' => "View your Mai Mai Statistics.",
-        'levelArray' => StatsController::stats($id),
-        'user' => NavController::get_user($request),
-        'status' => Page_status::set_status('profile')
-    ]);
+    if($request->user()->friendcode == $id){
+        return view('stats', [
+            'title' => 'Statistics Page',
+            'description' => "View your Mai Mai Statistics.",
+            'levelArray' => StatsController::stats($id),
+            'user' => NavController::get_user($request),
+            'status' => Page_status::set_status('profile')
+        ]);
+    }else{
+        return redirect('/');
+    }
 })->middleware('auth');
 //Post API for scorescrapper.js
 Route::post('/data', 'App\Http\Controllers\DatabaseController@data');
