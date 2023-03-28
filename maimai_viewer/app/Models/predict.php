@@ -6,28 +6,13 @@ use Illuminate\Support\Facades\DB;
 
 class Predict
 {
-    public $id;
-    public $name;
-    public $artist;
-    public $genre;
-    public $bpm;
-    public $version;
-    public $img;
-    public $level;
-    public $constant;
-    public $diff;
-    public $type;
-    public $type_col;
-    public $scoregrade;
     public $score;
-    public $dxscore;
-    public $sync_grade;
-    public $combo_grade;
-    public $rating;
-    public $color;
-    public $chartrating;
+    public $weight;
+    public $nextRange;
+    public $potentialRatingGain;
+    public $id;
 
-    function getAR($score)
+    public static function getAR($score)
     {
         $achievement_range = [80.0, 90.0, 94.0, 97.0, 98.0, 99.0, 99.5, 100.0, 100.5];
         $factor = [
@@ -53,7 +38,7 @@ class Predict
         }
     }
 
-    function CalculateRating($score, $chart_constant)
+    public static function CalculateRating($score, $chart_constant)
     {
         $score = floatval($score);
         if ($score < 80) {
@@ -73,7 +58,7 @@ class Predict
         $rating = intval($multiplier * $chart_constant);
         return $rating;
     }
-    function generateValues($userid, $charts)
+    public static function generateValues($userid, $charts)
     {
         $scores = DB::select("
         SELECT *
@@ -91,6 +76,7 @@ class Predict
             $constant = (float) $score['chartid']['constant'];
             $name = $score['chartid']['parentsong']['name'];
             $version = $score['chartid']['parentsong']['version'];
+            $id = $score['chartid']['parentsong']['songid'];
             $target = end($charts);
 
             if ($currentScore >= 100.5) {
@@ -130,7 +116,7 @@ class Predict
                     }
                 }
 
-                $potential[] = array($score, $weight, $nextRange, $potentialRatingGain);
+                $potential[] = array($score, $weight, $nextRange, $potentialRatingGain, $id);
             }
         }
 
@@ -138,6 +124,19 @@ class Predict
             return $b[1] <=> $a[1];
         });
 
-        return array_slice($potential, 0, 10);
+        return array_slice($potential, 0, 15);
+    }
+
+    public static function create_predict($score, $weight, $nextRange, $potentialRatingGain, $id)
+    {
+
+        $predict = new Predict();
+        $predict->score = $score;
+        $predict->weight = $weight;
+        $predict->nextRange = $nextRange;
+        $predict->potentialRatingGain = $potentialRatingGain;
+        $predict->id = $id;
+
+        return $predict;
     }
 }

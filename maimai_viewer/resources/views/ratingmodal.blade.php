@@ -19,7 +19,7 @@
                         @endfor
                     </div>
                     <h4 class="rank_label">{{ $chart->scoregrade }}</h4>
-                    <h5 class="score_label">Score: {{ $chart->scoregrade }}</h5>
+                    <h5 class="score_label">Score: {{ $chart->score }}</h5>
                 </div>
                 <div class="clear_badges">
                     <div class="ap_badges">
