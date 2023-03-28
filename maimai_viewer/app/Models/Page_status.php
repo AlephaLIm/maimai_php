@@ -4,6 +4,7 @@ namespace App\Models;
 class Page_status
 {
     public $home = '';
+    public $aboutus = '';
     public $profile = '';
     public $edit = '';
     public $achievements = '';
@@ -17,6 +18,8 @@ class Page_status
 
         if ($page == 'home') {
             $status->home = 'active';
+        } elseif ($page == 'aboutus') {
+            $status->aboutus = 'active';
         } elseif ($page == 'profile') {
             $status->profile = 'active';
         } elseif ($page == 'edit') {

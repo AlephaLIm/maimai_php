@@ -40,6 +40,15 @@ Route::get('/', function(Request $request) {
     ]);
 });
 
+Route::get('/aboutus', function(Request $request) {
+    return view('aboutus', [
+        'title'=> 'About Us',
+        'description'=> "Welcome to Mai Mai",
+        'user'=> NavController::get_user($request),
+        'status'=>Page_status::set_status('aboutus')
+    ]);
+});
+
 Route::get('/stats', function (Request $request) {
     return view('stats', [
         'title' => 'Statistics Page',
