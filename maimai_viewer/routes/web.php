@@ -37,6 +37,7 @@ Route::get('/', function(Request $request) {
         'user'=> NavController::get_user($request),
         'status'=>Page_status::set_status('home')
     ]);
+<<<<<<< HEAD
 }); 
  
 Route::get('/stats/{id}', function(Request $request, $id) {
@@ -48,6 +49,19 @@ Route::get('/stats/{id}', function(Request $request, $id) {
         'status'=>Page_status::set_status('profile')
     ]);
 })->middleware('auth'); 
+=======
+});
+
+Route::get('/stats', function (Request $request) {
+    return view('stats', [
+        'title' => 'Statistics Page',
+        'description' => "View your Mai Mai Statistics.",
+        'levelArray' => StatsController::stats($request),
+        'user' => NavController::get_user($request),
+        'status' => Page_status::set_status('profile')
+    ]);
+})->middleware('auth');
+>>>>>>> main
 //Post API for scorescrapper.js
 Route::post('/data', 'App\Http\Controllers\DatabaseController@data');
 //Get API to send song information to scorescrapper.js
