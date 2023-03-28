@@ -1,6 +1,5 @@
-
-$("document").ready(function(){
-    $(".filters, .searchsubmit").click(function(event){
+$("document").ready(function () {
+    $(".filters, .searchsubmit").click(function (event) {
         var selected = document.getElementsByClassName('selected');
         const ifselected = event.target.classList.contains('selected');
 
@@ -21,7 +20,7 @@ $("document").ready(function(){
                         dict[name] = val
                     }
                     else {
-                        dict[name] = dict[name] + ',' + val 
+                        dict[name] = dict[name] + ',' + val
                     }
                 }
             };
@@ -36,7 +35,7 @@ $("document").ready(function(){
             laststr = entrystr + "search=" + document.getElementById('sinput').value
         }
         else {
-            laststr = entrystr.substring(0, entrystr.length-1)
+            laststr = entrystr.substring(0, entrystr.length - 1)
         }
 
         fetch('/songs' + laststr).then(response => response).then(window.location.href = "/songs" + laststr)
