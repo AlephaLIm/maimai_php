@@ -2,9 +2,9 @@
 
 @section('links')
     @parent
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/songfilter.css') }}" />
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/songbox.css') }}" />
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/songmodal.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/songfilter.css') }}" >
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/songbox.css') }}" >
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/songmodal.css') }}" >
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
     <script defer src="{{ asset('js/song_finder.js') }}"></script>
@@ -40,7 +40,7 @@
                         <div class="filterlabel special">DIFFICULTY</div>
                         <div class="filterrow">
                             @foreach ($difficulties as $diff)
-                                <button type="button" class="filters {{ $diff->status }}" name="difficulty" form="songform" value="{{ $diff->value }}">{{ $diff->name }}</button>
+                                <button type="button" class="filters {{ $diff->status }}" name="difficulty" form="song_form" value="{{ $diff->value }}">{{ $diff->name }}</button>
                             @endforeach
                         </div>
                     </div> 

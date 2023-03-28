@@ -4,4 +4,5 @@
     <div class="devs">
         <div class="dev_label">Contributers: </div>
         <div class="dev_ppl">OhsterTohster @@Github<br>Alepha @@Github<br>brdley @@Github<br>SimYanZhe @@Github<br>Nydrel2 @@Github</div>
+    </div>
 </div>

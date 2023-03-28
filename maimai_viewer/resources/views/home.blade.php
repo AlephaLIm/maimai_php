@@ -2,7 +2,7 @@
 
 @section('links')
     @parent
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/home.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/home.css') }}" >
     <script src="//unpkg.com/alpinejs" defer></script>
 @endsection
 

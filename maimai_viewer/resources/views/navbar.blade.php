@@ -7,11 +7,11 @@
         integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous">
     </script>
     <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,1,0" />
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,1,0" >
     <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@48,400,1,0" />
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/nav.css') }}" />
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/footer.css') }}" />
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@48,400,1,0" >
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/nav.css') }}" >
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/footer.css') }}" >
 @endsection
 
 @section('header')
@@ -82,14 +82,13 @@
                     @auth
                         @csrf
                         <a class="nav-link ms-auto" href="logout"><span class="material-symbols-outlined">logout</span></a>
-                        </form>
                     @else
                         <a class="nav-link ms-auto" href="login"><span class="material-symbols-outlined">login</span></a>
-                        </form>
                     @endauth
                 </div>
             </div>
         </nav>
+    </div>
     @endsection
 
 
