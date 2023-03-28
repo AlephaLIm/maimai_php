@@ -195,6 +195,7 @@
     text-align: left;
     display: inline-block;
     vertical-align: middle;
+    color: white;
 }
 
 ::-webkit-scrollbar {
