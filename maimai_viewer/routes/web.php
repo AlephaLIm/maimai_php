@@ -157,6 +157,7 @@ Route::get('/recommendation', function (Request $request) {
     }
     else {
         $param = 'new';
+        $option = 'For new songs';
     }
     return view('reccomendation', [
         'title' => 'Recommendations',
