@@ -68,7 +68,7 @@ class ProfileController extends Controller
         ]);
         $friendcode = $request->user()->friendcode;
         if ($friendcode == $userData['friendcode']) {
-            $user = DB::select("SELECT * FROM users WHERE email = ? AND password = ? AND friendcode = ?",[$userData['email'],$userData['password'],$userData['friendcode']]);
+            $user = DB::select("SELECT * FROM users WHERE email = ? AND password = ? AND friendcode = ?",[$userData['email'],bcrypt($userData['password']),$userData['friendcode']]);
             if (count($user) == 1) {
                 DB::delete("DELETE FROM users WHERE friendcode = ?",$friendcode);
                 auth()->logout();

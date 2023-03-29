@@ -48,7 +48,7 @@
                         </a>
                     </div>
                     <div class="recommendation">
-                        <a href="./recommmendation">
+                        <a href="./recommendation">
                             <div class="img_wrapper">
                                 <img src="{{ asset('/images/home_icons/recommendations.png') }}" alt="Recommendations">
                                 <div class="desc_text"><p>Recommendations</p>What song should you play next?</div>
