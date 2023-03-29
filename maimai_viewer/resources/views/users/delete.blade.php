@@ -16,7 +16,7 @@
                 <p>Alivent your account</p>
             </div>
             
-            <form class="login-form" method="POST" action="/deleteUser">
+            <form class="login-form" method="POST" action="/delete_user">
                 @csrf
                 <div class="input-box">
                     <label for="email" class="label-input"> Email </label>

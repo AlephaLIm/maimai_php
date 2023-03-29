@@ -31,20 +31,21 @@ class ProfileController extends Controller
                     ->uncompromised()],
             ]);
         $friendcode = $request->user()->friendcode;
-        $validate = DB::select("SELECT * FROM users WHERE email = ? AND password = ?", [$userData['email'],bcrypt($userData['password'])]);
-        echo "<script>console.log('".bcrypt(($userData['password'])). "')</script>";
-         
-        if (count($validate) == 1) {
+        //$validate = DB::select("SELECT * FROM users WHERE email = ? AND password = ?", [$userData['email'],bcrypt($userData['password'])]);
+     
+        
+        if (auth()->attempt(['email' => $userData['email'],'password' => $userData['password']])) {
 
             if ($userData['new_email'] != null) {
-                DB::update("UPDATE users SET email = ? WHERE friendcode = ?",[$userData['email'],$friendcode]);
+                DB::update("UPDATE users SET email = ? WHERE friendcode = ?",[$userData['new_email'],$friendcode]);
             }
             
             if ($userData['new_password'] != null) {
-                DB::update("UPDATE users SET password = ? WHERE friendcode = ?",[bcrypt($userData['password']),$friendcode]);
+                DB::update("UPDATE users SET password = ? WHERE friendcode = ?",[bcrypt($userData['new_password']),$friendcode]);
 
             }
 
+            $request->session()->regenerateToken();
 
             return redirect()->back()->with("emailsuccess","Email updated successfully")->with("passwordsuccess","Password updated successfully");
         }
@@ -63,21 +64,19 @@ class ProfileController extends Controller
         $userData = $request->validate([
             'email' => 'required|email',
             'password' => 'required',
-            'friendcode' => 'required',
-            'checkbox' => 'accepted'
+            'checkbox' => 'required'
         ]);
-        $friendcode = $request->user()->friendcode;
-        if ($friendcode == $userData['friendcode']) {
-            $user = DB::select("SELECT * FROM users WHERE email = ? AND password = ? AND friendcode = ?",[$userData['email'],bcrypt($userData['password']),$userData['friendcode']]);
-            if (count($user) == 1) {
-                DB::delete("DELETE FROM users WHERE friendcode = ?",$friendcode);
-                auth()->logout();
-                $request->session()->invalidate();
-                $request->session()->regenerateToken();
-                return redirect('/')->with('message', 'Your account has been deleted');
+       
+        if (auth()->attempt(['email' => $userData['email'],'password' => $userData['password']])) {
+            $friendcode = $request->user()->friendcode;
+            DB::delete("DELETE FROM users WHERE friendcode = ?",[$friendcode]);
+            auth()->logout();
+            $request->session()->invalidate();
+            $request->session()->regenerateToken();
+            return redirect('/')->with('message', 'Your account has been deleted');
 
-            }
         }
+    
     }
     
 }
