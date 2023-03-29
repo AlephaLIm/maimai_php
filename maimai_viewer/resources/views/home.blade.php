@@ -61,10 +61,10 @@
                     <div class="about">
                         <h3>Welcome to Maiviewer!</h3>
                         <p>
-                            <a href="/login">Log in</a> with your account to view your scores and stats.
+                            Log in with your account to view your scores and stats.
                             <br>
                             <br>
-                            If you're new, <a href="/register">register</a> an account with us and use the javascript bookmark below to scrape your maimai data.
+                            If you're new, register an account with us and use the javascript bookmark below to scrape your maimai data.
                         </p>
                         
                     </div>

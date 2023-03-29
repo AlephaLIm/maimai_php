@@ -29,10 +29,17 @@
                         <h2 class="headur">Built for Maimai Players, By Maimai Players</h2>
                         <br><br>
                         <p>
-                            Maiviewer was built with one purpose in mind, to give the maimai community better access and insight into their score data. <br>Maiviewer provides the community with utilities that leverages score data to provide better insights about the player,<br> as well as providing better access to song and chart information.
+                            Maiviewer was built with one purpose in mind, to give the maimai community better access and insight into their score data. <br>Maiviewer provides the community with utilities that leverages score data to provide better insights about the player,<br> as well as providing better access to song and chart information.<br>
+                            Features: 
                         </p>
                         <br>
-                       
+                        <div class="about_wrapper">
+                          <div class="about"><h3 class="shiro">Features</h3> </div>
+                          <br>Song Search
+                          <br>Score Viewer
+                          <br>Rating Breakdown
+                          <br>Chart Recommendations
+
                     </div>
                 </div>
                 

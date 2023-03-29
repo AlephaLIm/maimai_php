@@ -16,8 +16,8 @@
 @section('body')
     <main>
     <div class="jumbotron text-center" id="headtitle">
-        <h1 class="display-4">BEST SONG SCORES:</h1>
-        <h2>{{ $user->name }}</h2>
+        <h2 class="display-4">BEST SONG SCORES:</h1>
+        <h3>{{ $user->name }}</h2>
     </div>
     <div class="container">
         <div class="dropdown">
