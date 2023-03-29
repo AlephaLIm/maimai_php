@@ -32,7 +32,7 @@ class ProfileController extends Controller
             ]);
         $friendcode = $request->user()->friendcode;
         $validate = DB::select("SELECT * FROM users WHERE email = ? AND password = ?", [$userData['email'],bcrypt($userData['password'])]);
-    
+        echo "<script>console.log('".bcrypt(($userData['password'])). "')</script>";
          
         if (count($validate) == 1) {
 
