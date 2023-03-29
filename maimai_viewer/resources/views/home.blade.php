@@ -24,7 +24,7 @@
                 </div>
                 <div class="routes">
                     <div class="achieve">
-                        <a href="./achievements">
+                        <a href="./ratings">
                             <div class="img_wrapper">
                                 <img src="{{ asset('/images/home_icons/achieve.png') }}" alt="Achievements">
                                 <div class="desc_text"><p>Achievements</p>View your best songs!</div>

@@ -36,6 +36,10 @@ class Chart
     public $rating;
     public $color;
 
+    public $score_goal;
+    public $rate_increase;
+    public $weight;
+
     public static function create_chart($id, $name, $artist, $genre, $bpm, $version, $img, $level, $constant, $diff, $type, ?string $scoregrade = null, ?float $score = null, ?int $rating = null, ?string $combo_grade = null, ?string $sync_grade = null)
     {
         $d_search = ["Basic" => "BASIC", "Advanced" => "ADVANCED", "Expert" => "EXPERT", "Master" => "MASTER", "Remaster" => "Re:MASTER"];
@@ -118,5 +122,11 @@ class Chart
         $this->ex = $exnotes;
 
         $this->chart_view = "enabled";
+    }
+
+    public function set_recommendation($score_goal, $rate_increase, $weight) {
+        $this->score_goal = $score_goal;
+        $this->rate_increase = $rate_increase;
+        $this->weight = $weight;
     }
 }

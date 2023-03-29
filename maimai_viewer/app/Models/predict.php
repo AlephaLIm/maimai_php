@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 
 class Predict
@@ -55,40 +56,61 @@ class Predict
         $score_diff = $score - $car;
         $score_progress = $score_diff / ($nar - $car);
         $multiplier = ($score_progress * ($FactorH - $FactorL)) + $FactorL;
-        $rating = intval($multiplier * $chart_constant);
+        $rating = floor($multiplier * $chart_constant);
         return $rating;
     }
-    public static function generateValues($userid, $charts)
+    public static function generateValues($friendcode, $fes15, $old15)
     {
-        $scores = DB::select("
-        SELECT *
-        FROM scores
-        JOIN songs ON charts.parentsong = songs.songid
-        WHERE userid = ?
-        ORDER BY id ASC
-        ", [$userid]);
+        
+        $results = DB::select("SELECT scores.score,scores.chartid, charts.constant, songs.version, scores.chartrating
+        FROM scores INNER JOIN charts ON scores.chartid = charts.chartid INNER JOIN songs ON songs.songid = charts.parentsong WHERE friendcode = ?",[$friendcode]);
 
-        $potential = array();
 
-        foreach ($scores as $score) {
+        $ret = array();
+        $festival = array();
+        $nonFestival = array();
+        $fesFloor = end($fes15)->chartrating;
+        $oldFloor = end($old15)->chartrating;
+
+        foreach ($results as $result) {
             $weight = 0;
-            $currentScore = (float) $score['score'];
-            $constant = (float) $score['chartid']['constant'];
-            $name = $score['chartid']['parentsong']['name'];
-            $version = $score['chartid']['parentsong']['version'];
-            $id = $score['chartid']['parentsong']['songid'];
-            $target = end($charts);
+            $version = $result->version;
+            if ($version == "FESTiVAL") {
+                $target = $fesFloor;
+                foreach($fes15 as $fes) {
+                    if ($fes->chartid == $result->chartid) {
+                        $target = $result->chartrating;
+                    }
+                } 
+            }
+            else {
+                $target = $oldFloor;
+                foreach($old15 as $old) {
+                    if ($old->chartid == $result->chartid) {
+                        $target = $result->chartrating;
+                    }
+                } 
+            }
+            
+            $currentScore = (float) $result->score;
+            $chartId = $result->chartid;
+            $constant = (float) $result->constant;
+           
+            
 
             if ($currentScore >= 100.5) {
                 continue;
             } else {
+                
                 $arValues = self::getAR($currentScore);
                 $nextRange = $arValues[1];
                 $nextFactorRange = $arValues[3];
                 $currentRating = self::CalculateRating($currentScore, $constant);
                 $nextRating = self::CalculateRating($nextRange, $constant);
+                $potentialRatingGain = 0;
 
-                if ($nextRating > $target['rating']) {
+                if ($nextRating > $target) {
+                    
                     if ($nextRange - $currentScore <= 0.1) {
                         $weight += 5;
                     } elseif ($nextRange - $currentScore <= 0.2) {
@@ -102,9 +124,9 @@ class Predict
                     } else {
                         $weight += 0.5;
                     }
-
-                    $potentialRatingGain = $nextRating - $target['rating'];
-
+                    
+                    $potentialRatingGain = $nextRating - $target;
+                    
                     if ($potentialRatingGain >= 10) {
                         $weight += 3;
                     } elseif ($potentialRatingGain >= 7) {
@@ -115,16 +137,30 @@ class Predict
                         $weight += 0.5;
                     }
                 }
+    
+                $candidate = ['weight' => $weight, 'nextRange'=> $nextRange,'potentialRatingGain'=> $potentialRatingGain, 'chartid' => $chartId];
+                if ($version == "FESTiVAL") {
+                    array_push($festival,$candidate);
+                }
+                else {
+                    array_push($nonFestival,$candidate);
+                }
 
-                $potential[] = array($score, $weight, $nextRange, $potentialRatingGain, $id);
             }
         }
 
-        usort($potential, function ($a, $b) {
-            return $b[1] <=> $a[1];
+        usort($festival, function ($a, $b) {
+            return $b['weight'] <=> $a['weight'];
         });
-
-        return array_slice($potential, 0, 15);
+        usort($nonFestival, function ($a, $b) {
+            return $b['weight'] <=> $a['weight'];
+        });
+        $fest15 = array_slice($festival, 0, 15);
+        $old15 = array_slice($nonFestival, 0, 15);
+        array_push($ret,$fest15);
+        array_push($ret,$old15);
+        return $ret;
+        
     }
 
     public static function create_predict($score, $weight, $nextRange, $potentialRatingGain, $id)

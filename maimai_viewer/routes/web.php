@@ -14,6 +14,7 @@ use App\Http\Controllers\Paginate;
 use App\Models\Sorted;
 use App\Models\Navbar;
 use App\Models\Page_status;
+use App\Models\RateOption;
 
 /*
 |--------------------------------------------------------------------------
@@ -106,11 +107,23 @@ Route::get('/songs', function(Request $request) {
 });
 
 Route::get('/ratings', function(Request $request) {
+    if ($request->has('filter')) {
+        if ($request->get('filter') == 'new') {
+            $param = 'new';
+        }
+        else {
+            $param = 'old';
+        }
+    }
+    else {
+        $param = null;
+    }
     return view('rating', [
         'title'=> 'Achievements',
         'description'=> "View your best played songs!",
         'user'=> NavController::get_user($request),
         'status'=> Page_status::set_status('achievement'),
+        'rate'=> RateOption::getRate($param),
         'songs'=> RatingController::rating($request)
     ]);
 })->middleware('auth');
@@ -129,4 +142,29 @@ Route::get('/login', [UserController::class, 'login'])->name('login')->middlewar
 
 // login user
 Route::post('/users/authenticate', [UserController::class, 'authenticate']);
+
+
+Route::get('/recommendation', function (Request $request) {
+    if ($request->has('filter')) {
+        if ($request->get('filter') == 'old') {
+            $param = 'old';
+            $option = 'For old songs';
+        }
+        else {
+            $param = 'new';
+            $option = 'For new songs';
+        }
+    }
+    else {
+        $param = 'new';
+    }
+    return view('reccomendation', [
+        'title' => 'Recommendations',
+        'description' => "What should you play next!",
+        'user' => NavController::get_user($request),
+        'status' => Page_status::set_status('recommendation'),
+        'rate'=> RateOption::getRate($param, $option),
+        'songs' => RatingController::recommendation($request)
+    ]);
+})->middleware('auth');
 

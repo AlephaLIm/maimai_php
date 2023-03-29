@@ -1,0 +1,77 @@
+@import url('https://fonts.googleapis.com/css2?family=Megrim&display=swap');
+
+body {
+    background: #141414;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+#headtitle {
+    margin-top: 3vh;
+    color: white;
+}
+
+#headtitle h2 {
+    font-family: 'Megrim', 'cursive';
+}
+
+main {
+    margin-top: 10px;
+}
+
+.dropdown {
+    display: inline-block;
+}
+
+.dropdown button {
+    width: min(60vw, 800px);
+    background-color: #3D087B;
+    border: none;
+}
+
+.dropdown button:hover {
+    background-color: #100720;
+}
+
+.dropdown button:focus {
+    background-color: #3D087B;
+}
+
+.dropdown .dropdown-menu {
+    width: min(60vw, 800px);
+    text-align: center;
+    background-color: #100720;
+}
+
+.dropdown .dropdown-menu .dropdown-item:focus {
+    background-color: #FFBF00;
+}
+
+.dropdown .dropdown-menu .active {
+    background-color: #FFBF00;
+}
+
+.achieve_hr {
+    width: 90vw;
+    margin-left: 5vw;
+    margin-right: 5vw;
+    color: white;
+}
+
+.songs_box {
+    margin-top: 10px;
+    overflow-y: scroll;
+    text-align: center;
+}
+
+.songs_box::-webkit-scrollbar {
+    display: none;
+}
+
+::-webkit-scrollbar {
+    width: 3px;
+}
