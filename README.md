@@ -1,2 +1,2 @@
 # maimai_php
-php port of the flask implementation via laravel and blade. 
+php implementation of a maimai scoreviewer website via laravel and blade. 
