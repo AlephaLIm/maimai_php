@@ -138,6 +138,7 @@
     height: max(20.5vw, 410px);
     width: max(20vw, 410px);
     text-align: center;
+    color: white;
 }
 
 .modal-body .error_radar {
