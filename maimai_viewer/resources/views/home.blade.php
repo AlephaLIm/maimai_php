@@ -24,7 +24,7 @@
                 </div>
                 <div class="routes">
                     <div class="achieve">
-                        <a href="./ratings">
+                        <a href="/ratings">
                             <div class="img_wrapper">
                                 <img src="{{ asset('/images/home_icons/achieve.png') }}" alt="Achievements">
                                 <div class="desc_text"><p>Achievements</p>View your best songs!</div>
@@ -32,7 +32,7 @@
                         </a>
                     </div>
                     <div class="profile">
-                        <a href="./profile">
+                        <a href="/stats">
                             <div class="img_wrapper">
                                 <img src="{{ asset('/images/home_icons/profile.jpg') }}" alt="Profile">
                                 <div class="desc_text"><p>Profile</p>View your stats and details!</div>
@@ -40,7 +40,7 @@
                         </a>
                     </div>
                     <div class="songs">
-                        <a href="./songs">
+                        <a href="/songs">
                             <div class="img_wrapper">
                                 <img src="{{ asset('/images/home_icons/songs.png') }}" alt="Songs Finder">
                                 <div class="desc_text"><p>Song Finder</p>Searching for a song?</div>
@@ -48,7 +48,7 @@
                         </a>
                     </div>
                     <div class="recommendation">
-                        <a href="./recommendation">
+                        <a href="/recommendation">
                             <div class="img_wrapper">
                                 <img src="{{ asset('/images/home_icons/recommendations.png') }}" alt="Recommendations">
                                 <div class="desc_text"><p>Recommendations</p>What song should you play next?</div>
