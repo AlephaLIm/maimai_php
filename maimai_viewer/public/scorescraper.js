@@ -103,7 +103,7 @@ async function checkLatestVersion() {
                         }
                     }
                     var songid = title.trim() + details.artist.trim() + chartType;
-                    songid = songid.replaceAll(/[!,'()]/g, '');
+                    songid = songid.replaceAll(/[!,'()]/g, '').replace('"',"").trim();
                     var song = {
                         "name": title,
                         "type": chartType,
