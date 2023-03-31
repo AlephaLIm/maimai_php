@@ -54,7 +54,7 @@ async function checkLatestVersion() {
     var url = "https://maimaidx-eng.com/maimai-mobile/record/musicVersion/search/?version=19&diff=3";
     var no = [];
     //var no = ["mystique as iris","M.S.S.Planet","劣等上等","分解収束テイル","田中","Random","蜘蛛の糸","Tricolor⁂circuS","フォニイ","ヴィラン","ホシシズク","[X]","ジレンマ","火炎地獄","アニマル","EYE","自傷無色","踊","響縁","Rainbow Rush Story","Luminaria","残響散歌","モザイクロール","スカーレット警察のゲットーパトロール24時"];
-    var postCheck = await sendPostRequest("test", "https://maiviewer.ordinarymagician.com/songinfo");
+    var postCheck = await sendPostRequest("test", "https://maiviewer2.ordinarymagician.com/songinfo");
     console.log(postCheck);
     if (postCheck.length == 0) {
         return true;
@@ -124,7 +124,7 @@ async function checkLatestVersion() {
             }
         }
         console.log(toSend);
-        var resp = await sendPostRequest(toSend, "https://maiviewer.ordinarymagician.com/newsongs");
+        var resp = await sendPostRequest(toSend, "https://maiviewer2.ordinarymagician.com/newsongs");
         if (resp.message == "success") {
             return true;
         }
@@ -479,7 +479,7 @@ async function preparePostData() {
 
 
 
-        return await sendPostRequest(postdata, 'https://maiviewer.ordinarymagician.com/data').then((postCheck) => {
+        return await sendPostRequest(postdata, 'https://maiviewer2.ordinarymagician.com/data').then((postCheck) => {
             if (postCheck == "success") {
                 return true;
             }
@@ -507,7 +507,7 @@ async function main() {
             console.log(dataCheck.message);
             console.log("Scores Uploaded Successfully");
             alert("Scores Scraped Successfully!");
-            window.open("https://maiviewer.ordinarymagician.com/login");
+            window.open("https://maiviewer2.ordinarymagician.com/login");
         }
         else {
             console.log("Error for preparePostData()");
