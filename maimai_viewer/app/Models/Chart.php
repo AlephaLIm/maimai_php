@@ -93,7 +93,7 @@ class Chart
         if (is_null($dxscore_val)) {
             $this->dxscore = 0;
         } else {
-            $params = explode('/', $dxscore_val);
+            $params = explode('/', str_replace(',', '', $dxscore_val));
             $dx = floatval($params[0]) / floatval($params[1]);
             if ($dx >= 0.97) {
                 $this->dxscore = 5;
